@@ -51,8 +51,13 @@ const userValidators = [
 ];
 
 /* GET users listing. */
-router.get('/', csrfProtection, function(req, res, next) {
-  res.send('respond with a resource');
+
+router.get('/signup', csrfProtection, function(req, res, next) {
+  res.render('signup-form');
+});
+
+router.get('/login', function(req, res, next) {
+  res.render('login-form');
 });
 
 /* POST */
