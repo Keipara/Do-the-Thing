@@ -22,7 +22,7 @@ module.exports = {
       listId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        refences: {model: "List"}
+        refences: {model: "Lists"}
       },
       description: {
         type: Sequelize.TEXT
