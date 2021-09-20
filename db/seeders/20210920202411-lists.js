@@ -9,7 +9,7 @@ module.exports = {
      */
    await queryInterface.bulkInsert('Lists',
    [
-      {name: 'Today', userId: 1}
+      {name: 'Today', userId: 1, createdAt: new Date(), updatedAt: new Date()}
     ], {});
   },
 

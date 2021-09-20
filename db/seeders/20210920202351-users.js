@@ -12,7 +12,7 @@ module.exports = {
      * }], {});
     */
      await queryInterface.bulkInsert('Users',
-     [{firstName: 'John', lastName: 'Uzumaki', email: 'john.uzumaki@leafvillage.com', username: 'JohnU', hashedPassword: 'password'}
+     [{firstName: 'John', lastName: 'Uzumaki', email: 'john.uzumaki@leafvillage.com', username: 'JohnU', hashedPassword: 'password', createdAt: new Date(), updatedAt: new Date()}
         ],
          {});
   },

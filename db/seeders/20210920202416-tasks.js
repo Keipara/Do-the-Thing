@@ -8,7 +8,7 @@ module.exports = {
      * Example:
      */
     await queryInterface.bulkInsert('Tasks', [
-      {name: 'Homework', due: new Date(), complete: false, listId: 1}
+      {name: 'Homework', due: new Date(), complete: false, listId: 1, createdAt: new Date(), updatedAt: new Date()}
     ], {});
   },
 
