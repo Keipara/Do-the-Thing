@@ -7,5 +7,26 @@ append head
   script(src="/javascripts/index.js" type="module" defer)
 
 block content
-  h1= title
-  p Welcome to your Project Skeleton
+  nav
+    div(class='nav-container')
+      div
+        a(href='/') Do The Thing
+      div
+        a(href='/login') Log In
+      div
+        a(href='/signup') Sign up for free
+      div
+        a(href='/') Demo user
+  main
+    div(class='main-container')
+      div(class='tagline')
+        h1 Be
+          i  well-armed
+          |  to tackle the to-do!
+        a(href='/signup') Sign up for free
+      div(class='image-container')
+  footer
+    div(class='footer-container')
+      a(href='https://github.com/Keipara') Kiara
+      a(href='https://github.com/LakshmiPriyaPrakash') Lakshmi
+      a(href='https://github.com/nevinchow') Nevin
