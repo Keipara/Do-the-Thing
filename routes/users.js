@@ -2,7 +2,7 @@ var express = require('express');
 const { check, validationResult } = require('express-validator');
 const { csrfProtection, asyncHandler } = require('./utils');
 const { User } = require('../db/models');
-const { loginUser } = require('../auth');
+const { loginUser, logoutUser } = require('../auth');
 const bcrypt = require('bcryptjs');
 
 var router = express.Router();
@@ -145,6 +145,9 @@ router.post('/login', csrfProtection, loginValidators, asyncHandler(async(req,re
   });
 }));
 
-
+router.get('/logout', (req, res) => {
+  logoutUser(req, res);
+  res.redirect('/');
+});
 
 module.exports = router;
