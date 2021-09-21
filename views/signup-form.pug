@@ -6,6 +6,12 @@ block content
     a(class='button', href='/login') Log in
     div
     p Sign up for free.
+    if errors
+        div
+            p The following error(s) occurred:
+            ul
+                each error in errors
+                    li= error
     form(action="/signup" method="post")
         input(type="hidden" name="_csrf" value=csrfToken)
         div
