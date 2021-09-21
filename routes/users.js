@@ -64,10 +64,6 @@ router.get('/signup', csrfProtection, function(req, res, next) {
   });
 });
 
-router.get('/login', function(req, res, next) {
-  res.render('login-form');
-});
-
 /* POST */
 router.post('/signup', csrfProtection, userValidators, asyncHandler(async(req,res) => {
   const {
@@ -103,5 +99,37 @@ router.post('/signup', csrfProtection, userValidators, asyncHandler(async(req,re
   }
 
 }));
+
+const loginValidators = [
+  check('username')
+    .exists({ checkFalsy: true })
+    .withMessage('Please provide a correct username or password.'),
+  check('password')
+    .exists({ checkFalsy: true })
+    .withMessage('Please provide a correct username or password.')
+];
+
+router.get('/login', function(req, res, next) {
+  res.render('login-form');
+});
+
+router.post('/login', csrfProtection, loginValidators, asyncHandler(async(req,res) => {
+  const {email, password} = req.body
+  let errors = [];
+  const validatorErrors = validationResult(req);
+
+  if (validatorErrors.isEmpty()) {
+    //todo:
+  } else {
+    errors = validatorErrors.array().map((error) => error.msg);
+  }
+  res.render('login-form', {
+    title: 'Login',
+    errors,
+    csrfToken: req.csrfToken(),
+  });
+}));
+
+
 
 module.exports = router;
