@@ -11,7 +11,6 @@ const usersRouter = require('./routes/users');
 const tasksRouter = require('./routes/tasks');
 const { sessionSecret } = require('./config');
 const { restoreUser } = require('./auth');
-
 const app = express();
 
 // view engine setup
