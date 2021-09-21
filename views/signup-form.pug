@@ -1,25 +1,31 @@
 extends layout
 
 block content
+    if errors
+        div
+            p The following error(s) occurred:
+            ul
+                each error in errors
+                    li= error
     form(action="/signup" method="post")
         input(type="hidden" name="_csrf" value=csrfToken)
         div
             label(for="firstName") First Name
-            input(type="text" name="firstName" value=firstName)
+            input(type="text" name="firstName" value=user.firstName)
         div
             label(for="lastName") Last Name
-            input(type="text" name="lastName" value=lastName)
+            input(type="text" name="lastName" value=user.lastName)
         div
             label(for="email" ) Email
-            input(type="email" name="email" value=email)
+            input(type="email" name="email" value=user.email)
         div
             label(for="username") Username
-            input(type="text" name="username" value=username)
+            input(type="text" name="username" value=user.username)
         div
             label(for="password") Password
-            input(type="password" name="password" value=password)
+            input(type="password" name="password")
         div
             label(for="confirmedPassword") Confirm Password
-            input(type="password" name="confirmedPassword" value=confirmedPassword)
+            input(type="password" name="confirmedPassword")
         div
             input(type="submit" value="Sign up!")
