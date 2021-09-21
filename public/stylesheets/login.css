@@ -1,0 +1,19 @@
+.button-2 {
+    position: relative;
+    left: 975px;
+    border-style: solid
+}
+
+.text {
+    position: relative;
+    left: 600px
+}
+.form {
+    position: relative;
+    left: 600px;
+}
+
+.username-label {
+    margin: 100px;
+    /* padding-top: 100px */
+}

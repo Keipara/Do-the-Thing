@@ -56,7 +56,7 @@ const userValidators = [
 
 /* GET users listing. */
 
-router.get('/signup', csrfProtection, requireAuth, function(req, res, next) {
+router.get('/signup', csrfProtection, function(req, res, next) {
   const user = User.build();
   res.render('signup-form', {
     title: 'Sign Up Form',
@@ -111,7 +111,7 @@ const loginValidators = [
     .withMessage('Please provide a password.')
 ];
 
-router.get('/login', requireAuth, csrfProtection, function(req, res, next) {
+router.get('/login', csrfProtection, function(req, res, next) {
   res.render('login-form', {
     title: 'Log In Form',
     csrfToken: req.csrfToken(),

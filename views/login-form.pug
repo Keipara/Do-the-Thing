@@ -1,12 +1,15 @@
 extends layout
 
-block content
+append head
+    link(rel='stylesheet', href='/stylesheets/login.css')
 
-    a(class='button', href='/') Do The Thing!
+block content
     div
-    a(class='button', href='/signup') Sign up for free
+    a(class='button-1', href='/') Do The Thing!
     div
-    p Been here before? Welcome back!
+    a(class='button-2', href='/signup') Sign up for free
+    div
+    p(class= 'text') Been here before? Welcome back!
     div
     if errors
         div
@@ -15,13 +18,13 @@ block content
                 each error in errors
                     li= error
     div
-    form(action="/login" method="post")
+    form(class= "form" action="/login" method="post")
         input(type="hidden" name="_csrf" value=csrfToken)
         div
-            label(for="username")
+            label(class= "username-label" for="username")
             input(type="text" name="username" value=username placeholder="Username")
         div
-            label(for="password")
+            label(class= "password-label" for="password")
             input(type="password" name="password" value=password placeholder="Password")
         div
             label(class=divClasses)
