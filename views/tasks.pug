@@ -2,12 +2,13 @@ extends layout
 
 append head
     link(rel="stylesheet" href="/stylesheets/task.css")
+    script(src="javascripts/search.js" type="module" defer)
 block content
     nav
         div(class='nav-container')
             div
-                input(type="text" name="name" placeholder= "Search tasks")
-                button(action="submit" value="tasks") Search
+                input(type="text" name="search" id='search-box' placeholder= "Search tasks")
+                button(action="submit" id='search-button') Search
             div
                 a(class='button', href='/logout') Log out
 
