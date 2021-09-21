@@ -1,6 +1,38 @@
 extends layout
 
+append head
+    link(rel="stylesheet" href="/stylesheets/task.css")
 block content
+    nav
+        div(class='nav-container')
+            div
+                input(type="text" name="name" placeholder= "Search tasks")
+                button(action="submit" value="tasks") Search
+                a(class='button', href='/logout') Log out
 
-    textarea(name="Task")
-    a(class='button', href='/logout') Log out
+    div(class='main-container')
+        div(class='list-container')
+            h2 Add a list
+            div
+                text Please enter a new list name:
+            form(action="/tasks" method="post")
+                input(type="hidden" name="_csrf" value=csrfToken)
+                div
+                    input(type="text" name="name" placeholder= "Add a list")
+                    button(action="submit" value="list") Add
+                    button(action="submit" value="list") Cancel
+
+
+        div(class='task-container')
+            form(action="/lists" method="post")
+                h2 All Tasks
+                div
+                label(for="name")
+                input(type="text" name="name" placeholder= "Add a task")
+                button(action="submit" value="task") Add Task
+            a(class='button', href='/tasks') Incomplete
+            div
+            a(class='button', href='/tasks') Complete
+
+
+        div(class='details-containter')

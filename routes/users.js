@@ -56,7 +56,7 @@ const userValidators = [
 
 /* GET users listing. */
 
-router.get('/signup', csrfProtection, requireAuth, function(req, res, next) {
+router.get('/signup', csrfProtection, function(req, res, next) {
   const user = User.build();
   res.render('signup-form', {
     title: 'Sign Up Form',
@@ -66,7 +66,7 @@ router.get('/signup', csrfProtection, requireAuth, function(req, res, next) {
 });
 
 /* POST */
-router.post('/signup', csrfProtection, requireAuth, userValidators, asyncHandler(async(req,res) => {
+router.post('/signup', csrfProtection, userValidators, asyncHandler(async(req,res) => {
   const {
     firstName,
     lastName,
@@ -111,14 +111,14 @@ const loginValidators = [
     .withMessage('Please provide a password.')
 ];
 
-router.get('/login', requireAuth, csrfProtection, function(req, res, next) {
+router.get('/login', csrfProtection, function(req, res, next) {
   res.render('login-form', {
     title: 'Log In Form',
     csrfToken: req.csrfToken(),
   });
 });
 
-router.post('/login', requireAuth, csrfProtection, loginValidators, asyncHandler(async(req,res) => {
+router.post('/login', csrfProtection, loginValidators, asyncHandler(async(req,res) => {
   const {username, password} = req.body
   let errors = [];
   const validatorErrors = validationResult(req);
