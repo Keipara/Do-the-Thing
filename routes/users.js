@@ -103,30 +103,42 @@ router.post('/signup', csrfProtection, userValidators, asyncHandler(async(req,re
 const loginValidators = [
   check('username')
     .exists({ checkFalsy: true })
-    .withMessage('Please provide a correct username or password.'),
+    .withMessage('Please provide a username.'),
   check('password')
     .exists({ checkFalsy: true })
-    .withMessage('Please provide a correct username or password.')
+    .withMessage('Please provide a password.')
 ];
 
-router.get('/login', function(req, res, next) {
-  res.render('login-form');
+router.get('/login', csrfProtection, function(req, res, next) {
+  res.render('login-form', {
+    title: 'Log In Form',
+    csrfToken: req.csrfToken(),
+  });
 });
 
 router.post('/login', csrfProtection, loginValidators, asyncHandler(async(req,res) => {
-  const {email, password} = req.body
+  const {username, password} = req.body
   let errors = [];
   const validatorErrors = validationResult(req);
 
   if (validatorErrors.isEmpty()) {
-    //todo:
+    const user = await User.findOne({ where: { username } });
+
+    if (user !== null) {
+      const passwordMatch = await bcrypt.compare(password, user.hashedPassword.toString());
+
+      if (passwordMatch) {
+        return res.redirect('/tasks')
+      }
+    }
+    errors.push('Login failed for the provided username and/or password')
   } else {
     errors = validatorErrors.array().map((error) => error.msg);
   }
   res.render('login-form', {
     title: 'Login',
     errors,
-    csrfToken: req.csrfToken(),
+    csrfToken: req.csrfToken(), 
   });
 }));
 
