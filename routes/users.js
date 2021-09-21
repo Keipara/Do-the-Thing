@@ -2,6 +2,7 @@ var express = require('express');
 const { check, validationResult } = require('express-validator');
 const { csrfProtection, asyncHandler } = require('./utils');
 const { User } = require('../db/models');
+const { loginUser } = require('../auth');
 const bcrypt = require('bcryptjs');
 
 var router = express.Router();
@@ -25,7 +26,7 @@ const userValidators = [
     .isEmail()
     .withMessage('Email Address is not a valid email')
     .custom((value) => {
-      return db.User.findOne({ where: { emailAddress: value } })
+      return User.findOne({ where: { email: value } })
         .then((user) => {
           if (user) {
             return Promise.reject('The provided Email Address is already in use by another account');
@@ -87,7 +88,8 @@ router.post('/signup', csrfProtection, userValidators, asyncHandler(async(req,re
     const hashedPassword = await bcrypt.hash(password, 10);
     user.hashedPassword = hashedPassword;
     await user.save();
-    res.redirect('/');
+    loginUser(req, res, user);
+    res.redirect('/tasks');
   } else {
     const errors = validatorErrors.array().map((error) => error.msg);
     res.render('signup-form', {
@@ -128,6 +130,7 @@ router.post('/login', csrfProtection, loginValidators, asyncHandler(async(req,re
       const passwordMatch = await bcrypt.compare(password, user.hashedPassword.toString());
 
       if (passwordMatch) {
+        loginUser(req, res, user);
         return res.redirect('/tasks')
       }
     }
@@ -138,7 +141,7 @@ router.post('/login', csrfProtection, loginValidators, asyncHandler(async(req,re
   res.render('login-form', {
     title: 'Login',
     errors,
-    csrfToken: req.csrfToken(), 
+    csrfToken: req.csrfToken(),
   });
 }));
 
