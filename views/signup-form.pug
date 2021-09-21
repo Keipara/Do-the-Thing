@@ -1,25 +1,30 @@
 extends layout
 
 block content
+    a(class='button', href='/') Do The Thing!
+    div
+    a(class='button', href='/login') Log in
+    div
+    p Sign up for free.
     form(action="/signup" method="post")
         input(type="hidden" name="_csrf" value=csrfToken)
         div
-            label(for="firstName") First Name
-            input(type="text" name="firstName" value=firstName)
+            label(for="firstName")
+            input(type="text" name="firstName" value=firstName placeholder= "First Name")
         div
-            label(for="lastName") Last Name
-            input(type="text" name="lastName" value=lastName)
+            label(for="lastName")
+            input(type="text" name="lastName" value=lastName placeholder= "Last Name")
         div
-            label(for="email" ) Email
-            input(type="email" name="email" value=email)
+            label(for="email" )
+            input(type="email" name="email" value=email placeholder= "Email")
         div
-            label(for="username") Username
-            input(type="text" name="username" value=username)
+            label(for="username")
+            input(type="text" name="username" value=username placeholder= "Username")
         div
-            label(for="password") Password
-            input(type="password" name="password" value=password)
+            label(for="password")
+            input(type="password" name="password" value=password placeholder= "Password")
         div
-            label(for="confirmedPassword") Confirm Password
-            input(type="password" name="confirmedPassword" value=confirmedPassword)
+            label(for="confirmedPassword")
+            input(type="password" name="confirmedPassword" value=confirmedPassword placeholder= "Confirm Password")
         div
             input(type="submit" value="Sign up!")

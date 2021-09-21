@@ -1,13 +1,25 @@
 extends layout
 
 block content
+
+    a(class='button', href='/') Do The Thing!
+    div
+    a(class='button', href='/signup') Sign up for free
+    div
+    p Been here before? Welcome back!
+    div
     form(action="/login" method="post")
         input(type="hidden" name="_csrf" value=csrfToken)
         div
-            label(for="username") Username
-            input(type="text" name="username" value=username)
+            label(for="username")
+            input(type="text" name="username" value=username placeholder="Username")
         div
-            label(for="password") Password
-            input(type="password" name="password" value=password)
+            label(for="password")
+            input(type="password" name="password" value=password placeholder="Password")
         div
-            input(type="submit" value="Log In")
+            label(class=divClasses)
+            input(type="checkbox" value="stay-logged-in")
+            span Stay logged in
+        div
+            a(href='placeholderforpasswordreset') Forgot password?
+        input(type="submit" value="Log In")
