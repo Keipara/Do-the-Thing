@@ -18,5 +18,11 @@ router.get("/task-list", asyncHandler(async (req, res) => {
 );
 
 
-router.post()
+router.post("/", asyncHandler(async (req, res) => {
+    const { name, complete, listId, createdAt, updatedAt} = req.body;
+    const task = await Task.create({ name, complete, listId, createdAt, updatedAt });
+    res.status(201).redirect('/tasks')
+  })
+);
+
 module.exports = router;
