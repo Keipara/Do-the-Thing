@@ -1,7 +1,7 @@
 var express = require('express');
+const { Op } = require("sequelize");
 var router = express.Router();
-const db = require('../db/models')
-const { Task } = db;
+const { Task, List, User, sequelize }= require('../db/models')
 const {asyncHandler, handleValidationErrors} = require("./utils");
 
 router.get("/", asyncHandler(async (req, res) => {
@@ -17,6 +17,27 @@ router.get("/task-list", asyncHandler(async (req, res) => {
 })
 );
 
+router.get("/search/:searchTerm(\\w+)", asyncHandler(async (req, res) => {
+   const searchTerm = req.params.searchTerm;
+   const tasks = await Task.findAll({
+     where: {
+        name: {
+          [Op.iLike]: `%${searchTerm}%`,
+        }
+    },
+    include: [
+      {
+        model: List,
+        where:{
+          userId: res.locals.user.id
+        }
+      }
+    ]
+  });
+  res.json({ tasks });
+})
+);
 
-router.post()
+
+
 module.exports = router;
