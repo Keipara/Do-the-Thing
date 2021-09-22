@@ -73,7 +73,7 @@ router.delete("/:id(\\d+)", asyncHandler(async (req, res, next) => {
 );
 
 
-router.get("/search/:searchTerm(\\w+)", asyncHandler(async (req, res) => {
+router.get("/search/:searchTerm(\\w+)", requireAuth, asyncHandler(async (req, res) => {
    const searchTerm = req.params.searchTerm;
    const tasks = await Task.findAll({
      where: {
@@ -136,29 +136,6 @@ router.post("/", asyncHandler(async (req, res) => {
     res.status(201).redirect('/tasks')
   })
 );
-
-
-router.get("/search/:searchTerm(\\w+)", asyncHandler(async (req, res) => {
-   const searchTerm = req.params.searchTerm;
-   const tasks = await Task.findAll({
-     where: {
-        name: {
-          [Op.iLike]: `%${searchTerm}%`,
-        }
-    },
-    include: [
-      {
-        model: List,
-        where:{
-          userId: res.locals.user.id
-        }
-      }
-    ]
-  });
-  res.json({ tasks });
-})
-);
-
 
 
 module.exports = router;
