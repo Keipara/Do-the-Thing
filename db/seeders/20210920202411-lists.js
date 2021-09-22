@@ -7,6 +7,7 @@ module.exports = {
      *
      * Example:
      */
+
    await queryInterface.bulkInsert('Lists',
    [
     {name: 'Personal', userId: 2, createdAt: new Date(), updatedAt: new Date()},
