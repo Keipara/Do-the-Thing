@@ -26,12 +26,12 @@ block content
 
 
         div(class='task-container')
-            form(action="/lists" method="post")
+            form(action="/tasks" method="post")
                 h2 All Tasks
                 div
                 label(for="name")
                 input(type="text" name="name" placeholder= "Add a task")
-                button(action="submit" value="task") Add Task
+                button(class="taskButton" action="submit" value="task") Add Task
             a(class='button', href='/tasks') Incomplete
             div
             a(class='button', href='/tasks') Complete
