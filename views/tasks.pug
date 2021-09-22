@@ -19,7 +19,7 @@ block content
             h2 Add a list
             div
                 text Please enter a new list name:
-            form(action="/tasks" method="post")
+            form(action="/tasks/add-list" method="post")
                 input(type="hidden" name="_csrf" value=csrfToken)
                 div
                     input(id="new-list" type="text" name="name" placeholder= "Add a list")

@@ -53,28 +53,25 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
 
-  // document.addEventListener("DOMContentLoaded", async() => {
-  //   try {
-  //     const res = await fetch("/tasks", {
-  //       method: "POST",
-  //       header: {"Content-Type": "application/json"},
-  //       body: JSON.stringify(Object)
-  //     });
-  //     const { lists } = await res.json();
-  //     const listContainer = document.querySelector(".list-list");
-
-  //     const listHtml = lists.map(
-  //         () =>
-  //         `
-  //         <div class="card">
-  //         <div class="card-body">
-  //         <p class="card-text">${lists}</p>
-  //         </div>
-  //         </div>
-  //         `
-  //         );
-  //     listContainer.innerHTML = listHtml.join("");
-  //   } catch (e) {
-  //     console.error(e)
-  //   }
-  // });
+  document.addEventListener("DOMContentLoaded", async() => {
+    try {
+      const res = await fetch("/tasks/add-list", {
+        method: "POST",
+        header: {"Content-Type": "application/json"},
+        body: JSON.stringify(listName)
+      });
+      const {list} = await res.json();
+      const listContainer = document.querySelector(".list-list");
+      const listHtml = lists.map((list) => {
+      `
+            <div class="card">
+          <div class="card-body">
+          <input type="checkbox"</input>${list.name}
+          </div>
+          </div>
+      `});
+      listContainer.innerHTML = listHtml.join("");
+    } catch (e) {
+      console.error(e);
+    }
+  });

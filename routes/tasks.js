@@ -29,12 +29,12 @@ router.get("/task-list", asyncHandler(async (req, res) => {
 );
 
 
-router.post("/", asyncHandler(async (req, res) => {
-    const { name, complete, listId, createdAt, updatedAt} = req.body;
-    const task = await Task.create({ name, complete, listId, createdAt, updatedAt });
-    res.status(201).redirect('/tasks')
-  })
-);
+// router.post("/", asyncHandler(async (req, res) => {
+//     const { name, complete, listId, createdAt, updatedAt} = req.body;
+//     const task = await Task.create({ name, complete, listId, createdAt, updatedAt });
+//     res.status(201).redirect('/tasks')
+//   })
+// );
 
 router.get("/:id(\\d+)", asyncHandler(async (req, res, next) => {
     const taskId = parseInt(req.params.id, 10);
@@ -98,21 +98,39 @@ router.get("/list-list", asyncHandler(async (req, res) => {
 })
 );
 
-router.post("/", asyncHandler(async (req, res) => {
+//here
+// router.post("/add-list", asyncHandler(async (req, res) => {
+//   const {name} = req.body;
+//   const list = List.build({
+//     name,
+//     userId: res.locals.user.id
+//   })
+//   await list.save()
+//   res.redirect("/tasks")
+//   //get userId from cookies
+// })
+// );
+
+router.post("/add-list", asyncHandler(async (req, res) => {
   const {name} = req.body;
-  const list = db.List.build({
+  const list =await List.create({
     name,
-    userId: 1
+    userId: res.locals.user.id
   })
   await list.save()
-  res.redirect("/tasks")
+  res.json({list})
+  // await list.save()
+  // res.redirect("/tasks")
   //get userId from cookies
-})
-);
+}))
 
 router.post("/", asyncHandler(async (req, res) => {
-    const { name, complete, listId, createdAt, updatedAt} = req.body;
-    const task = await Task.create({ name, complete, listId, createdAt, updatedAt });
+    const { name, listId} = req.body;
+    const task = await Task.create({
+      name,
+      listId: res.locals.user.id
+    });
+    await task.save()
     res.status(201).redirect('/tasks')
   })
 );
