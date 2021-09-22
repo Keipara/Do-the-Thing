@@ -1,9 +1,12 @@
 var express = require('express');
 const { Op } = require("sequelize");
+const { loginUser, restoreUser, logoutUser, requireAuth } = require("../auth");
+
 var router = express.Router();
 
 const { Task, List, User, sequelize }= require('../db/models')
 const {asyncHandler, handleValidationErrors} = require("./utils");
+
 
 router.get("/", asyncHandler(async (req, res) => {
     const tasks = await Task.findAll();
@@ -19,7 +22,7 @@ router.get("/task-list", asyncHandler(async (req, res) => {
 );
 
 
-router.get("/search/:searchTerm(\\w+)", asyncHandler(async (req, res) => {
+router.get("/search/:searchTerm(\\w+)", requireAuth, asyncHandler(async (req, res) => {
    const searchTerm = req.params.searchTerm;
    const tasks = await Task.findAll({
      where: {
@@ -40,8 +43,6 @@ router.get("/search/:searchTerm(\\w+)", asyncHandler(async (req, res) => {
 })
 );
 
-
-=======
 router.get("/list-list", asyncHandler(async (req, res) => {
   const lists = await List.findAll();
   res.json({ lists });
@@ -50,7 +51,7 @@ router.get("/list-list", asyncHandler(async (req, res) => {
 
 router.post("/", asyncHandler(async (req, res) => {
   const {name} = req.body;
-  const list = db.List.build({
+  const list = List.build({
     name,
     userId: 1
   })

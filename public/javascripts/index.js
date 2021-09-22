@@ -8,17 +8,24 @@ document.addEventListener("DOMContentLoaded", async () => {
       const { tasks } = await res.json();
       const taskContainer = document.querySelector(".task-list");
 
-      const taskHtml = tasks.map(
-          ( task ) =>
-          `
-            <div class="card">
-          <div class="card-body">
-          <p class="card-text">${task.name}</p>
-          </div>
-          </div>
-          `
-          );
-      taskContainer.innerHTML = taskHtml.join("");
+      for(let i = 0; i < tasks.length; i++) {
+        const task = tasks[i];
+
+        const outerDiv = document.createElement("div");
+        outerDiv.className = "each-task";
+
+        const para = document.createElement("p");
+        para.id = task.id;
+        para.innerText = task.name;
+        para.addEventListener("click", (event) => {
+          const taskId = event.target.id
+          console.log("Select task with id: ", taskId);
+        })
+
+        outerDiv.appendChild(para);
+        taskContainer.appendChild(outerDiv);
+      }
+
     } catch (e) {
       console.error(e);
     }
