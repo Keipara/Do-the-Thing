@@ -117,4 +117,28 @@ router.post("/", asyncHandler(async (req, res) => {
   })
 );
 
+
+router.get("/search/:searchTerm(\\w+)", asyncHandler(async (req, res) => {
+   const searchTerm = req.params.searchTerm;
+   const tasks = await Task.findAll({
+     where: {
+        name: {
+          [Op.iLike]: `%${searchTerm}%`,
+        }
+    },
+    include: [
+      {
+        model: List,
+        where:{
+          userId: res.locals.user.id
+        }
+      }
+    ]
+  });
+  res.json({ tasks });
+})
+);
+
+
+
 module.exports = router;
