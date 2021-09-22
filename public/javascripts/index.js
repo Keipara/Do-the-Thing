@@ -3,6 +3,10 @@ window.addEventListener("load", (event)=>{
 })
 
 document.addEventListener("DOMContentLoaded", async () => {
+  // let addTaskBtn = document.querySelector(".addTaskBtn")
+  // const addTask = () => {
+
+  // }
     try {
       const res = await fetch("/tasks/task-list");
       const { tasks } = await res.json();
@@ -13,7 +17,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           `
             <div class="card">
           <div class="card-body">
-          <p class="card-text">${task.name}</p>
+          <input type="checkbox"</input>${task.name}
           </div>
           </div>
           `
@@ -22,6 +26,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     } catch (e) {
       console.error(e);
     }
+    // addTaskBtn.addEventListener('click', addTask)
   });
 
 
