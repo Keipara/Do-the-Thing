@@ -1,5 +1,7 @@
 var express = require('express');
 const { Op } = require("sequelize");
+const { loginUser, restoreUser, logoutUser, requireAuth } = require("../auth");
+
 var router = express.Router();
 
 const { Task, List, User, sequelize }= require('../db/models')
