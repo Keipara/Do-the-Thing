@@ -117,8 +117,7 @@ router.post("/add-list", asyncHandler(async (req, res) => {
     name,
     userId: res.locals.user.id
   })
-  await list.save()
-  res.json({list})
+  res.status(201).redirect('/tasks')
   // await list.save()
   // res.redirect("/tasks")
   //get userId from cookies
