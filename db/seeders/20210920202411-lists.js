@@ -7,9 +7,12 @@ module.exports = {
      *
      * Example:
      */
-  //  await queryInterface.bulkInsert('Lists',
-  //  [{name: 'Test', userId: "100", createdAt: new Date(), updatedAt: new Date()}
-  // ], {});
+
+   await queryInterface.bulkInsert('Lists',
+   [
+    {name: 'Personal', userId: 2, createdAt: new Date(), updatedAt: new Date()},
+    {name: 'General', userId: 1, createdAt: new Date(), updatedAt: new Date()},
+    ], {});
   },
 
   down: async (queryInterface, Sequelize) => {
