@@ -14,11 +14,28 @@ const taskNotFoundError = (id) => {
   return err;
 };
 
+// router.get("/", asyncHandler(async (req, res) => {
+//     const tasks = await Task.findAll({
+//       include: [{
+//           model: List,
+//           where:{userId: res.locals.user.id},
+//         }]
+//         });
+//     // res.render("tasks.pug")
+//     res.json({ tasks });
+//   })
+// );
+
 router.get("/", asyncHandler(async (req, res) => {
-    const tasks = await Task.findAll();
-    res.render("tasks.pug")
-    // res.json({ tasks });
-  })
+  const tasks = await Task.findAll({
+      where:{
+        listId: res.locals.user.id
+      }
+
+  });
+  res.render("tasks.pug")
+  // res.json({ tasks });
+})
 );
 
 router.get("/task-list", asyncHandler(async (req, res) => {
@@ -92,8 +109,19 @@ router.get("/search/:searchTerm(\\w+)", asyncHandler(async (req, res) => {
 })
 );
 
+// router.get("/list-list", asyncHandler(async (req, res) => {
+//   const lists = await List.findAll();
+//   res.json({ lists });
+// })
+// );
+
 router.get("/list-list", asyncHandler(async (req, res) => {
-  const lists = await List.findAll();
+  const lists = await List.findAll({
+        where:{
+          userId: res.locals.user.id
+        }
+      });
+  // res.render("tasks.pug")
   res.json({ lists });
 })
 );
@@ -156,6 +184,15 @@ router.get("/search/:searchTerm(\\w+)", asyncHandler(async (req, res) => {
 })
 );
 
+router.post('/lists/delete/:id(\\d+)', asyncHandler(async (req, res) => {
+    const bookId = parseInt(req.params.id, 10);
+    const book = await db.Book.findByPk(bookId);
+
+    checkPermissions(book, res.locals.user);
+
+    await book.destroy();
+    res.redirect('/');
+  }));
 
 
 module.exports = router;
