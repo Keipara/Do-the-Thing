@@ -17,19 +17,26 @@ const taskNotFoundError = (id) => {
 };
 
 router.get("/", asyncHandler(async (req, res) => {
-    const tasks = await Task.findAll();
+    const tasks = await Task.findAll({
+      include: [{
+          model: List,
+          where:{userId: res.locals.user.id},
+        }]
+        });
     res.render("tasks.pug")
-    // res.json({ tasks });
   })
 );
 
 router.get("/task-list", asyncHandler(async (req, res) => {
-  const tasks = await Task.findAll();
+  const tasks = await Task.findAll({
+    include: [{
+      model: List,
+      where:{userId: res.locals.user.id},
+    }]
+  });
   res.json({ tasks });
-  //get userId to find taskList related to user.
 })
 );
-
 
 router.post("/task-list", asyncHandler(async (req, res) => {
     const { name, complete, listId, createdAt, updatedAt} = req.body;
@@ -101,23 +108,15 @@ router.get("/search/:searchTerm(\\w+)", requireAuth, asyncHandler(async (req, re
 );
 
 router.get("/list-list", asyncHandler(async (req, res) => {
-  const lists = await List.findAll();
+  const lists = await List.findAll({
+        where:{
+          userId: res.locals.user.id
+        }
+      });
   res.json({ lists });
 })
 );
 
-//here
-// router.post("/add-list", asyncHandler(async (req, res) => {
-//   const {name} = req.body;
-//   const list = List.build({
-//     name,
-//     userId: res.locals.user.id
-//   })
-//   await list.save()
-//   res.redirect("/tasks")
-//   //get userId from cookies
-// })
-// );
 
 router.post("/add-list", asyncHandler(async (req, res) => {
   const {name} = req.body;
@@ -125,10 +124,7 @@ router.post("/add-list", asyncHandler(async (req, res) => {
     name,
     userId: res.locals.user.id
   })
-  res.json({list})
-  // await list.save()
-  // res.redirect("/tasks")
-  //get userId from cookies
+
 }))
 
 // router.post("/task-list", asyncHandler(async (req, res) => {
@@ -146,6 +142,15 @@ router.post("/add-list", asyncHandler(async (req, res) => {
 //   })
 // );
 
+router.post('/lists/delete/:id(\\d+)', asyncHandler(async (req, res) => {
+    const bookId = parseInt(req.params.id, 10);
+    const book = await db.Book.findByPk(bookId);
+
+    checkPermissions(book, res.locals.user);
+
+    await book.destroy();
+    res.redirect('/');
+  }));
 
 
 module.exports = router;
