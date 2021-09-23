@@ -3,7 +3,6 @@ extends layout
 append head
     link(rel="stylesheet" href="/stylesheets/task.css")
 
-
 block content
     nav
         div(class='nav-container')
@@ -54,7 +53,9 @@ block content
                     input(type="text" name="due" value=task.due)
                 div
                     label(for="listId") List
-                    input(type="text" value=task.listId)
+                    select(name="listId")
+                        each list in lists
+                            option(value=list.id)= list.name
                 div
                     label(for="description") Description
                     input(type="text")

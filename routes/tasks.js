@@ -100,9 +100,15 @@ router.get("/search/:searchTerm(\\w+)", requireAuth, asyncHandler(async (req, re
 router.get("/:id(\\d+)/edit", csrfProtection, requireAuth, asyncHandler(async (req, res) => {
   const taskId = parseInt(req.params.id, 10);
     const task = await Task.findByPk(taskId);
+    const lists = await List.findAll({
+      where: {
+        userId: res.locals.user.id
+      }
+    });
     res.render("task-edit.pug", {
       title: 'Task Edit Form',
       task,
+      lists,
       csrfToken: req.csrfToken(),
     })
   })
@@ -161,6 +167,7 @@ router.post("/", asyncHandler(async (req, res) => {
     res.status(201).redirect('/tasks')
   })
 );
+
 
 
 module.exports = router;
