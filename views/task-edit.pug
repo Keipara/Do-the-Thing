@@ -55,7 +55,10 @@ block content
                     label(for="listId") List
                     select(name="listId")
                         each list in lists
-                            option(value=list.id)= list.name
+                            if task.listId === list.id
+                                option(value=list.id selected)= list.name
+                            else
+                                option(value=list.id)= list.name
                 div
                     label(for="description") Description
                     textarea(name="description")
