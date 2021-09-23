@@ -9,6 +9,9 @@ block content
     nav
         div(class='nav-container')
             div
+                a(href='localhost:8080/tasks')
+                    img.image(class="logo" src="blue-w-black-outline.png")
+            div
                 input(type="text" name="search" id='search-box' placeholder= "Search tasks")
                 button(action="submit" id='search-button') Search
             div
@@ -16,31 +19,26 @@ block content
 
     div(class='main-container')
         div(class='list-container')
-            h2 Add a list
-            div
-                text Please enter a new list name:
             form(action="/tasks/add-list" method="post")
                 input(type="hidden" name="_csrf" value=csrfToken)
-                div
-                    input(id="new-list" type="text" name="name" placeholder= "Add a list")
-                    button(id="addList" action="submit" value="list") Add
-                    button( value="list") Cancel
+                div(class="listButtons")
+                    button(id="addList" action="submit" value="list") Lists
+                    button( value="list") +
                 div(class="list-list")
 
 
         div(class='task-container')
-            form(action="/tasks" method="post")
-                h2 All Tasks
+            form(action="/tasks/task-list" method="post")
+                h3 All Tasks
+                button(class="deleteButton" action="" value="task") Delete
+                a(class='button-1', href='/tasks') Incomplete
+                a(class='button-2', href='/tasks') Complete
                 div
                 label(for="name")
-                input(type="text" name="name" placeholder= "Add a task")
+                div(class="taskBarandBox")
+                    input(class="addTaskbox" type="text" name="name" placeholder= "Add a task")
+                    button(class="addTaskButton" action="submit" value="task") Add Task
 
-
-                button(class="taskButton" action="submit" value="task") Add Task
-
-            a(class='button', href='/tasks') Incomplete
-            div
-            a(class='button', href='/tasks') Complete
             div(class='task-list')
 
 
