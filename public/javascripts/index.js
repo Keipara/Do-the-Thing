@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           ( task ) =>
           `
             <div class="card">
-          <div class="card-body">
+          <div class="task">
           <input type="checkbox"</input>${task.name}
           </div>
           </div>
