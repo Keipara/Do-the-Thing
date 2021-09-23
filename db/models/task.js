@@ -8,7 +8,9 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.TEXT
   }, {});
   Task.associate = function(models) {
-    Task.belongsTo(models.List, {foreignKey: 'listId'})
+    Task.belongsTo(models.List, {
+      foreignKey: 'listId',
+  })
   };
   return Task;
 };

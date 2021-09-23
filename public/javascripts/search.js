@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const { tasks } = await res.json();
                     const taskContainer = document.querySelector(".task-list");
 
-                    if(tasks.length !== 0) {
+                    if (tasks.length !== 0) {
                         taskContainer.innerHTML = "";
                         for(let i = 0; i < tasks.length; i++) {
                             const task = tasks[i];
