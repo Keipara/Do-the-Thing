@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const { tasks } = await res.json();
       const taskContainer = document.querySelector(".task-list");
 
+
       const taskHtml = tasks.map(
           ( task ) =>
           `
@@ -23,6 +24,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           `
           );
       taskContainer.innerHTML = taskHtml.join("");
+      
     } catch (e) {
       console.error(e);
     }
