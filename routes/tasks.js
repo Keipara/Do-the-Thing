@@ -1,5 +1,7 @@
 var express = require('express');
 const { Op } = require("sequelize");
+const { loginUser, restoreUser, logoutUser, requireAuth } = require("../auth");
+
 var router = express.Router();
 
 const { Task, List, User, sequelize }= require('../db/models')
@@ -36,6 +38,7 @@ router.get("/task-list", asyncHandler(async (req, res) => {
 })
 );
 
+
 router.get("/:id(\\d+)", asyncHandler(async (req, res, next) => {
     const taskId = parseInt(req.params.id, 10);
     const task = await Task.findByPk(taskId);
@@ -71,7 +74,7 @@ router.delete("/:id(\\d+)", asyncHandler(async (req, res, next) => {
 );
 
 
-router.get("/search/:searchTerm(\\w+)", asyncHandler(async (req, res) => {
+router.get("/search/:searchTerm(\\w+)", requireAuth, asyncHandler(async (req, res) => {
    const searchTerm = req.params.searchTerm;
    const tasks = await Task.findAll({
      where: {
@@ -109,41 +112,23 @@ router.post("/add-list", asyncHandler(async (req, res) => {
     name,
     userId: res.locals.user.id
   })
-  res.status(201).redirect('/tasks')
+
 }))
 
-router.post("/", asyncHandler(async (req, res) => {
-    const { name, listId} = req.body;
-    const task = await Task.create({
-      name,
-      listId: res.locals.user.id
-    });
-    await task.save()
-    res.status(201).redirect('/tasks')
-  })
-);
-
-
-router.get("/search/:searchTerm(\\w+)", asyncHandler(async (req, res) => {
-   const searchTerm = req.params.searchTerm;
-   const tasks = await Task.findAll({
-     where: {
-        name: {
-          [Op.iLike]: `%${searchTerm}%`,
-        }
-    },
-    include: [
-      {
-        model: List,
-        where:{
-          userId: res.locals.user.id
-        }
-      }
-    ]
-  });
-  res.json({ tasks });
-})
-);
+// router.post("/task-list", asyncHandler(async (req, res) => {
+//     const { name, listId} = req.body;
+//     const task = await Task.create({
+//       name,
+//       listId: res.locals.user.id
+//     });
+//     const newTask = await Task.findOne({
+//       where: {
+//         name
+//       }
+//     })
+//     res.json({newTask})
+//   })
+// );
 
 router.post('/lists/delete/:id(\\d+)', asyncHandler(async (req, res) => {
     const bookId = parseInt(req.params.id, 10);

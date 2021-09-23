@@ -5,32 +5,39 @@ window.addEventListener("load", (event)=>{
 
 document.addEventListener("DOMContentLoaded", async () => {
     try {
-      const res = await fetch("/tasks/task-list");
+      const res = await fetch("/tasks/task-list", {});
       const { tasks } = await res.json();
       const taskContainer = document.querySelector(".task-list");
+
 
       const taskHtml = tasks.map(
           ( task ) =>
           `
             <div class="card">
-          <div class="card-body">
+          <div class="task">
           <input type="checkbox"</input>${task.name}
           </div>
           </div>
           `
           );
       taskContainer.innerHTML = taskHtml.join("");
+      
     } catch (e) {
       console.error(e);
     }
   });
 
+  let addTaskButton = document.querySelector(".addTaskButton")
+  addTaskButton.addEventListener("click", async () => {
+    // let addTaskBtn = document.querySelector(".addTaskBtn")
+    // const addTask = () => {
 
-  document.addEventListener("DOMContentLoaded", async() => {
-    try {
-      const res = await fetch("/tasks/list-list");
-      const { lists } = await res.json();
-      const listContainer = document.querySelector(".list-list");
+    // }
+      try {
+        const res = await fetch("/tasks/task-list", {});
+        const { tasks } = await res.json();
+        const taskContainer = document.querySelector(".task-list");
+
 
       const listHtml = lists.map(
           (list) =>
