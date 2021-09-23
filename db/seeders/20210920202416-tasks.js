@@ -8,18 +8,18 @@ module.exports = {
      * Example:
      */
     await queryInterface.bulkInsert('Tasks', [
-      {name: 'Homework Bubba', due: new Date(), complete: false, listId: 1, createdAt: new Date(), updatedAt: new Date()},
-      {name: 'Food Bubba', due: new Date(), complete: false, listId: 1, createdAt: new Date(), updatedAt: new Date()},
-      {name: 'Coding Bubba', due: new Date(), complete: false, listId: 1, createdAt: new Date(), updatedAt: new Date()},
-      {name: 'More food Bubba', due: new Date(), complete: false, listId: 1, createdAt: new Date(), updatedAt: new Date()},
-      {name: 'Homework Bubba', due: new Date(), complete: false, listId: 1, createdAt: new Date(), updatedAt: new Date()},
-      {name: 'Sleep Bubba', due: new Date(), complete: false, listId: 1, createdAt: new Date(), updatedAt: new Date()},
-      {name: 'Homework Demo', due: new Date(), complete: false, listId: 2, createdAt: new Date(), updatedAt: new Date()},
-      {name: 'Food Demo', due: new Date(), complete: false, listId: 2, createdAt: new Date(), updatedAt: new Date()},
-      {name: 'Coding Demo', due: new Date(), complete: false, listId: 2, createdAt: new Date(), updatedAt: new Date()},
-      {name: 'More food Demo', due: new Date(), complete: false, listId: 2, createdAt: new Date(), updatedAt: new Date()},
-      {name: 'Homework Demo', due: new Date(), complete: false, listId: 2, createdAt: new Date(), updatedAt: new Date()},
-      {name: 'Sleep Demo', due: new Date(), complete: false, listId: 2, createdAt: new Date(), updatedAt: new Date()},
+      {name: 'Homework Bubba', complete: false, listId: 1, createdAt: new Date(), updatedAt: new Date()},
+      {name: 'Food Bubba', complete: false, listId: 1, createdAt: new Date(), updatedAt: new Date()},
+      {name: 'Coding Bubba', complete: false, listId: 1, createdAt: new Date(), updatedAt: new Date()},
+      {name: 'More food Bubba', complete: false, listId: 1, createdAt: new Date(), updatedAt: new Date()},
+      {name: 'Homework Bubba', complete: false, listId: 1, createdAt: new Date(), updatedAt: new Date()},
+      {name: 'Sleep Bubba', complete: false, listId: 1, createdAt: new Date(), updatedAt: new Date()},
+      {name: 'Homework Demo', complete: false, listId: 2, createdAt: new Date(), updatedAt: new Date()},
+      {name: 'Food Demo', complete: false, listId: 2, createdAt: new Date(), updatedAt: new Date()},
+      {name: 'Coding Demo', complete: false, listId: 2, createdAt: new Date(), updatedAt: new Date()},
+      {name: 'More food Demo', complete: false, listId: 2, createdAt: new Date(), updatedAt: new Date()},
+      {name: 'Homework Demo', complete: false, listId: 2, createdAt: new Date(), updatedAt: new Date()},
+      {name: 'Sleep Demo', complete: false, listId: 2, createdAt: new Date(), updatedAt: new Date()},
     ], {});
   },
 

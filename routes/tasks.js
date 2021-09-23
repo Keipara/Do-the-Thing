@@ -105,6 +105,7 @@ router.get("/:id(\\d+)/edit", csrfProtection, requireAuth, asyncHandler(async (r
         userId: res.locals.user.id
       }
     });
+
     res.render("task-edit.pug", {
       title: 'Task Edit Form',
       task,
@@ -118,8 +119,14 @@ router.post("/:id(\\d+)/edit", csrfProtection, requireAuth, asyncHandler(async (
   const taskId = parseInt(req.params.id, 10);
   const { name, due, listId, description} = req.body;
   const taskToUpdate = await Task.findByPk(taskId);
+  let task = {};
 
-  const task = { name, due, listId, description }
+  if(description === "") {
+    task = { name, due, listId }
+  } else {
+    task = { name, due, listId, description }
+  }
+
   await taskToUpdate.update(task);
   res.redirect('/tasks')
 }))
