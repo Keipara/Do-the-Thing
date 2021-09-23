@@ -19,14 +19,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         outerDiv.className = "each-task";
 
         const para = document.createElement("p");
-        para.id = task.id;
-        para.innerText = task.name;
-        para.addEventListener("click", (event) => {
-          const taskId = event.target.id
-          console.log("Select task with id: ", taskId);
-          taskEdit(taskId);
-        })
 
+        const aTag = document.createElement('a');
+        aTag.className = "task-tag"
+        aTag.href = `/tasks/${task.id}/edit`
+        aTag.innerText = task.name;
+
+        para.appendChild(aTag)
         outerDiv.appendChild(para);
         taskContainer.appendChild(outerDiv);
       }
@@ -84,27 +83,27 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   });
 
- const taskEdit = async (taskId) => {
-    console.log(`Received ${taskId} in function`)
-    const res = await fetch(`/tasks/${taskId}/edit`);
-    const { task } = await res.json();
+//  const taskEdit = async (taskId) => {
+//     console.log(`Received ${taskId} in function`)
+//     const res = await fetch(`/tasks/${taskId}/edit`);
+//     const { task } = await res.json();
 
-    const listSummaryContainer = document.querySelector(".list-summary-container");
-    listSummaryContainer.style.display = 'none';
+//     const listSummaryContainer = document.querySelector(".list-summary-container");
+//     listSummaryContainer.style.display = 'none';
 
-    const taskEditContainer = document.querySelector(".task-edit-container");
-    taskEditContainer.innerHTML = "Task Details";
-    taskEditContainer.style.display = 'block';
+//     const taskEditContainer = document.querySelector(".task-edit-container");
+//     taskEditContainer.innerHTML = "Task Details";
+//     taskEditContainer.style.display = 'block';
 
-    let closeButton = document.createElement("input");
-    closeButton.type = "submit";
-    closeButton.value = "Close";
+//     let closeButton = document.createElement("input");
+//     closeButton.type = "submit";
+//     closeButton.value = "Close";
 
-    closeButton.addEventListener("click", event => {
-      listSummaryContainer.style.display = 'block';
-      taskEditContainer.style.display = 'none';
-    })
+//     closeButton.addEventListener("click", event => {
+//       listSummaryContainer.style.display = 'block';
+//       taskEditContainer.style.display = 'none';
+//     })
 
-    taskEditContainer.appendChild(closeButton);
+//     taskEditContainer.appendChild(closeButton);
 
-}
+// }

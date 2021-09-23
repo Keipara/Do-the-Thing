@@ -17,3 +17,7 @@
 .task-edit-container {
     display: none;
 }
+
+.task-tag {
+    text-decoration: none;
+}
