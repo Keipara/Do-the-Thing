@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         para.addEventListener("click", (event) => {
           const taskId = event.target.id
           console.log("Select task with id: ", taskId);
+          taskEdit(taskId);
         })
 
         outerDiv.appendChild(para);
@@ -82,3 +83,28 @@ document.addEventListener("DOMContentLoaded", async () => {
       console.error(e);
     }
   });
+
+ const taskEdit = async (taskId) => {
+    console.log(`Received ${taskId} in function`)
+    const res = await fetch(`/tasks/${taskId}/edit`);
+    const { task } = await res.json();
+
+    const listSummaryContainer = document.querySelector(".list-summary-container");
+    listSummaryContainer.style.display = 'none';
+
+    const taskEditContainer = document.querySelector(".task-edit-container");
+    taskEditContainer.innerHTML = "Task Details";
+    taskEditContainer.style.display = 'block';
+
+    let closeButton = document.createElement("input");
+    closeButton.type = "submit";
+    closeButton.value = "Close";
+
+    closeButton.addEventListener("click", event => {
+      listSummaryContainer.style.display = 'block';
+      taskEditContainer.style.display = 'none';
+    })
+
+    taskEditContainer.appendChild(closeButton);
+
+}

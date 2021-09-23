@@ -9,3 +9,11 @@
     flex-direction: row;
     justify-content: space-between;
 }
+
+.list-summary-container {
+    display: block;
+}
+
+.task-edit-container {
+    display: none;
+}

@@ -94,6 +94,13 @@ router.get("/search/:searchTerm(\\w+)", requireAuth, asyncHandler(async (req, re
 })
 );
 
+router.get("/:id(\\d+)/edit", requireAuth, asyncHandler(async (req, res) => {
+  const taskId = parseInt(req.params.id, 10);
+    const task = await Task.findByPk(taskId);
+    res.json({ task });
+  })
+);
+
 router.get("/list-list", asyncHandler(async (req, res) => {
   const lists = await List.findAll();
   res.json({ lists });
