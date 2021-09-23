@@ -21,7 +21,8 @@ module.exports = {
       },
       listId: {
         type: Sequelize.INTEGER,
-        refences: {model: "Lists"}
+        allowNull: false,
+        references: {model: "Lists"}
       },
       description: {
         type: Sequelize.TEXT

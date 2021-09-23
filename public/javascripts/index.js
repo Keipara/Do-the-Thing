@@ -1,106 +1,130 @@
+
+
 window.addEventListener("load", (event)=>{
     console.log("hello from javascript!")
 })
 
-document.addEventListener("DOMContentLoaded", async () => {
-  // let addTaskBtn = document.querySelector(".addTaskBtn")
-  // const addTask = () => {
+// document.addEventListener("DOMContentLoaded", async () => {
+//   // let addTaskBtn = document.querySelector(".addTaskBtn")
+//   // const addTask = () => {
 
-  // }
-    try {
-      const res = await fetch("/tasks/task-list", {});
-      const { tasks } = await res.json();
-      const taskContainer = document.querySelector(".task-list");
+//   // }
+//     try {
+//       const res = await fetch("/tasks/task-list", {});
+//       const { tasks } = await res.json();
+//       const taskContainer = document.querySelector(".task-list");
 
 
-      const taskHtml = tasks.map(
-          ( task ) =>
-          `
-            <div class="card">
-          <div class="task">
-          <input type="checkbox"</input>${task.name}
-          </div>
-          </div>
-          `
-          );
-      taskContainer.innerHTML = taskHtml.join("");
-      
-    } catch (e) {
-      console.error(e);
+//       // const taskHtml = tasks.map(
+//       //     ( task ) =>
+//       //     `
+//       //       <div class="card">
+//       //     <div class="task">
+//       //     <input type="checkbox"</input>${task.name}
+//       //     </div>
+//       //     </div>
+//       //     `
+//       //     );
+//       const taskHtml = tasks.map(
+//         (task) =>
+//         `
+//             <div class="card">
+//           <div class="task">
+//           <input type="checkbox"</input>${task.name}
+
+//           </div>
+//           </div>
+//           `
+//       )
+
+//       taskContainer.innerHTML = taskHtml.join("");
+//       const deleteButton = document.querySelector('.deleteButton')
+//       deleteButton.addEventListener("click", (event) => {
+//         event.target.
+//       })
+//     } catch (e) {
+//       console.error(e);
+//     }
+//     // addTaskBtn.addEventListener('click', addTask)
+//   });
+
+
+
+  // let addTaskButton = document.querySelector(".addTaskButton")
+  // addTaskButton.addEventListener("click", async () => {
+  //   // let addTaskBtn = document.querySelector(".addTaskBtn")
+  //   // const addTask = () => {
+
+  //   // }
+  //     try {
+  //       const res = await fetch("/tasks/task-list", {});
+  //       const { tasks } = await res.json();
+  //       const taskContainer = document.querySelector(".task-list");
+
+  //       const taskHtml = tasks.map(
+  //           ( task ) =>
+  //           `
+  //             <div class="card">
+  //           <div class="card-body">
+  //           <input type="checkbox"</input>${task.name}
+  //           </div>
+  //           </div>
+  //           `
+  //           );
+  //       taskContainer.innerHTML = taskHtml.join("");
+  //     } catch (e) {
+  //       console.error(e);
+  //     }
+  //     // addTaskBtn.addEventListener('click', addTask)
+  //   });
+
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    const res = await fetch("/tasks/task-list");
+    const {tasks} = await res.json();
+    const taskContainer = document.querySelector(".task-list")
+    for (let i = 0; i< tasks.length; i++) {
+      const task = tasks[i];
+
+      const li = document.createElement('li');
+      li.innerText = task.name
+      li.className = "all-tasks";
+      li.id = task.id
+
+      const deleteButton = document.createElement('button');
+      deleteButton.className = "delete-button";
+      deleteButton.innerText = "Delete";
+      deleteButton.addEventListener('click', (event) => {
+        event.preventDefault();
+        removeTask(task.id)
+        event.target.parentElement.remove();
+      })
+      li.appendChild(deleteButton);
+      taskContainer.appendChild(li)
     }
-    // addTaskBtn.addEventListener('click', addTask)
-  });
+  } catch (e) {
+    console.error(e)
+    }
+})
 
-  let addTaskButton = document.querySelector(".addTaskButton")
-  addTaskButton.addEventListener("click", async () => {
-    // let addTaskBtn = document.querySelector(".addTaskBtn")
-    // const addTask = () => {
 
-    // }
-      try {
-        const res = await fetch("/tasks/task-list", {});
-        const { tasks } = await res.json();
-        const taskContainer = document.querySelector(".task-list");
-
-        const taskHtml = tasks.map(
-            ( task ) =>
-            `
-              <div class="card">
-            <div class="card-body">
-            <input type="checkbox"</input>${task.name}
-            </div>
-            </div>
-            `
-            );
-        taskContainer.innerHTML = taskHtml.join("");
-      } catch (e) {
-        console.error(e);
-      }
-      // addTaskBtn.addEventListener('click', addTask)
+async function removeTask(taskId) {
+  try {
+    const res = await fetch(`/tasks/delete/${taskId}`, {
+      method: 'POST',
+      headers: {'Content-type': 'application/json'}
     });
-
-  // document.addEventListener("DOMContentLoaded", async() => {
-  //   try {
-  //     const res = await fetch("/tasks/list-list");
-  //     const { lists } = await res.json();
-  //     const listContainer = document.querySelector(".list-list");
-
-  //     const listHtml = lists.map(
-  //         (list) =>
-  //         `
-  //         <div class="card">
-  //         <div class="card-body">
-  //         <p class="card-text">${list.name}</p>
-  //         </div>
-  //         </div>
-  //         `
-  //         );
-  //     listContainer.innerHTML = listHtml.join("");
-  //   } catch (e) {
-  //     console.error(e)
-  //   }
-  // });
+  } catch (e) {
+  }
+}
 
 
-  // document.addEventListener("DOMContentLoaded", async() => {
-  //   try {
-  //     const res = await fetch("/tasks/add-list", {
-  //       method: "POST",
-  //       header: {"Content-Type": "application/json"},
-  //       body: JSON.stringify(listName)
-  //     });
-  //     const {list} = await res.json();
-  //     const listContainer = document.querySelector(".list-list");
-  //     const listHtml = lists.map((list) => {
-  //     `
-  //           <div class="card">
-  //         <div class="card-body">
-  //         <input type="checkbox"</input>${list.name}
-  //         </div>
-  //         </div>
-  //     `});
-  //     listContainer.innerHTML = listHtml.join("");
-  //   } catch (e) {
-  //     console.error(e);
-  //   }
-  // });
+// const deleteButton = document.getElementsByClassName("delete-button")
+// deleteButton.addEventListener('click', async() => {
+//   try {
+//     const res = await fetch(`/tasks/${task.id}`, {
+//       method: "DELETE",
+//     });
+//   } catch (e) {
+//   }
+// })

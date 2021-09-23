@@ -59,17 +59,23 @@ router.patch("/:id(\\d+)", asyncHandler(async (req, res, next) => {
 );
 
 
-router.delete("/:id(\\d+)", asyncHandler(async (req, res, next) => {
-    const taskId = parseInt(req.params.id, 10);
-    const task = await Task.findByPk(taskId);
+// router.get("/delete/:id(\\d+)", asyncHandler(async (req, res, next) => {
+//   const taskId = parseInt(req.params.id, 10);
+//   const task = await Task.findByPk(taskId);
+//   res.render('tasks.pug')
+// }));
 
-    if (task) {
-      await task.destroy();
-      res.status(204).end();
-    } else {
-      next(taskNotFoundError(taskId));
-    }
-  })
+router.post("/delete/:id(\\d+)", asyncHandler(async (req, res, next) => {
+  const taskId = parseInt(req.params.id, 10);
+  const task = await Task.findByPk(taskId);
+
+  if (task) {
+    await task.destroy();
+    res.status(204).end();
+  } else {
+    next(taskNotFoundError(taskId));
+  }
+})
 );
 
 
