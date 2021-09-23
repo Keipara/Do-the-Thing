@@ -38,6 +38,12 @@ router.get("/task-list", asyncHandler(async (req, res) => {
 })
 );
 
+router.post("/task-list", asyncHandler(async (req, res) => {
+    const { name, complete, listId, createdAt, updatedAt} = req.body;
+    const task = await Task.create({ name, complete, listId, createdAt, updatedAt });
+    res.redirect('/tasks')
+  })
+);
 
 router.get("/:id(\\d+)", asyncHandler(async (req, res, next) => {
     const taskId = parseInt(req.params.id, 10);
