@@ -18,14 +18,15 @@ block content
                 a(class='button', href='/logout') Log out
 
     div(class='main-container')
-    
+
         div(class='list-container')
-            form(action="/tasks/add-list" method="post")
-                input(type="hidden" name="_csrf" value=csrfToken)
-                div(class="listButtons")
-                    button(id="addList" action="submit" value="list") Lists
-                    button( value="list") +
-                div(class="list-list")
+            form(action="/tasks/add-list" method="post" class="list-form")
+                div(class="form-items")
+                    input(type="hidden" name="_csrf" value=csrfToken)
+                    div(class="listButtons")
+                        button(id="addList" action="submit" value="list") Lists
+                        button( value="list") +
+                    div(class="list-list")
 
 
         div(class='task-container')
