@@ -41,6 +41,8 @@ h3 {
 }
 
 .list-container {
+    display: flex;
+    flex-direction: column;
     width: 10%
 }
 
@@ -89,7 +91,7 @@ h3 {
 }
 
 .listButtons {
-    position: relative;
+    position: block;
     top: 75px
 }
 
@@ -102,5 +104,16 @@ h3 {
 }
 
 .list-container {
-    height: 100vh
+    height: 100vh;
+}
+
+.list-list {
+    position: relative
+}
+
+.form-items {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin-top: 80px;
 }
