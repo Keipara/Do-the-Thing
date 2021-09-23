@@ -2,8 +2,7 @@ extends layout
 
 append head
     link(rel="stylesheet" href="/stylesheets/task.css")
-    script(src="javascripts/search.js" type="module" defer)
-    script(src="javascripts/index.js" type="module" defer)
+
 
 block content
     nav
@@ -43,4 +42,21 @@ block content
             a(class='button', href='/tasks') Complete
             div(class='task-list')
 
-        div(class='list-summary-container') List Summary
+
+        div(class='task-edit-container') Task Details
+            form(class= "form" action=`/tasks/${task.id}/edit` method="post")
+                input(type="hidden" name="_csrf" value=csrfToken)
+
+                div
+                    input(type="text" name="name" value=task.name)
+                div
+                    label(for="due") Due
+                    input(type="text" name="due" value=task.due)
+                div
+                    label(for="listId") List
+                    input(type="text" value=task.listId)
+                div
+                    label(for="description") Description
+                    input(type="text")
+                div
+                    input(type="submit" value="Save")

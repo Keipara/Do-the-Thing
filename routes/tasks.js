@@ -1,11 +1,12 @@
 var express = require('express');
 const { Op } = require("sequelize");
 const { loginUser, restoreUser, logoutUser, requireAuth } = require("../auth");
+const { csrfProtection, asyncHandler, handleValidationErrors } = require('./utils');
 
 var router = express.Router();
 
 const { Task, List, User, sequelize }= require('../db/models')
-const {asyncHandler, handleValidationErrors} = require("./utils");
+
 
 
 
@@ -24,7 +25,9 @@ router.get("/", asyncHandler(async (req, res) => {
 );
 
 router.get("/task-list", asyncHandler(async (req, res) => {
-  const tasks = await Task.findAll();
+  const tasks = await Task.findAll({
+    order: ["id"]
+  });
   res.json({ tasks });
   //get userId to find taskList related to user.
 })
@@ -94,12 +97,27 @@ router.get("/search/:searchTerm(\\w+)", requireAuth, asyncHandler(async (req, re
 })
 );
 
-router.get("/:id(\\d+)/edit", requireAuth, asyncHandler(async (req, res) => {
+router.get("/:id(\\d+)/edit", csrfProtection, requireAuth, asyncHandler(async (req, res) => {
   const taskId = parseInt(req.params.id, 10);
     const task = await Task.findByPk(taskId);
-    res.json({ task });
+    res.render("task-edit.pug", {
+      title: 'Task Edit Form',
+      task,
+      csrfToken: req.csrfToken(),
+    })
   })
 );
+
+router.post("/:id(\\d+)/edit", csrfProtection, requireAuth, asyncHandler(async (req, res) => {
+  const taskId = parseInt(req.params.id, 10);
+  const { name, due, listId, description} = req.body;
+  const taskToUpdate = await Task.findByPk(taskId);
+
+  const task = { name, due, listId, description }
+  await taskToUpdate.update(task);
+  res.redirect('/tasks')
+}))
+
 
 router.get("/list-list", asyncHandler(async (req, res) => {
   const lists = await List.findAll();
