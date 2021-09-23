@@ -34,7 +34,7 @@ router.get("/task-list", asyncHandler(async (req, res) => {
 router.post("/task-list", asyncHandler(async (req, res) => {
     const { name, complete, listId, createdAt, updatedAt} = req.body;
     const task = await Task.create({ name, complete, listId, createdAt, updatedAt });
-    res.status(200)
+    res.redirect('/tasks')
   })
 );
 
