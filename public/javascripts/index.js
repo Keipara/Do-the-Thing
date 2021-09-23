@@ -50,33 +50,33 @@ window.addEventListener("load", (event)=>{
 
 
 
-  // let addTaskButton = document.querySelector(".addTaskButton")
-  // addTaskButton.addEventListener("click", async () => {
-  //   // let addTaskBtn = document.querySelector(".addTaskBtn")
-  //   // const addTask = () => {
+  let addTaskButton = document.querySelector(".addTaskButton")
+  addTaskButton.addEventListener("click", async () => {
+    // let addTaskBtn = document.querySelector(".addTaskBtn")
+    // const addTask = () => {
 
-  //   // }
-  //     try {
-  //       const res = await fetch("/tasks/task-list", {});
-  //       const { tasks } = await res.json();
-  //       const taskContainer = document.querySelector(".task-list");
+    // }
+      try {
+        const res = await fetch("/tasks/task-list", {});
+        const { tasks } = await res.json();
+        const taskContainer = document.querySelector(".task-list");
 
-  //       const taskHtml = tasks.map(
-  //           ( task ) =>
-  //           `
-  //             <div class="card">
-  //           <div class="card-body">
-  //           <input type="checkbox"</input>${task.name}
-  //           </div>
-  //           </div>
-  //           `
-  //           );
-  //       taskContainer.innerHTML = taskHtml.join("");
-  //     } catch (e) {
-  //       console.error(e);
-  //     }
-  //     // addTaskBtn.addEventListener('click', addTask)
-  //   });
+        const taskHtml = tasks.map(
+            ( task ) =>
+            `
+              <div class="card">
+            <div class="card-body">
+            <input type="checkbox"</input>${task.name}
+            </div>
+            </div>
+            `
+            );
+        taskContainer.innerHTML = taskHtml.join("");
+      } catch (e) {
+        console.error(e);
+      }
+      // addTaskBtn.addEventListener('click', addTask)
+    });
 
 document.addEventListener('DOMContentLoaded', async () => {
   try {
@@ -86,10 +86,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     for (let i = 0; i< tasks.length; i++) {
       const task = tasks[i];
 
-      const li = document.createElement('li');
-      li.innerText = task.name
-      li.className = "all-tasks";
-      li.id = task.id
+      const a = document.createElement('a');
+      aTag.innerText = task.name
+      aTag.className = "all-tasks";
+      aTag.id = task.id
 
       const deleteButton = document.createElement('button');
       deleteButton.className = "delete-button";
@@ -99,8 +99,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         removeTask(task.id)
         event.target.parentElement.remove();
       })
-      li.appendChild(deleteButton);
-      taskContainer.appendChild(li)
+      aTag.appendChild(deleteButton);
+      taskContainer.appendChild(aTag)
     }
   } catch (e) {
     console.error(e)
