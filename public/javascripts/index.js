@@ -1,29 +1,5 @@
 const incompleteContainer = document.querySelector(".complete-tasks")
 
-
-  let addTaskButton = document.querySelector(".addTaskButton")
-  addTaskButton.addEventListener("click", (event) => {
-    const taskContainer = document.querySelector(".task-list")
-    let addTaskbox = document.querySelector(".addTaskbox")
-    let taskName = addTaskbox.value
-    if (addTaskbox) {
-      let newATag = document.createElement('a')
-      addTask(taskName)
-      taskContainer.appendChild(newATag)
-    }
-  })
-
-  async function addTask(taskName) {
-    try {
-      const res = await fetch("/task-list", {
-        method: "POST",
-        headers: {'Content-type': 'application/json'}
-      });
-    } catch (e) {
-    }
-  }
-
-
 document.addEventListener('DOMContentLoaded', async () => {
   try {
     const res = await fetch("/tasks/task-list");
@@ -62,6 +38,56 @@ document.addEventListener('DOMContentLoaded', async () => {
       //
     }
 
+    const editSaveButton = document.querySelector("#edit-save-button");
+      editSaveButton.addEventListener("click", async (event) => {
+        event.preventDefault();
+        console.log("clicked")
+        const taskNameInput = document.querySelector("#task-name-input");
+        const newName = taskNameInput.value
+
+        const listSelect = document.querySelector("#list-select");
+        const newListId = listSelect.value
+
+        const taskDueDate = document.querySelector("#task-due-date");
+        const newDueDate = taskDueDate.value
+
+        const taskDescription = document.querySelector("#task-description");
+        const newDescription = taskDescription.value
+
+        const taskId = event.target.dataset.taskId;
+        const res = await fetch (`/tasks/${taskId}/edit`, {
+          method: 'POST',
+          headers: {'Content-type': 'application/json'},
+          body: JSON.stringify({
+            name: newName,
+            due: newDueDate,
+            listId: newListId,
+            description: newDescription
+          }),
+        });
+
+        if(res.ok) {
+          window.location.reload();
+        }
+
+        const listSummaryContainer = document.querySelector(".list-summary-container");
+        listSummaryContainer.style.display = "block";
+
+        const taskEditContainer = document.querySelector(".task-edit-container");
+        taskEditContainer.style.display = "none";
+      });
+
+      const editCloseButton = document.querySelector("#edit-close-button");
+      editCloseButton.addEventListener("click", event => {
+
+        const listSummaryContainer = document.querySelector(".list-summary-container");
+        listSummaryContainer.style.display = "block";
+
+        const taskEditContainer = document.querySelector(".task-edit-container");
+        taskEditContainer.style.display = "none";
+
+      })
+
   } catch (e) {
     console.error(e)
     }
@@ -75,13 +101,13 @@ function createTasksList(tasks, taskContainer) {
 
     const taskDiv = document.createElement('div')
     taskDiv.className = "task-div"
-
+    console.log(task.name)
     const para = document.createElement("p");
       para.id = task.id;
       para.innerText = task.name;
       para.className = "edit-task-para"
-      para.addEventListener("click", async (event) => {
-        event.preventDefault();
+      para.addEventListener("click", (event) => {
+        // event.preventDefault();
         if(event.target.classList.contains("edit-task-para")) {
           const listSummaryContainer = document.querySelector(".list-summary-container");
           listSummaryContainer.style.display = "none";
@@ -90,6 +116,8 @@ function createTasksList(tasks, taskContainer) {
           taskEditContainer.style.display = "block";
 
           const taskId = event.target.id
+          const editSubmitButton = document.querySelector("#edit-save-button")
+          editSubmitButton.dataset.taskId = taskId;
           editTask(taskId)
         }
 
@@ -135,7 +163,7 @@ function createTasksList(tasks, taskContainer) {
      try {
       const res = await fetch(`/tasks/${taskId}/edit`);
       const data = await res.json();
-
+      console.log(data)
       const taskNameInput = document.querySelector("#task-name-input");
       taskNameInput.value = data.task.name;
 
@@ -148,66 +176,12 @@ function createTasksList(tasks, taskContainer) {
       const taskDescription = document.querySelector("#task-description");
       taskDescription.value = data.task.description;
 
-      // const editForm = document.querySelector("#task-edit-form")
-      // editForm.action = `/tasks/${data.task.id}/edit`;
-
-      const editSaveButton = document.querySelector("#edit-save-button");
-      editSaveButton.addEventListener("click", async (event) => {
-        event.preventDefault();
-
-        const taskNameInput = document.querySelector("#task-name-input");
-        const newName = taskNameInput.value
-
-        const listSelect = document.querySelector("#list-select");
-        const newListId = listSelect.value
-
-        const taskDueDate = document.querySelector("#task-due-date");
-        const newDueDate = taskDueDate.value
-
-        const taskDescription = document.querySelector("#task-description");
-        const newDescription = taskDescription.value
-
-        const res = await fetch (`/tasks/${data.task.id}/edit`, {
-          method: 'POST',
-          headers: {'Content-type': 'application/json'},
-          body: JSON.stringify({
-            name: newName,
-            due: newDueDate,
-            listId: newListId,
-            description: newDescription
-          }),
-        });
-
-        if(res.ok) {
-          console.log("IF block")
-          window.location.reload();
-        }
-
-        const listSummaryContainer = document.querySelector(".list-summary-container");
-        listSummaryContainer.style.display = "block";
-
-        const taskEditContainer = document.querySelector(".task-edit-container");
-        taskEditContainer.style.display = "none";
-      });
-
-      const editCloseButton = document.querySelector("#edit-close-button");
-      editCloseButton.addEventListener("click", event => {
-
-        const listSummaryContainer = document.querySelector(".list-summary-container");
-        listSummaryContainer.style.display = "block";
-
-        const taskEditContainer = document.querySelector(".task-edit-container");
-        taskEditContainer.style.display = "none";
-
-      })
-
     } catch (e) {
     }
   }
 
 //search for tasks
 let searchButton = document.getElementById("search-button");
-
 searchButton.addEventListener("click", async (event) => {
   let searchBox = document.getElementById("search-box");
   let searchTerm = searchBox.value;
@@ -250,6 +224,8 @@ searchButton.addEventListener("click", async (event) => {
     }
   });
 
+  let selectedList;
+
   function createListsList(lists, listContainer) {
     for (let i = 0; i< lists.length; i++) {
       const list = lists[i];
@@ -264,6 +240,7 @@ searchButton.addEventListener("click", async (event) => {
           event.preventDefault();
           try {
             const res = await fetch(`tasks/${list.id}/tasks`);
+            selectedList = list.id;
             const {tasks} = await res.json();
             const taskContainer = document.querySelector(".task-list")
             taskContainer.innerHTML = "";
@@ -275,6 +252,7 @@ searchButton.addEventListener("click", async (event) => {
           } catch (e) {
             console.error(e)
             }
+
         })
       const deleteListButton = document.createElement('button')
       deleteListButton.className = "delete-list-button"
@@ -287,6 +265,37 @@ searchButton.addEventListener("click", async (event) => {
       para.appendChild(deleteListButton)
       listDiv.appendChild(para);
       listContainer.appendChild(listDiv)
+
+
+    }
+
+  }
+
+  const addTaskButton = document.querySelector(".addTaskButton")
+      addTaskButton.addEventListener("click", (event) => {
+        event.preventDefault()
+        let addTaskbox = document.querySelector(".addTaskbox")
+        let taskName = addTaskbox.value;
+        addTask(taskName, selectedList);
+      })
+
+
+  async function addTask(taskName, listId) {
+    try {
+      const res = await fetch("/tasks/add-task", {
+        method: 'POST',
+        headers: {'Content-type': 'application/json'},
+        body: JSON.stringify({
+          name: taskName,
+          listId: listId
+        }),
+      });
+
+      if(res.ok) {
+        window.location.reload();
+      }
+
+    } catch (e) {
     }
   }
 
@@ -320,6 +329,7 @@ searchButton.addEventListener("click", async (event) => {
     } catch (e) {
     }
   }
+
 
 //List Summary
 document.addEventListener('DOMContentLoaded', async () => {
@@ -361,3 +371,4 @@ document.addEventListener('DOMContentLoaded', async () => {
 //   event.preventDefault();
 //   listName.innerText = list.innerText
 // })
+
