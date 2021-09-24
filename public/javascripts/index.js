@@ -1,5 +1,6 @@
 
 
+
   let addTaskButton = document.querySelector(".addTaskButton")
   addTaskButton.addEventListener("click", (event) => {
     const taskContainer = document.querySelector(".task-list")
@@ -15,6 +16,7 @@
   async function addTask(taskName) {
     try {
       const res = await fetch("/task-list", {
+        method: "POST",
         headers: {'Content-type': 'application/json'}
       });
     } catch (e) {
@@ -245,6 +247,7 @@ searchButton.addEventListener("click", async (event) => {
       const para = document.createElement("p");
         para.id = list.id;
         para.innerText = list.name;
+        para.className = "listNames"
         para.addEventListener("click", async (event) => {
           event.preventDefault();
           try {
@@ -253,6 +256,8 @@ searchButton.addEventListener("click", async (event) => {
             const taskContainer = document.querySelector(".task-list")
             taskContainer.innerHTML = "";
             createTasksList(tasks, taskContainer);
+            const listName = document.querySelector('.listName')
+            listName.innerText = para.innerText.slice(0, -6)
           } catch (e) {
             console.error(e)
             }
@@ -312,4 +317,12 @@ searchButton.addEventListener("click", async (event) => {
 //     });
 //   } catch (e) {
 //   }
+// })
+
+
+// let listName = document.querySelector('.listName')
+// let list = document.querySelector('.listNames')
+// list.addEventListener("click", async (event) => {
+//   event.preventDefault();
+//   listName.innerText = list.innerText
 // })
