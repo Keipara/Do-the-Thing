@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
       })
 
       para.appendChild(deleteButton);
-      outerDiv.appendChild(para);
+      div.appendChild(para);
       taskContainer.appendChild(div)
             }
           } else {
