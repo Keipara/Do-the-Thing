@@ -30,8 +30,8 @@ block content
 
         div(class='task-container')
             form(action="/tasks/task-list" method="post")
-                a(class='button-1', href='/tasks') Incomplete
-                a(class='button-2', href='/tasks') Complete
+                a(class='button-1', href='#') Incomplete
+                a(class='button-2', href='#') Complete
                 div
                 label(for="name")
                 div(class="taskBarandBox")
@@ -39,6 +39,8 @@ block content
                     button(class="addTaskButton" action="submit" value="task") Add Task
 
             div(class='task-list')
+            div(class='complete-tasks')
+                p 
 
 
         div(class='details-containter')
