@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
           const taskId = event.target.id
           editTask(taskId)
+          // event.target.innerText = "new text!"
 
         })
 
