@@ -28,7 +28,7 @@ router.get("/", csrfProtection, asyncHandler(async (req, res) => {
     res.render("tasks.pug", {
       task,
       lists,
-      csrfToken: req.csrfToken()
+      // csrfToken: req.csrfToken()
     })
     // res.json({ tasks });
   })
@@ -125,21 +125,12 @@ router.get("/:id(\\d+)/edit", csrfProtection, requireAuth, asyncHandler(async (r
   })
 );
 
-router.post("/:id(\\d+)/edit", csrfProtection, requireAuth, asyncHandler(async (req, res) => {
-  // const task = await Task.findByPk(taskId);
-  //   const lists = await List.findAll({
-  //     where: {
-  //       userId: res.locals.user.id
-  //     }
-  //   });
-
-  //   res.json({ task, lists });
+router.post("/:id(\\d+)/edit", requireAuth, asyncHandler(async (req, res) => {
 
   const taskId = parseInt(req.params.id, 10);
   let { name, due, listId, description} = req.body;
   const taskToUpdate = await Task.findByPk(taskId);
   let task = {};
-  console.log("in post route")
 
   if(!due) {
     due = taskToUpdate.due;
@@ -152,7 +143,8 @@ router.post("/:id(\\d+)/edit", csrfProtection, requireAuth, asyncHandler(async (
   }
 
   await taskToUpdate.update(task);
-  res.redirect('/tasks')
+  // res.redirect('/tasks')
+  res.status(204).end();
 }))
 
 

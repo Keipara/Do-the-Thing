@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const para = document.createElement("p");
         para.id = task.id;
         para.innerText = task.name;
-        para.addEventListener("click", (event) => {
+        para.addEventListener("click", async (event) => {
           event.preventDefault();
           const listSummaryContainer = document.querySelector(".list-summary-container");
           listSummaryContainer.style.display = "none";
@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
           const taskId = event.target.id
           editTask(taskId)
+
         })
 
         // const aTag = document.createElement('a');
@@ -86,8 +87,53 @@ document.addEventListener("DOMContentLoaded", async () => {
       const taskDescription = document.querySelector("#task-description");
       taskDescription.value = data.task.description;
 
-      const editForm = document.querySelector("#task-edit-form")
-      editForm.action = `/tasks/${data.task.id}/edit`;
+      // const editForm = document.querySelector("#task-edit-form")
+      // editForm.action = `/tasks/${data.task.id}/edit`;
+
+      const editSaveButton = document.querySelector("#edit-save-button");
+      editSaveButton.addEventListener("click", async (event) => {
+        event.preventDefault();
+
+        const taskNameInput = document.querySelector("#task-name-input");
+        const newName = taskNameInput.value
+
+        const listSelect = document.querySelector("#list-select");
+        const newListId = listSelect.value
+
+        const taskDueDate = document.querySelector("#task-due-date");
+        const newDueDate = taskDueDate.value
+
+        const taskDescription = document.querySelector("#task-description");
+        const newDescription = taskDescription.value
+
+        await fetch (`/tasks/${data.task.id}/edit`, {
+          method: 'POST',
+          headers: {'Content-type': 'application/json'},
+          body: JSON.stringify({
+            name: newName,
+            due: newDueDate,
+            listId: newListId,
+            description: newDescription
+          }),
+        });
+
+        const listSummaryContainer = document.querySelector(".list-summary-container");
+        listSummaryContainer.style.display = "block";
+
+        const taskEditContainer = document.querySelector(".task-edit-container");
+        taskEditContainer.style.display = "none";
+      });
+
+      const editCloseButton = document.querySelector("#edit-close-button");
+      editCloseButton.addEventListener("click", event => {
+
+        const listSummaryContainer = document.querySelector(".list-summary-container");
+        listSummaryContainer.style.display = "block";
+
+        const taskEditContainer = document.querySelector(".task-edit-container");
+        taskEditContainer.style.display = "none";
+
+      })
 
     } catch (e) {
     }
