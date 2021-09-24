@@ -175,6 +175,21 @@ searchButton.addEventListener("click", async (event) => {
       }
   }
 
+  let mainContainer = document.querySelector(".main-container");
+  mainContainer.addEventListener("click", async(event) => {
+    let searchBox = document.getElementById("search-box");
+    searchBox.value = "";
+    try {
+      const res = await fetch("/tasks/task-list");
+      const {tasks} = await res.json();
+      const taskContainer = document.querySelector(".task-list")
+      taskContainer.innerHTML = "";
+      createTasksList(tasks, taskContainer);
+    } catch (e) {
+      console.error(e)
+      }
+  })
+
 });
 
 
