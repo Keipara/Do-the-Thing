@@ -14,7 +14,7 @@ block content
                 input(type="text" name="search" id='search-box' value="" placeholder= "Search tasks")
                 button(action="submit" id='search-button') Search
             div
-                a(class='button', href='/logout') Log out
+                a(class='logoutbutton', href='/logout') Log Out
 
     div(class='main-container')
 
@@ -28,10 +28,12 @@ block content
                     div(class="list-list")
 
 
+
         div(class='task-container') All Tasks
             div
                 a(class='button-1', href='/tasks') Incomplete
                 a(class='button-2', href='/tasks') Complete
+
                 div
                 label(for="name")
                 div(class="taskBarandBox")
@@ -39,19 +41,22 @@ block content
                     button(class="addTaskButton" action="submit" value="task") Add Task
 
             div(class='task-list')
+            div(class='complete-tasks')
+                p 
 
 
         div(class='details-containter')
-            div(class='list-summary-container') List Summary
-                    div(class="")
+            div(class='list-summary-container')
+                    div(class="listName") Test
+                    div(class="tasksCount")
                         div(class="tasksNumber")
-                        text Tasks
-                    div(class="")
+                        text(class="taskInfo-1") tasks
+                    div(class="completedCount")
                         div(class="completedNumber")
-                        text Completed
-                    div(class="")
+                        text(class="taskInfo-2") completed
+                    div(class="overdueCount")
                         div(class="overdueNumber")
-                        text Overdue
+                        text(class="taskInfo-3") overdue
 
             div(class='task-edit-container') Task Details
                     div

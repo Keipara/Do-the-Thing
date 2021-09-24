@@ -57,6 +57,7 @@ router.get("/add-list", asyncHandler(async (req, res) => {
 })
 );
 
+
 // router.post("/task-list", asyncHandler(async (req, res) => {
 //     const { name, complete, listId, createdAt, updatedAt} = req.body;
 //     const task = await Task.create({ name, complete, listId, createdAt, updatedAt });
@@ -64,7 +65,8 @@ router.get("/add-list", asyncHandler(async (req, res) => {
 //   })
 // );
 
-router.get("/:id(\\d+)", asyncHandler(async (req, res, next) => {
+
+router.post("/:id(\\d+)", asyncHandler(async (req, res, next) => {
     const taskId = parseInt(req.params.id, 10);
     const task = await Task.findByPk(taskId);
     res.json({ task });
@@ -94,6 +96,19 @@ router.post("/delete/:id(\\d+)", asyncHandler(async (req, res, next) => {
     res.status(204).end();
   } else {
     next(taskNotFoundError(taskId));
+  }
+})
+);
+
+router.post("/lists/delete/:listId(\\d+)", asyncHandler(async (req, res, next) => {
+  const listId = parseInt(req.params.listId, 10);
+  console.log(req.params.listId)
+  const list = await List.findByPk(listId);
+  if (list) {
+    await list.destroy();
+    res.status(204).end();
+  } else {
+    next(taskNotFoundError(listId));
   }
 })
 );
@@ -138,6 +153,7 @@ router.get("/:id(\\d+)/edit", csrfProtection, requireAuth, asyncHandler(async (r
     // })
   })
 );
+
 
 router.post("/:id(\\d+)/edit", requireAuth, asyncHandler(async (req, res) => {
 

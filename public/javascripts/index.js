@@ -1,3 +1,4 @@
+const incompleteContainer = document.querySelector(".complete-tasks")
 
 document.addEventListener('DOMContentLoaded', async () => {
   try {
@@ -94,6 +95,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 function createTasksList(tasks, taskContainer) {
+
   for (let i = 0; i< tasks.length; i++) {
     const task = tasks[i];
 
@@ -130,9 +132,20 @@ function createTasksList(tasks, taskContainer) {
       event.target.parentElement.remove();
     })
 
-    para.appendChild(deleteButton);
-    taskDiv.appendChild(para);
-    taskContainer.appendChild(taskDiv)
+
+
+    if (task.complete === false) {
+      const completeButton = document.createElement('button');
+      completeButton.className = 'complete-button';
+      completeButton.innerText = "Complete";
+      para.appendChild(deleteButton);
+      taskDiv.appendChild(para);
+      taskContainer.appendChild(taskDiv)
+    } else {
+      para.appendChild(deleteButton);
+      taskDiv.appendChild(para);
+      incompleteContainer.appendChild(taskDiv)
+    }
   }
 }
 
@@ -222,6 +235,7 @@ searchButton.addEventListener("click", async (event) => {
       const para = document.createElement("p");
         para.id = list.id;
         para.innerText = list.name;
+        para.className = "listNames"
         para.addEventListener("click", async (event) => {
           event.preventDefault();
           try {
@@ -231,13 +245,24 @@ searchButton.addEventListener("click", async (event) => {
             const taskContainer = document.querySelector(".task-list")
             taskContainer.innerHTML = "";
             createTasksList(tasks, taskContainer);
+
+            const listName = document.querySelector('.listName')
+            listName.innerText = para.innerText.slice(0, -6)
+
           } catch (e) {
             console.error(e)
             }
 
-
         })
-
+      const deleteListButton = document.createElement('button')
+      deleteListButton.className = "delete-list-button"
+      deleteListButton.innerText = "Delete"
+      deleteListButton.addEventListener('click', (event) => {
+        event.preventDefault();
+        removeList(list.id)
+        event.target.parentElement.remove();
+      })
+      para.appendChild(deleteListButton)
       listDiv.appendChild(para);
       listContainer.appendChild(listDiv)
 
@@ -274,6 +299,16 @@ searchButton.addEventListener("click", async (event) => {
     }
   }
 
+  async function removeList(listId) {
+    try {
+      const res = await fetch(`/tasks/lists/delete/${listId}`, {
+        method: 'POST',
+        headers: {'Content-type': 'application/json'}
+      });
+    } catch (e) {
+    }
+  }
+
   let addListButton = document.querySelector(".add-list-button");
   addListButton.addEventListener("click", (event) => {
     const listContainer = document.querySelector(".list-list");
@@ -294,3 +329,46 @@ searchButton.addEventListener("click", async (event) => {
     } catch (e) {
     }
   }
+
+
+//List Summary
+document.addEventListener('DOMContentLoaded', async () => {
+  let incompleteTab = document.querySelector(".button-1");
+  let completeTab = document.querySelector(".button-2");
+  const taskContainer = document.querySelector(".task-list")
+
+  completeTab.addEventListener("click", async (event) => {
+
+    taskContainer.style.display = "none";
+    incompleteContainer.style.display = "block";
+  });
+
+  incompleteTab.addEventListener("click", async (event) => {
+
+    taskContainer.style.display = "block";
+    incompleteContainer.style.display = "none";
+  });
+});
+
+//
+
+  // add-list-button
+
+// const deleteButton = document.getElementsByClassName("delete-button")
+// deleteButton.addEventListener('click', async() => {
+//   try {
+//     const res = await fetch(`/tasks/${task.id}`, {
+//       method: "DELETE",
+//     });
+//   } catch (e) {
+//   }
+// })
+
+
+// let listName = document.querySelector('.listName')
+// let list = document.querySelector('.listNames')
+// list.addEventListener("click", async (event) => {
+//   event.preventDefault();
+//   listName.innerText = list.innerText
+// })
+
