@@ -117,3 +117,16 @@ h3 {
     flex-direction: column;
     margin-top: 80px;
 }
+
+.list-summary-container {
+    display: block;
+}
+
+.task-edit-container {
+    display: none;
+
+}
+
+.task-tag {
+    text-decoration: none;
+}
