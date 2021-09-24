@@ -14,7 +14,7 @@ block content
                 input(type="text" name="search" id='search-box' value="" placeholder= "Search tasks")
                 button(action="submit" id='search-button') Search
             div
-                a(class='button', href='/logout') Log out
+                a(class='logoutbutton', href='/logout') Log Out
 
     div(class='main-container')
 
@@ -28,7 +28,7 @@ block content
                     div(class="list-list")
 
 
-        div(class='task-container') All Tasks
+        div(class='task-container')
             form(action="/tasks/task-list" method="post")
                 a(class='button-1', href='#') Incomplete
                 a(class='button-2', href='#') Complete
@@ -44,16 +44,17 @@ block content
 
 
         div(class='details-containter')
-            div(class='list-summary-container') List Summary
-                    div(class="")
+            div(class='list-summary-container')
+                    div(class="listName") Test
+                    div(class="tasksCount")
                         div(class="tasksNumber")
-                        text Tasks
-                    div(class="")
+                        text(class="taskInfo-1") tasks
+                    div(class="completedCount")
                         div(class="completedNumber")
-                        text Completed
-                    div(class="")
+                        text(class="taskInfo-2") completed
+                    div(class="overdueCount")
                         div(class="overdueNumber")
-                        text Overdue
+                        text(class="taskInfo-3") overdue
 
             div(class='task-edit-container') Task Details
                     div
