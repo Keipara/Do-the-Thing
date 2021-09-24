@@ -21,17 +21,41 @@
     }
   }
 
-
-
-
-
 document.addEventListener('DOMContentLoaded', async () => {
   try {
     const res = await fetch("/tasks/task-list");
     const {tasks} = await res.json();
     const taskContainer = document.querySelector(".task-list")
+
+    //List-Summary
+    let completeCounter = 0;
+    let incompleteCounter = 0;
+    let overdueCounter = 0;
+    //
+
     for (let i = 0; i< tasks.length; i++) {
       const task = tasks[i];
+
+      //List-Summary
+      console.log(task.complete)
+      if (task.complete === false) {
+        incompleteCounter++;
+      } else {
+        completeCounter++;
+      }
+
+      if (task.due <= Date() ) {
+        overdueCounter++;
+      }
+
+      let taskTotal= document.querySelector(".tasksNumber")
+      taskTotal.innerHTML = incompleteCounter
+      let completeTotal = document.querySelector(".completedNumber")
+      completeTotal.innerHTML = completeCounter
+      let overdueTotal = document.querySelector(".overdueNumber")
+      overdueTotal.innerHTML = overdueCounter
+      //
+
       const div = document.createElement('div')
       const aTag = document.createElement('a');
       aTag.innerText = task.name
@@ -49,6 +73,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       div.appendChild(aTag)
       aTag.appendChild(deleteButton);
       taskContainer.appendChild(div)
+
     }
   } catch (e) {
     console.error(e)
