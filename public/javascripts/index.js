@@ -179,15 +179,6 @@ searchButton.addEventListener("click", async (event) => {
   mainContainer.addEventListener("click", async(event) => {
     let searchBox = document.getElementById("search-box");
     searchBox.value = "";
-    try {
-      const res = await fetch("/tasks/task-list");
-      const {tasks} = await res.json();
-      const taskContainer = document.querySelector(".task-list")
-      taskContainer.innerHTML = "";
-      createTasksList(tasks, taskContainer);
-    } catch (e) {
-      console.error(e)
-      }
   })
 
 });
@@ -198,22 +189,38 @@ searchButton.addEventListener("click", async (event) => {
       const res = await fetch("/tasks/list-list");
       const { lists } = await res.json();
       const listContainer = document.querySelector(".list-list");
-
-      const listHtml = lists.map(
-          (list) =>
-          `
-          <div class="card">
-          <div class="card-body">
-          <p class="card-text">${list.name}</p>
-          </div>
-          </div>
-          `
-          );
-      listContainer.innerHTML = listHtml.join("");
+      createListsList(lists, listContainer);
     } catch (e) {
       console.error(e)
     }
   });
+
+  function createListsList(lists, listContainer) {
+    for (let i = 0; i< lists.length; i++) {
+      const list = lists[i];
+
+      const div = document.createElement('div')
+      const para = document.createElement("p");
+        para.id = list.id;
+        para.innerText = list.name;
+        para.addEventListener("click", async (event) => {
+          event.preventDefault();
+          try {
+            const res = await fetch(`tasks/${list.id}/tasks`);
+            const {tasks} = await res.json();
+            const taskContainer = document.querySelector(".task-list")
+            taskContainer.innerHTML = "";
+            createTasksList(tasks, taskContainer);
+          } catch (e) {
+            console.error(e)
+            }
+
+        })
+
+      div.appendChild(para);
+      listContainer.appendChild(div)
+    }
+  }
 
   let addListButton = document.querySelector(".add-list-button");
   addListButton.addEventListener("click", (event) => {

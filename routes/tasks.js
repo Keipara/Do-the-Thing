@@ -161,6 +161,19 @@ router.post("/:id(\\d+)/edit", requireAuth, asyncHandler(async (req, res) => {
   res.status(204).end();
 }))
 
+router.get("/:id(\\d+)/tasks", asyncHandler(async (req, res, next) => {
+  const listId = parseInt(req.params.id, 10);
+  const tasks = await Task.findAll({
+    include: [{
+      model: List,
+      where:{
+        id: listId
+       }
+    }]
+  });
+  res.json({ tasks });
+})
+);
 
 router.get("/list-list", asyncHandler(async (req, res) => {
   const lists = await List.findAll({
