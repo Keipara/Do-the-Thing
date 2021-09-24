@@ -212,7 +212,20 @@ router.post("/add-list", asyncHandler(async (req, res) => {
 }))
 
 router.post("/add-task", asyncHandler(async (req, res) => {
-    const { name, listId} = req.body;
+    let { name, listId} = req.body;
+
+    if(!listId) {
+      const list = await List.findAll({
+        where:{
+          userId: res.locals.user.id
+        },
+        order: ["id"],
+        limit: 1
+      });
+
+      listId = list[0].id;
+
+    }
 
     const newTask = await Task.create({
       name,
