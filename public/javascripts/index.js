@@ -256,13 +256,14 @@ searchButton.addEventListener("click", async (event) => {
 
 
   async function addTask(taskName, listId) {
+    console.log(listId)
     try {
       const res = await fetch("/tasks/add-task", {
         method: 'POST',
         headers: {'Content-type': 'application/json'},
         body: JSON.stringify({
           name: taskName,
-          listId: listId
+          listId
         }),
       });
 
