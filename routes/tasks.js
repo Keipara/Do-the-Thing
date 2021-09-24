@@ -1,11 +1,12 @@
 var express = require('express');
 const { Op } = require("sequelize");
 const { loginUser, restoreUser, logoutUser, requireAuth } = require("../auth");
+const { csrfProtection, asyncHandler, handleValidationErrors } = require('./utils');
 
 var router = express.Router();
 
 const { Task, List, User, sequelize }= require('../db/models')
-const {asyncHandler, handleValidationErrors} = require("./utils");
+
 
 
 
@@ -16,14 +17,20 @@ const taskNotFoundError = (id) => {
   return err;
 };
 
-router.get("/", asyncHandler(async (req, res) => {
-    const tasks = await Task.findAll({
-      include: [{
-          model: List,
-          where:{userId: res.locals.user.id},
-        }]
-        });
-    res.render("tasks.pug")
+router.get("/", csrfProtection, asyncHandler(async (req, res) => {
+    const tasks = await Task.findAll();
+    const task = Task.build();
+    const lists = await List.findAll({
+      where: {
+        userId: res.locals.user.id
+      }
+    });
+    res.render("tasks.pug", {
+      task,
+      lists,
+      // csrfToken: req.csrfToken()
+    })
+    // res.json({ tasks });
   })
 );
 
@@ -32,6 +39,7 @@ router.get("/task-list", asyncHandler(async (req, res) => {
     include: [{
       model: List,
       where:{userId: res.locals.user.id},
+      order: ["id"]
     }]
   });
   res.json({ tasks });
@@ -77,12 +85,6 @@ router.patch("/:id(\\d+)", asyncHandler(async (req, res, next) => {
 );
 
 
-// router.get("/delete/:id(\\d+)", asyncHandler(async (req, res, next) => {
-//   const taskId = parseInt(req.params.id, 10);
-//   const task = await Task.findByPk(taskId);
-//   res.render('tasks.pug')
-// }));
-
 router.post("/delete/:id(\\d+)", asyncHandler(async (req, res, next) => {
   const taskId = parseInt(req.params.id, 10);
   const task = await Task.findByPk(taskId);
@@ -95,7 +97,6 @@ router.post("/delete/:id(\\d+)", asyncHandler(async (req, res, next) => {
   }
 })
 );
-
 
 router.get("/search/:searchTerm(\\w+)", requireAuth, asyncHandler(async (req, res) => {
    const searchTerm = req.params.searchTerm;
@@ -113,6 +114,62 @@ router.get("/search/:searchTerm(\\w+)", requireAuth, asyncHandler(async (req, re
         }
       }
     ]
+  });
+  res.json({ tasks });
+})
+);
+
+router.get("/:id(\\d+)/edit", csrfProtection, requireAuth, asyncHandler(async (req, res) => {
+  const taskId = parseInt(req.params.id, 10);
+    const task = await Task.findByPk(taskId);
+    const lists = await List.findAll({
+      where: {
+        userId: res.locals.user.id
+      }
+    });
+
+    res.json({ task, lists });
+
+    // res.render("task-edit.pug", {
+    //   title: 'Task Edit Form',
+    //   task,
+    //   lists,
+    //   csrfToken: req.csrfToken(),
+    // })
+  })
+);
+
+router.post("/:id(\\d+)/edit", requireAuth, asyncHandler(async (req, res) => {
+
+  const taskId = parseInt(req.params.id, 10);
+  let { name, due, listId, description} = req.body;
+  const taskToUpdate = await Task.findByPk(taskId);
+  let task = {};
+
+  if(!due) {
+    due = taskToUpdate.due;
+  }
+
+  if(description === "") {
+    task = { name, due, listId }
+  } else {
+    task = { name, due, listId, description }
+  }
+
+  await taskToUpdate.update(task);
+  // res.redirect('/tasks')
+  res.status(204).end();
+}))
+
+router.get("/:id(\\d+)/tasks", asyncHandler(async (req, res, next) => {
+  const listId = parseInt(req.params.id, 10);
+  const tasks = await Task.findAll({
+    include: [{
+      model: List,
+      where:{
+        id: listId
+       }
+    }]
   });
   res.json({ tasks });
 })
@@ -164,6 +221,7 @@ router.post('/lists/delete/:id(\\d+)', asyncHandler(async (req, res) => {
     await book.destroy();
     res.redirect('/');
   }));
+
 
 
 module.exports = router;

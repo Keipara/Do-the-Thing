@@ -21,7 +21,6 @@ module.exports = {
       },
       listId: {
         type: Sequelize.INTEGER,
-        defaultValue: 1,
         references: {model: "Lists"}
       },
       description: {

@@ -2,7 +2,6 @@ extends layout
 
 append head
     link(rel="stylesheet" href="/stylesheets/task.css")
-    script(src="javascripts/search.js" type="module" defer)
     script(src="javascripts/index.js" type="module" defer)
 
 block content
@@ -12,7 +11,7 @@ block content
                 a(href='localhost:8080/tasks')
                     img.image(class="logo" src="blue-w-black-outline.png")
             div
-                input(type="text" name="search" id='search-box' placeholder= "Search tasks")
+                input(type="text" name="search" id='search-box' value="" placeholder= "Search tasks")
                 button(action="submit" id='search-button') Search
             div
                 a(class='button', href='/logout') Log out
@@ -29,9 +28,8 @@ block content
                     div(class="list-list")
 
 
-        div(class='task-container')
+        div(class='task-container') All Tasks
             form(action="/tasks/task-list" method="post")
-                h3 All Tasks
                 a(class='button-1', href='/tasks') Incomplete
                 a(class='button-2', href='/tasks') Complete
                 div
@@ -44,14 +42,40 @@ block content
 
 
         div(class='details-containter')
+            div(class='list-summary-container') List Summary
+                div(class="")
+                        div(class="tasksNumber")
+                        text Tasks
+                    div(class="")
+                        div(class="completedNumber")
+                        text Completed
+                    div(class="")
+                        div(class="overdueNumber")
+                        text Overdue
 
-        div(class='list-summary-container') List Summary
-            div(class="")
-                div(class="tasksNumber")
-                text Tasks
-            div(class="")
-                div(class="completedNumber")
-                text Completed
-            div(class="")
-                div(class="overdueNumber")
-                text Overdue
+            div(class='task-edit-container') Task Details
+                    div
+                        input(type="text" name="name" id="task-name-input" value=task.name)
+                    div
+                        label(for="due") Due
+                        input(type="date" name="due" id="task-due-date")
+                    div
+                        label(for="listId") List
+                        select(name="listId" id="list-select")
+                            each list in lists
+                                if task.listId === list.id
+                                    option(value=list.id selected)= list.name
+                                else
+                                    option(value=list.id)= list.name
+                    div
+                        label(for="description") Description
+                        textarea(name="description" id="task-description")
+                    div
+                        input(type="submit" value="Save" id="edit-save-button")
+                        input(type="submit" value="Close" id="edit-close-button")
+    footer
+        div(class='task-footer-container')
+            a(href='https://github.com/Keipara') Kiara
+            a(href='https://github.com/LakshmiPriyaPrakash') Lakshmi
+            a(href='https://github.com/nevinchow') Nevin
+

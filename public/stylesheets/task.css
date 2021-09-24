@@ -1,7 +1,8 @@
 .main-container {
     display: flex;
     flex-direction: row;
-    background-color: #e4eef8
+    background-color: #e4eef8;
+    height: 100%;
 
 }
 
@@ -9,21 +10,21 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    height: 21.5px;
-    background-color: #0060bf
+    height: 50px;
+    background-color: #0060bf;
+    color: whitesmoke;
 }
 
 .task-container {
     background-color: white;
-    position: relative;
     top: 5px;
     border-radius: 5px;
-    width: 45%;
-    height: 100vh;
+    width: 100%;
+
 }
-h3 {
-    position: relative;
-    left: 500px;
+
+.task-div {
+    border-bottom:1px dotted gray;
 }
 
 .button-1 {
@@ -43,19 +44,22 @@ h3 {
 .list-container {
     display: flex;
     flex-direction: column;
-    width: 10%
+    width: 10%;
+
 }
 
 #search-button {
     position: absolute;
-    left: 275px
+    left: 275px;
+    top: 10px;
 }
 
 #search-box {
     position: absolute;
     left: 110px;
     border-radius: 3px;
-    border-width: 1px
+    border-width: 1px;
+    top: 10px;
 }
 
 .task {
@@ -71,8 +75,8 @@ h3 {
     border-top: 1px solid;
 }
  .addTaskbox {
-     height: 17.5px;
-     width: 475px;
+     height: 30px;
+     width: 450px;
      display: block;
      margin: 5px
  }
@@ -80,14 +84,14 @@ h3 {
 .addTaskButton {
     display: block;
     position: relative;
-    left: 405px
+    left: 360px
 }
 
 .logo {
     height: 65px;
     width: 75px;
     position: relative;
-    top: 25px
+    top: 50px
 }
 
 .listButtons {
@@ -103,9 +107,6 @@ h3 {
     font-size: 10px
 }
 
-.list-container {
-    height: 100vh
-}
 
 .list-list {
     position: relative
@@ -116,4 +117,24 @@ h3 {
     display: flex;
     flex-direction: column;
     margin-top: 80px;
+}
+
+.list-summary-container {
+    display: block;
+    width: 100%;
+}
+
+.task-edit-container {
+    display: none;
+    width: 100%;
+
+}
+
+.task-footer-container {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #0060bf;
+    color: whitesmoke;
 }
