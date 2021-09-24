@@ -1,20 +1,4 @@
 
-
-  // let addTaskButton = document.querySelector(".addTaskButton")
-  // addTaskButton.addEventListener("click", (event) => {
-  //   const taskContainer = document.querySelector(".task-list")
-  //   let addTaskbox = document.querySelector(".addTaskbox")
-  //   let taskName = addTaskbox.value
-  //   if (addTaskbox) {
-  //     let newATag = document.createElement('a')
-  //     addTask(taskName)
-  //     taskContainer.appendChild(newATag)
-  //   }
-  // })
-
-
-
-
 document.addEventListener('DOMContentLoaded', async () => {
   try {
     const res = await fetch("/tasks/task-list");
@@ -53,6 +37,56 @@ document.addEventListener('DOMContentLoaded', async () => {
       //
     }
 
+    const editSaveButton = document.querySelector("#edit-save-button");
+      editSaveButton.addEventListener("click", async (event) => {
+        event.preventDefault();
+        console.log("clicked")
+        const taskNameInput = document.querySelector("#task-name-input");
+        const newName = taskNameInput.value
+
+        const listSelect = document.querySelector("#list-select");
+        const newListId = listSelect.value
+
+        const taskDueDate = document.querySelector("#task-due-date");
+        const newDueDate = taskDueDate.value
+
+        const taskDescription = document.querySelector("#task-description");
+        const newDescription = taskDescription.value
+
+        const taskId = event.target.dataset.taskId;
+        const res = await fetch (`/tasks/${taskId}/edit`, {
+          method: 'POST',
+          headers: {'Content-type': 'application/json'},
+          body: JSON.stringify({
+            name: newName,
+            due: newDueDate,
+            listId: newListId,
+            description: newDescription
+          }),
+        });
+
+        if(res.ok) {
+          window.location.reload();
+        }
+
+        const listSummaryContainer = document.querySelector(".list-summary-container");
+        listSummaryContainer.style.display = "block";
+
+        const taskEditContainer = document.querySelector(".task-edit-container");
+        taskEditContainer.style.display = "none";
+      });
+
+      const editCloseButton = document.querySelector("#edit-close-button");
+      editCloseButton.addEventListener("click", event => {
+
+        const listSummaryContainer = document.querySelector(".list-summary-container");
+        listSummaryContainer.style.display = "block";
+
+        const taskEditContainer = document.querySelector(".task-edit-container");
+        taskEditContainer.style.display = "none";
+
+      })
+
   } catch (e) {
     console.error(e)
     }
@@ -65,13 +99,13 @@ function createTasksList(tasks, taskContainer) {
 
     const taskDiv = document.createElement('div')
     taskDiv.className = "task-div"
-
+    console.log(task.name)
     const para = document.createElement("p");
       para.id = task.id;
       para.innerText = task.name;
       para.className = "edit-task-para"
-      para.addEventListener("click", async (event) => {
-        event.preventDefault();
+      para.addEventListener("click", (event) => {
+        // event.preventDefault();
         if(event.target.classList.contains("edit-task-para")) {
           const listSummaryContainer = document.querySelector(".list-summary-container");
           listSummaryContainer.style.display = "none";
@@ -80,6 +114,8 @@ function createTasksList(tasks, taskContainer) {
           taskEditContainer.style.display = "block";
 
           const taskId = event.target.id
+          const editSubmitButton = document.querySelector("#edit-save-button")
+          editSubmitButton.dataset.taskId = taskId;
           editTask(taskId)
         }
 
@@ -126,55 +162,6 @@ function createTasksList(tasks, taskContainer) {
 
       const taskDescription = document.querySelector("#task-description");
       taskDescription.value = data.task.description;
-
-      const editSaveButton = document.querySelector("#edit-save-button");
-      editSaveButton.addEventListener("click", async (event) => {
-        event.preventDefault();
-        console.log("clicked")
-        const taskNameInput = document.querySelector("#task-name-input");
-        const newName = taskNameInput.value
-
-        const listSelect = document.querySelector("#list-select");
-        const newListId = listSelect.value
-
-        const taskDueDate = document.querySelector("#task-due-date");
-        const newDueDate = taskDueDate.value
-
-        const taskDescription = document.querySelector("#task-description");
-        const newDescription = taskDescription.value
-
-        const res = await fetch (`/tasks/${data.task.id}/edit`, {
-          method: 'POST',
-          headers: {'Content-type': 'application/json'},
-          body: JSON.stringify({
-            name: newName,
-            due: newDueDate,
-            listId: newListId,
-            description: newDescription
-          }),
-        });
-
-        if(res.ok) {
-          window.location.reload();
-        }
-
-        const listSummaryContainer = document.querySelector(".list-summary-container");
-        listSummaryContainer.style.display = "block";
-
-        const taskEditContainer = document.querySelector(".task-edit-container");
-        taskEditContainer.style.display = "none";
-      });
-
-      const editCloseButton = document.querySelector("#edit-close-button");
-      editCloseButton.addEventListener("click", event => {
-
-        const listSummaryContainer = document.querySelector(".list-summary-container");
-        listSummaryContainer.style.display = "block";
-
-        const taskEditContainer = document.querySelector(".task-edit-container");
-        taskEditContainer.style.display = "none";
-
-      })
 
     } catch (e) {
     }
@@ -307,15 +294,3 @@ searchButton.addEventListener("click", async (event) => {
     } catch (e) {
     }
   }
-
-  // add-list-button
-
-// const deleteButton = document.getElementsByClassName("delete-button")
-// deleteButton.addEventListener('click', async() => {
-//   try {
-//     const res = await fetch(`/tasks/${task.id}`, {
-//       method: "DELETE",
-//     });
-//   } catch (e) {
-//   }
-// })
