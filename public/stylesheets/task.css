@@ -15,7 +15,8 @@
 }
 
 .task-edit-container {
-    display: block;
+    display: none;
+
 }
 
 .task-tag {

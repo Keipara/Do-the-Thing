@@ -19,13 +19,36 @@ document.addEventListener("DOMContentLoaded", async () => {
         outerDiv.className = "each-task";
 
         const para = document.createElement("p");
+        para.id = task.id;
+        para.innerText = task.name;
+        para.addEventListener("click", (event) => {
+          event.preventDefault();
+          const listSummaryContainer = document.querySelector(".list-summary-container");
+          listSummaryContainer.style.display = "none";
 
-        const aTag = document.createElement('a');
-        aTag.className = "task-tag"
-        aTag.href = `/tasks/${task.id}/edit`
-        aTag.innerText = task.name;
+          const taskEditContainer = document.querySelector(".task-edit-container");
+          taskEditContainer.style.display = "block";
 
-        para.appendChild(aTag)
+          const taskId = event.target.id
+          editTask(taskId)
+        })
+
+        // const aTag = document.createElement('a');
+        // aTag.className = "task-tag"
+        // aTag.href = `/tasks/${task.id}/edit`
+        // aTag.innerText = task.name;
+
+        const deleteButton = document.createElement('button');
+          deleteButton.className = "delete-button";
+          deleteButton.innerText = "Delete";
+          deleteButton.addEventListener('click', (event) => {
+            event.preventDefault();
+            removeTask(task.id)
+            event.target.parentElement.remove();
+      })
+
+        para.appendChild(deleteButton);
+        // para.appendChild(aTag)
         outerDiv.appendChild(para);
         taskContainer.appendChild(outerDiv);
       }
@@ -35,6 +58,41 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
     // addTaskBtn.addEventListener('click', addTask)
   });
+
+  async function removeTask(taskId) {
+    try {
+      const res = await fetch(`/tasks/delete/${taskId}`, {
+        method: 'POST',
+        headers: {'Content-type': 'application/json'}
+      });
+    } catch (e) {
+    }
+  }
+
+  async function editTask(taskId) {
+     try {
+      const res = await fetch(`/tasks/${taskId}/edit`);
+      const data = await res.json();
+
+      const taskNameInput = document.querySelector("#task-name-input");
+      taskNameInput.value = data.task.name;
+
+      const listSelect = document.querySelector("#list-select");
+      listSelect.value = data.task.listId;
+
+      const taskDueDate = document.querySelector("#task-due-date");
+      taskDueDate.value = data.task.due;
+
+      const taskDescription = document.querySelector("#task-description");
+      taskDescription.value = data.task.description;
+
+      const editForm = document.querySelector("#task-edit-form")
+      editForm.action = `/tasks/${data.task.id}/edit`;
+
+    } catch (e) {
+    }
+  }
+
 
 
   document.addEventListener("DOMContentLoaded", async() => {

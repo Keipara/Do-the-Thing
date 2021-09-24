@@ -17,9 +17,19 @@ const taskNotFoundError = (id) => {
   return err;
 };
 
-router.get("/", asyncHandler(async (req, res) => {
+router.get("/", csrfProtection, asyncHandler(async (req, res) => {
     const tasks = await Task.findAll();
-    res.render("tasks.pug")
+    const task = Task.build();
+    const lists = await List.findAll({
+      where: {
+        userId: res.locals.user.id
+      }
+    });
+    res.render("tasks.pug", {
+      task,
+      lists,
+      csrfToken: req.csrfToken()
+    })
     // res.json({ tasks });
   })
 );
@@ -61,20 +71,18 @@ router.patch("/:id(\\d+)", asyncHandler(async (req, res, next) => {
   })
 );
 
+router.post("/delete/:id(\\d+)", asyncHandler(async (req, res, next) => {
+  const taskId = parseInt(req.params.id, 10);
+  const task = await Task.findByPk(taskId);
 
-router.delete("/:id(\\d+)", asyncHandler(async (req, res, next) => {
-    const taskId = parseInt(req.params.id, 10);
-    const task = await Task.findByPk(taskId);
-
-    if (task) {
-      await task.destroy();
-      res.status(204).end();
-    } else {
-      next(taskNotFoundError(taskId));
-    }
-  })
+  if (task) {
+    await task.destroy();
+    res.status(204).end();
+  } else {
+    next(taskNotFoundError(taskId));
+  }
+})
 );
-
 
 router.get("/search/:searchTerm(\\w+)", requireAuth, asyncHandler(async (req, res) => {
    const searchTerm = req.params.searchTerm;
@@ -106,20 +114,32 @@ router.get("/:id(\\d+)/edit", csrfProtection, requireAuth, asyncHandler(async (r
       }
     });
 
-    res.render("task-edit.pug", {
-      title: 'Task Edit Form',
-      task,
-      lists,
-      csrfToken: req.csrfToken(),
-    })
+    res.json({ task, lists });
+
+    // res.render("task-edit.pug", {
+    //   title: 'Task Edit Form',
+    //   task,
+    //   lists,
+    //   csrfToken: req.csrfToken(),
+    // })
   })
 );
 
 router.post("/:id(\\d+)/edit", csrfProtection, requireAuth, asyncHandler(async (req, res) => {
+  // const task = await Task.findByPk(taskId);
+  //   const lists = await List.findAll({
+  //     where: {
+  //       userId: res.locals.user.id
+  //     }
+  //   });
+
+  //   res.json({ task, lists });
+
   const taskId = parseInt(req.params.id, 10);
   let { name, due, listId, description} = req.body;
   const taskToUpdate = await Task.findByPk(taskId);
   let task = {};
+  console.log("in post route")
 
   if(!due) {
     due = taskToUpdate.due;

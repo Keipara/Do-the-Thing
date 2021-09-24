@@ -44,3 +44,28 @@ block content
             div(class='task-list')
 
         div(class='list-summary-container') List Summary
+        div(class='task-edit-container') Task Details
+            form(class= "form" action=`/tasks/${task.id}/edit` method="post" id="task-edit-form")
+                input(type="hidden" name="_csrf" value=csrfToken)
+
+                div
+                    input(type="text" name="name" id="task-name-input" value=task.name)
+                div
+                    label(for="due") Due
+                    input(type="date" name="due" id="task-due-date")
+                div
+                    label(for="listId") List
+                    select(name="listId" id="list-select")
+                        each list in lists
+                            if task.listId === list.id
+                                option(value=list.id selected)= list.name
+                            else
+                                option(value=list.id)= list.name
+                div
+                    label(for="preDescription") Previous Description:
+                    label(for="preDescription" id="task-description")= task.description
+                div
+                    label(for="description") New Description
+                    textarea(name="description")
+                div
+                    input(type="submit" value="Save" id="edit-save-button")
