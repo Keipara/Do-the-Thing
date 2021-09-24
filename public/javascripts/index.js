@@ -58,25 +58,6 @@ document.addEventListener('DOMContentLoaded', async () => {
       let overdueTotal = document.querySelector(".overdueNumber")
       overdueTotal.innerHTML = overdueCounter
       //
-
-      const div = document.createElement('div')
-      const aTag = document.createElement('a');
-      aTag.innerText = task.name
-      aTag.className = "all-tasks";
-      aTag.id = task.id
-
-      const deleteButton = document.createElement('button');
-      deleteButton.className = "delete-button";
-      deleteButton.innerText = "Delete";
-      deleteButton.addEventListener('click', (event) => {
-        event.preventDefault();
-        removeTask(task.id)
-        event.target.parentElement.remove();
-      })
-      div.appendChild(aTag)
-      aTag.appendChild(deleteButton);
-      taskContainer.appendChild(div)
-
     }
 
   } catch (e) {
@@ -95,17 +76,19 @@ function createTasksList(tasks, taskContainer) {
     const para = document.createElement("p");
       para.id = task.id;
       para.innerText = task.name;
+      para.className = "edit-task-para"
       para.addEventListener("click", async (event) => {
         event.preventDefault();
-        const listSummaryContainer = document.querySelector(".list-summary-container");
-        listSummaryContainer.style.display = "none";
+        if(event.target.classList.contains("edit-task-para")) {
+          const listSummaryContainer = document.querySelector(".list-summary-container");
+          listSummaryContainer.style.display = "none";
 
-        const taskEditContainer = document.querySelector(".task-edit-container");
-        taskEditContainer.style.display = "block";
+          const taskEditContainer = document.querySelector(".task-edit-container");
+          taskEditContainer.style.display = "block";
 
-        const taskId = event.target.id
-        editTask(taskId)
-        // event.target.innerText = "new text!"
+          const taskId = event.target.id
+          editTask(taskId)
+        }
 
       })
 
@@ -146,7 +129,7 @@ function createTasksList(tasks, taskContainer) {
       listSelect.value = data.task.listId;
 
       const taskDueDate = document.querySelector("#task-due-date");
-      taskDueDate.value = data.task.due;
+      taskDueDate.value = data.task.due.slice(0,10);
 
       const taskDescription = document.querySelector("#task-description");
       taskDescription.value = data.task.description;
@@ -170,7 +153,7 @@ function createTasksList(tasks, taskContainer) {
         const taskDescription = document.querySelector("#task-description");
         const newDescription = taskDescription.value
 
-        await fetch (`/tasks/${data.task.id}/edit`, {
+        const res = await fetch (`/tasks/${data.task.id}/edit`, {
           method: 'POST',
           headers: {'Content-type': 'application/json'},
           body: JSON.stringify({
@@ -180,6 +163,11 @@ function createTasksList(tasks, taskContainer) {
             description: newDescription
           }),
         });
+
+        if(res.ok) {
+          console.log("IF block")
+          window.location.reload();
+        }
 
         const listSummaryContainer = document.querySelector(".list-summary-container");
         listSummaryContainer.style.display = "block";
