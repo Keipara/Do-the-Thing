@@ -56,10 +56,7 @@ block content
                             else
                                 option(value=list.id)= list.name
                 div
-                    label(for="preDescription") Previous Description:
-                    label(for="preDescription")= task.description
-                div
-                    label(for="description") New Description
+                    label(for="description") Description
                     textarea(name="description" id="task-description")
                 div
                     input(type="submit" value="Save" id="edit-save-button")
