@@ -1,4 +1,4 @@
-
+const incompleteContainer = document.querySelector(".complete-tasks")
 
   let addTaskButton = document.querySelector(".addTaskButton")
   addTaskButton.addEventListener("click", (event) => {
@@ -67,6 +67,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 function createTasksList(tasks, taskContainer) {
+
   for (let i = 0; i< tasks.length; i++) {
     const task = tasks[i];
 
@@ -101,9 +102,20 @@ function createTasksList(tasks, taskContainer) {
       event.target.parentElement.remove();
     })
 
-    para.appendChild(deleteButton);
-    taskDiv.appendChild(para);
-    taskContainer.appendChild(taskDiv)
+
+
+    if (task.complete === false) {
+      const completeButton = document.createElement('button');
+      completeButton.className = 'complete-button';
+      completeButton.innerText = "Complete";
+      para.appendChild(deleteButton);
+      taskDiv.appendChild(para);
+      taskContainer.appendChild(taskDiv)
+    } else {
+      para.appendChild(deleteButton);
+      taskDiv.appendChild(para);
+      incompleteContainer.appendChild(taskDiv)
+    }
   }
 }
 
@@ -253,6 +265,9 @@ searchButton.addEventListener("click", async (event) => {
             const taskContainer = document.querySelector(".task-list")
             taskContainer.innerHTML = "";
             createTasksList(tasks, taskContainer);
+
+
+
           } catch (e) {
             console.error(e)
             }
@@ -284,6 +299,27 @@ searchButton.addEventListener("click", async (event) => {
     } catch (e) {
     }
   }
+
+//List Summary
+document.addEventListener('DOMContentLoaded', async () => {
+  let incompleteTab = document.querySelector(".button-1");
+  let completeTab = document.querySelector(".button-2");
+  const taskContainer = document.querySelector(".task-list")
+
+  completeTab.addEventListener("click", async (event) => {
+
+    taskContainer.style.display = "none";
+    incompleteContainer.style.display = "block";
+  });
+
+  incompleteTab.addEventListener("click", async (event) => {
+
+    taskContainer.style.display = "block";
+    incompleteContainer.style.display = "none";
+  });
+});
+
+//
 
   // add-list-button
 

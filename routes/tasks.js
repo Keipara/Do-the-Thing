@@ -139,6 +139,7 @@ router.get("/:id(\\d+)/edit", csrfProtection, requireAuth, asyncHandler(async (r
   })
 );
 
+
 router.post("/:id(\\d+)/edit", requireAuth, asyncHandler(async (req, res) => {
 
   const taskId = parseInt(req.params.id, 10);
