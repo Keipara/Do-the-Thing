@@ -1,7 +1,7 @@
 var express = require('express');
 const { check, validationResult } = require('express-validator');
 const { csrfProtection, asyncHandler } = require('./utils');
-const { User } = require('../db/models');
+const { User, List } = require('../db/models');
 const { loginUser, logoutUser, requireAuth } = require('../auth');
 const bcrypt = require('bcryptjs');
 
@@ -88,6 +88,10 @@ router.post('/signup', csrfProtection, userValidators, asyncHandler(async(req,re
     const hashedPassword = await bcrypt.hash(password, 10);
     user.hashedPassword = hashedPassword;
     await user.save();
+    await List.create({
+      name: "School",
+      userId: user.id
+    });
     loginUser(req, res, user);
     res.redirect('/tasks');
   } else {

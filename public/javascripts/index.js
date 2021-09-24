@@ -1,25 +1,18 @@
 
 
-  let addTaskButton = document.querySelector(".addTaskButton")
-  addTaskButton.addEventListener("click", (event) => {
-    const taskContainer = document.querySelector(".task-list")
-    let addTaskbox = document.querySelector(".addTaskbox")
-    let taskName = addTaskbox.value
-    if (addTaskbox) {
-      let newATag = document.createElement('a')
-      addTask(taskName)
-      taskContainer.appendChild(newATag)
-    }
-  })
+  // let addTaskButton = document.querySelector(".addTaskButton")
+  // addTaskButton.addEventListener("click", (event) => {
+  //   const taskContainer = document.querySelector(".task-list")
+  //   let addTaskbox = document.querySelector(".addTaskbox")
+  //   let taskName = addTaskbox.value
+  //   if (addTaskbox) {
+  //     let newATag = document.createElement('a')
+  //     addTask(taskName)
+  //     taskContainer.appendChild(newATag)
+  //   }
+  // })
 
-  async function addTask(taskName) {
-    try {
-      const res = await fetch("/task-list", {
-        headers: {'Content-type': 'application/json'}
-      });
-    } catch (e) {
-    }
-  }
+
 
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -165,7 +158,6 @@ function createTasksList(tasks, taskContainer) {
         });
 
         if(res.ok) {
-          console.log("IF block")
           window.location.reload();
         }
 
@@ -193,7 +185,6 @@ function createTasksList(tasks, taskContainer) {
 
 //search for tasks
 let searchButton = document.getElementById("search-button");
-
 searchButton.addEventListener("click", async (event) => {
   let searchBox = document.getElementById("search-box");
   let searchTerm = searchBox.value;
@@ -236,6 +227,8 @@ searchButton.addEventListener("click", async (event) => {
     }
   });
 
+  let selectedList;
+
   function createListsList(lists, listContainer) {
     for (let i = 0; i< lists.length; i++) {
       const list = lists[i];
@@ -249,6 +242,7 @@ searchButton.addEventListener("click", async (event) => {
           event.preventDefault();
           try {
             const res = await fetch(`tasks/${list.id}/tasks`);
+            selectedList = list.id;
             const {tasks} = await res.json();
             const taskContainer = document.querySelector(".task-list")
             taskContainer.innerHTML = "";
@@ -257,10 +251,42 @@ searchButton.addEventListener("click", async (event) => {
             console.error(e)
             }
 
+
         })
 
       listDiv.appendChild(para);
       listContainer.appendChild(listDiv)
+
+
+    }
+
+  }
+
+  const addTaskButton = document.querySelector(".addTaskButton")
+      addTaskButton.addEventListener("click", (event) => {
+        event.preventDefault()
+        let addTaskbox = document.querySelector(".addTaskbox")
+        let taskName = addTaskbox.value;
+        addTask(taskName, selectedList);
+      })
+
+
+  async function addTask(taskName, listId) {
+    try {
+      const res = await fetch("/tasks/add-task", {
+        method: 'POST',
+        headers: {'Content-type': 'application/json'},
+        body: JSON.stringify({
+          name: taskName,
+          listId: listId
+        }),
+      });
+
+      if(res.ok) {
+        window.location.reload();
+      }
+
+    } catch (e) {
     }
   }
 

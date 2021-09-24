@@ -57,12 +57,12 @@ router.get("/add-list", asyncHandler(async (req, res) => {
 })
 );
 
-router.post("/task-list", asyncHandler(async (req, res) => {
-    const { name, complete, listId, createdAt, updatedAt} = req.body;
-    const task = await Task.create({ name, complete, listId, createdAt, updatedAt });
-    res.redirect('/tasks')
-  })
-);
+// router.post("/task-list", asyncHandler(async (req, res) => {
+//     const { name, complete, listId, createdAt, updatedAt} = req.body;
+//     const task = await Task.create({ name, complete, listId, createdAt, updatedAt });
+//     res.redirect('/tasks')
+//   })
+// );
 
 router.get("/:id(\\d+)", asyncHandler(async (req, res, next) => {
     const taskId = parseInt(req.params.id, 10);
@@ -195,22 +195,16 @@ router.post("/add-list", asyncHandler(async (req, res) => {
   res.redirect('/tasks')
 }))
 
-// router.post("/task-list", asyncHandler(async (req, res) => {
-//     const { name, listId} = req.body;
-//     const task = await Task.create({
-//       name,
-//       listId: {
-//         defaultValue: 1
-//       }
-//     });
-//     const newTask = await Task.findOne({
-//       where: {
-//         name
-//       }
-//     })
-//     res.json({newTask})
-//   })
-// );
+router.post("/add-task", asyncHandler(async (req, res) => {
+    const { name, listId} = req.body;
+
+    const newTask = await Task.create({
+      name,
+      listId: listId
+    });
+    res.status(204).end();
+  })
+);
 
 router.post('/lists/delete/:id(\\d+)', asyncHandler(async (req, res) => {
     const bookId = parseInt(req.params.id, 10);
