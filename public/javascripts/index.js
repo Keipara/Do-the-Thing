@@ -114,7 +114,7 @@ function createTasksList(tasks, taskContainer) {
      try {
       const res = await fetch(`/tasks/${taskId}/edit`);
       const data = await res.json();
-
+      console.log(data)
       const taskNameInput = document.querySelector("#task-name-input");
       taskNameInput.value = data.task.name;
 
@@ -127,13 +127,10 @@ function createTasksList(tasks, taskContainer) {
       const taskDescription = document.querySelector("#task-description");
       taskDescription.value = data.task.description;
 
-      // const editForm = document.querySelector("#task-edit-form")
-      // editForm.action = `/tasks/${data.task.id}/edit`;
-
       const editSaveButton = document.querySelector("#edit-save-button");
       editSaveButton.addEventListener("click", async (event) => {
         event.preventDefault();
-
+        console.log("clicked")
         const taskNameInput = document.querySelector("#task-name-input");
         const newName = taskNameInput.value
 
