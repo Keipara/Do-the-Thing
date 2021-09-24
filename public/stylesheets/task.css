@@ -130,6 +130,17 @@
 
 }
 
+.task-list {
+    display: block;
+    width: 100%;
+}
+
+.complete-tasks {
+    display: none;
+    width: 100%;
+
+}
+
 .task-footer-container {
     height: 100px;
     display: flex;
