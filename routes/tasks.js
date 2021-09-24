@@ -38,6 +38,17 @@ router.get("/task-list", asyncHandler(async (req, res) => {
 })
 );
 
+
+router.get("/add-list", asyncHandler(async (req, res) => {
+  const lists = await List.findAll({
+
+      where:{userId: res.locals.user.id},
+
+  });
+  res.json({ tasks });
+})
+);
+
 router.post("/task-list", asyncHandler(async (req, res) => {
     const { name, complete, listId, createdAt, updatedAt} = req.body;
     const task = await Task.create({ name, complete, listId, createdAt, updatedAt });
@@ -124,14 +135,16 @@ router.post("/add-list", asyncHandler(async (req, res) => {
     name,
     userId: res.locals.user.id
   })
-
+  res.redirect('/tasks')
 }))
 
 // router.post("/task-list", asyncHandler(async (req, res) => {
 //     const { name, listId} = req.body;
 //     const task = await Task.create({
 //       name,
-//       listId: res.locals.user.id
+//       listId: {
+//         defaultValue: 1
+//       }
 //     });
 //     const newTask = await Task.findOne({
 //       where: {
