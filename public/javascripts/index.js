@@ -66,6 +66,50 @@ async function removeTask(taskId) {
   }
 }
 
+ document.addEventListener("DOMContentLoaded", async() => {
+    try {
+      const res = await fetch("/tasks/list-list");
+      const { lists } = await res.json();
+      const listContainer = document.querySelector(".list-list");
+
+      const listHtml = lists.map(
+          (list) =>
+          `
+          <div class="card">
+          <div class="card-body">
+          <p class="card-text">${list.name}</p>
+          </div>
+          </div>
+          `
+          );
+      listContainer.innerHTML = listHtml.join("");
+    } catch (e) {
+      console.error(e)
+    }
+  });
+
+  let addListButton = document.querySelector(".add-list-button");
+  addListButton.addEventListener("click", (event) => {
+    const listContainer = document.querySelector(".list-list");
+    let listInput = document.querySelector(".list-input");
+    let listName = listInput.value;
+    if (listInput) {
+      let newListTag = document.createElement('a')
+      addList(listName)
+      listContainer.appendChild(newListTag)
+    }
+  })
+
+  async function addList(listName) {
+    try {
+      const res = await fetch("/add-list", {
+        headers: {'Content-type': 'application/json'}
+      });
+    } catch (e) {
+    }
+  }
+
+  // add-list-button
 
 // const deleteButton = document.getElementsByClassName("delete-button")
 // deleteButton.addEventListener('click', async() => {

@@ -22,10 +22,10 @@ block content
         div(class='list-container')
             form(action="/tasks/add-list" method="post" class="list-form")
                 div(class="form-items")
-                    input(type="hidden" name="_csrf" value=csrfToken)
+                    input(type="text" class="list-input" name="name" placeholder="Add a list")
                     div(class="listButtons")
                         button(id="addList" action="submit" value="list") Lists
-                        button( value="list") +
+                        button( value="list" action="submit" class="add-list-button") + temp add
                     div(class="list-list")
 
 
