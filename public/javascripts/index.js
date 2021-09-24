@@ -271,11 +271,28 @@ searchButton.addEventListener("click", async (event) => {
           } catch (e) {
             console.error(e)
             }
-
         })
-
+      const deleteListButton = document.createElement('button')
+      deleteListButton.className = "delete-list-button"
+      deleteListButton.innerText = "Delete"
+      deleteListButton.addEventListener('click', (event) => {
+        event.preventDefault();
+        removeList(list.id)
+        event.target.parentElement.remove();
+      })
+      para.appendChild(deleteListButton)
       listDiv.appendChild(para);
       listContainer.appendChild(listDiv)
+    }
+  }
+
+  async function removeList(listId) {
+    try {
+      const res = await fetch(`/tasks/lists/delete/${listId}`, {
+        method: 'POST',
+        headers: {'Content-type': 'application/json'}
+      });
+    } catch (e) {
     }
   }
 
