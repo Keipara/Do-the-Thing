@@ -19,8 +19,12 @@
     background-color: white;
     top: 5px;
     border-radius: 5px;
-    width: 45%;
+    width: 100%;
 
+}
+
+.task-div {
+    border-bottom:1px dotted gray;
 }
 
 .button-1 {

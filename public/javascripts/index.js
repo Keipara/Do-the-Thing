@@ -38,7 +38,9 @@ function createTasksList(tasks, taskContainer) {
   for (let i = 0; i< tasks.length; i++) {
     const task = tasks[i];
 
-    const div = document.createElement('div')
+    const taskDiv = document.createElement('div')
+    taskDiv.className = "task-div"
+
     const para = document.createElement("p");
       para.id = task.id;
       para.innerText = task.name;
@@ -66,8 +68,8 @@ function createTasksList(tasks, taskContainer) {
     })
 
     para.appendChild(deleteButton);
-    div.appendChild(para);
-    taskContainer.appendChild(div)
+    taskDiv.appendChild(para);
+    taskContainer.appendChild(taskDiv)
   }
 }
 
@@ -199,7 +201,8 @@ searchButton.addEventListener("click", async (event) => {
     for (let i = 0; i< lists.length; i++) {
       const list = lists[i];
 
-      const div = document.createElement('div')
+      const listDiv = document.createElement('div')
+      listDiv.className = "list-div"
       const para = document.createElement("p");
         para.id = list.id;
         para.innerText = list.name;
@@ -217,8 +220,8 @@ searchButton.addEventListener("click", async (event) => {
 
         })
 
-      div.appendChild(para);
-      listContainer.appendChild(div)
+      listDiv.appendChild(para);
+      listContainer.appendChild(listDiv)
     }
   }
 
