@@ -27,44 +27,49 @@ document.addEventListener('DOMContentLoaded', async () => {
     const res = await fetch("/tasks/task-list");
     const {tasks} = await res.json();
     const taskContainer = document.querySelector(".task-list")
-    for (let i = 0; i< tasks.length; i++) {
-      const task = tasks[i];
-
-      const div = document.createElement('div')
-      const para = document.createElement("p");
-        para.id = task.id;
-        para.innerText = task.name;
-        para.addEventListener("click", async (event) => {
-          event.preventDefault();
-          const listSummaryContainer = document.querySelector(".list-summary-container");
-          listSummaryContainer.style.display = "none";
-
-          const taskEditContainer = document.querySelector(".task-edit-container");
-          taskEditContainer.style.display = "block";
-
-          const taskId = event.target.id
-          editTask(taskId)
-          // event.target.innerText = "new text!"
-
-        })
-
-      const deleteButton = document.createElement('button');
-      deleteButton.className = "delete-button";
-      deleteButton.innerText = "Delete";
-      deleteButton.addEventListener('click', (event) => {
-        event.preventDefault();
-        removeTask(task.id)
-        event.target.parentElement.remove();
-      })
-
-      para.appendChild(deleteButton);
-      div.appendChild(para);
-      taskContainer.appendChild(div)
-    }
+    createTasksList(tasks, taskContainer);
   } catch (e) {
     console.error(e)
     }
 })
+
+
+function createTasksList(tasks, taskContainer) {
+  for (let i = 0; i< tasks.length; i++) {
+    const task = tasks[i];
+
+    const div = document.createElement('div')
+    const para = document.createElement("p");
+      para.id = task.id;
+      para.innerText = task.name;
+      para.addEventListener("click", async (event) => {
+        event.preventDefault();
+        const listSummaryContainer = document.querySelector(".list-summary-container");
+        listSummaryContainer.style.display = "none";
+
+        const taskEditContainer = document.querySelector(".task-edit-container");
+        taskEditContainer.style.display = "block";
+
+        const taskId = event.target.id
+        editTask(taskId)
+        // event.target.innerText = "new text!"
+
+      })
+
+    const deleteButton = document.createElement('button');
+    deleteButton.className = "delete-button";
+    deleteButton.innerText = "Delete";
+    deleteButton.addEventListener('click', (event) => {
+      event.preventDefault();
+      removeTask(task.id)
+      event.target.parentElement.remove();
+    })
+
+    para.appendChild(deleteButton);
+    div.appendChild(para);
+    taskContainer.appendChild(div)
+  }
+}
 
   async function removeTask(taskId) {
     try {
@@ -145,6 +150,32 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
+//search for tasks
+let searchButton = document.getElementById("search-button");
+
+searchButton.addEventListener("click", async (event) => {
+  let searchBox = document.getElementById("search-box");
+  let searchTerm = searchBox.value;
+
+  if(searchTerm) {
+    try {
+      const res = await fetch(`/tasks/search/${searchTerm}`);
+      const { tasks } = await res.json();
+      const taskContainer = document.querySelector(".task-list");
+
+        if(tasks.length !== 0) {
+          taskContainer.innerHTML = "";
+          createTasksList(tasks, taskContainer)
+        } else {
+            taskContainer.innerHTML = 'Sorry! No results found.'
+          }
+
+    } catch (e) {
+        console.error(e);
+      }
+  }
+
+});
 
 
  document.addEventListener("DOMContentLoaded", async() => {
