@@ -40,29 +40,42 @@ block content
 
             div(class='task-list')
 
-        div(class='list-summary-container') List Summary
-        div(class='task-edit-container') Task Details
-                div
-                    input(type="text" name="name" id="task-name-input" value=task.name)
-                div
-                    label(for="due") Due
-                    input(type="date" name="due" id="task-due-date")
-                div
-                    label(for="listId") List
-                    select(name="listId" id="list-select")
-                        each list in lists
-                            if task.listId === list.id
-                                option(value=list.id selected)= list.name
-                            else
-                                option(value=list.id)= list.name
-                div
-                    label(for="description") Description
-                    textarea(name="description" id="task-description")
-                div
-                    input(type="submit" value="Save" id="edit-save-button")
-                    input(type="submit" value="Close" id="edit-close-button")
+
+        div(class='details-containter')
+            div(class='list-summary-container') List Summary
+                div(class="")
+                        div(class="tasksNumber")
+                        text Tasks
+                    div(class="")
+                        div(class="completedNumber")
+                        text Completed
+                    div(class="")
+                        div(class="overdueNumber")
+                        text Overdue
+
+            div(class='task-edit-container') Task Details
+                    div
+                        input(type="text" name="name" id="task-name-input" value=task.name)
+                    div
+                        label(for="due") Due
+                        input(type="date" name="due" id="task-due-date")
+                    div
+                        label(for="listId") List
+                        select(name="listId" id="list-select")
+                            each list in lists
+                                if task.listId === list.id
+                                    option(value=list.id selected)= list.name
+                                else
+                                    option(value=list.id)= list.name
+                    div
+                        label(for="description") Description
+                        textarea(name="description" id="task-description")
+                    div
+                        input(type="submit" value="Save" id="edit-save-button")
+                        input(type="submit" value="Close" id="edit-close-button")
     footer
         div(class='task-footer-container')
             a(href='https://github.com/Keipara') Kiara
             a(href='https://github.com/LakshmiPriyaPrakash') Lakshmi
             a(href='https://github.com/nevinchow') Nevin
+

@@ -27,7 +27,58 @@ document.addEventListener('DOMContentLoaded', async () => {
     const res = await fetch("/tasks/task-list");
     const {tasks} = await res.json();
     const taskContainer = document.querySelector(".task-list")
+
     createTasksList(tasks, taskContainer);
+
+    //List-Summary
+    let completeCounter = 0;
+    let incompleteCounter = 0;
+    let overdueCounter = 0;
+    //
+
+    for (let i = 0; i< tasks.length; i++) {
+      const task = tasks[i];
+
+      //List-Summary
+      console.log(task.complete)
+      if (task.complete === false) {
+        incompleteCounter++;
+      } else {
+        completeCounter++;
+      }
+
+      if (task.due <= Date() ) {
+        overdueCounter++;
+      }
+
+      let taskTotal= document.querySelector(".tasksNumber")
+      taskTotal.innerHTML = incompleteCounter
+      let completeTotal = document.querySelector(".completedNumber")
+      completeTotal.innerHTML = completeCounter
+      let overdueTotal = document.querySelector(".overdueNumber")
+      overdueTotal.innerHTML = overdueCounter
+      //
+
+      const div = document.createElement('div')
+      const aTag = document.createElement('a');
+      aTag.innerText = task.name
+      aTag.className = "all-tasks";
+      aTag.id = task.id
+
+      const deleteButton = document.createElement('button');
+      deleteButton.className = "delete-button";
+      deleteButton.innerText = "Delete";
+      deleteButton.addEventListener('click', (event) => {
+        event.preventDefault();
+        removeTask(task.id)
+        event.target.parentElement.remove();
+      })
+      div.appendChild(aTag)
+      aTag.appendChild(deleteButton);
+      taskContainer.appendChild(div)
+
+    }
+
   } catch (e) {
     console.error(e)
     }
