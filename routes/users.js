@@ -89,11 +89,10 @@ router.post('/signup', csrfProtection, userValidators, asyncHandler(async(req,re
     user.hashedPassword = hashedPassword;
     await user.save();
     await List.create({
-      name: "School",
-
+      name: "Miscellaneous",
       userId: user.id
-
     });
+
     loginUser(req, res, user);
     res.redirect('/tasks');
   } else {

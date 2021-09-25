@@ -20,6 +20,7 @@ module.exports = {
         defaultValue: false
       },
       listId: {
+        allowNull: false,
         type: Sequelize.INTEGER,
         references: {model: "Lists"}
       },
