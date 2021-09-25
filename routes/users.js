@@ -152,9 +152,9 @@ router.post('/login', csrfProtection, loginValidators, asyncHandler(async(req,re
 }));
 
 router.get('/demo', asyncHandler(async (req, res) => {
+  if(res.locals.authenticated) return res.redirect('/tasks');
   let demo = await User.findOne({ where: {email: 'demouser@demo.com'} });
   loginUser(req, res, demo);
-  if(res.locals.authenticated) return res.redirect('/tasks');
   res.redirect('/');
 }));
 
