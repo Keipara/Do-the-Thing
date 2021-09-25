@@ -31,8 +31,8 @@ block content
 
         div(class='task-container') All Tasks
             div
-                a(class='button-1', href='/tasks') Incomplete
-                a(class='button-2', href='/tasks') Complete
+                a(class='button-1', href='#') Incomplete
+                a(class='button-2', href='#') Complete/Overdue
 
                 div
                 label(for="name")
@@ -42,7 +42,7 @@ block content
 
             div(class='task-list')
             div(class='complete-tasks')
-                p 
+
 
 
         div(class='details-containter')
@@ -72,6 +72,10 @@ block content
                                     option(value=list.id selected)= list.name
                                 else
                                     option(value=list.id)= list.name
+                    div
+                        label(for="complete") Move to Complete
+                        input(type="checkbox" name="complete" checked id="complete-select")
+
                     div
                         label(for="description") Description
                         textarea(name="description" id="task-description")
