@@ -158,7 +158,7 @@ router.get("/:id(\\d+)/edit", csrfProtection, requireAuth, asyncHandler(async (r
 router.post("/:id(\\d+)/edit", requireAuth, asyncHandler(async (req, res) => {
 
   const taskId = parseInt(req.params.id, 10);
-  let { name, due, listId, description} = req.body;
+  let { name, due, listId, complete, description} = req.body;
   const taskToUpdate = await Task.findByPk(taskId);
   let task = {};
 
@@ -167,9 +167,9 @@ router.post("/:id(\\d+)/edit", requireAuth, asyncHandler(async (req, res) => {
   }
 
   if(description === "") {
-    task = { name, due, listId }
+    task = { name, due, listId, complete }
   } else {
-    task = { name, due, listId, description }
+    task = { name, due, listId, complete, description }
   }
 
   await taskToUpdate.update(task);

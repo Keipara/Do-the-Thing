@@ -1,5 +1,3 @@
-const incompleteContainer = document.querySelector(".complete-tasks")
-
 document.addEventListener('DOMContentLoaded', async () => {
   try {
     const res = await fetch("/tasks/task-list");
@@ -54,6 +52,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         const taskDescription = document.querySelector("#task-description");
         const newDescription = taskDescription.value
 
+        const completeStatus = document.querySelector("#complete-select");
+        const newStatus = completeStatus.value
+
         const taskId = event.target.dataset.taskId;
         const res = await fetch (`/tasks/${taskId}/edit`, {
           method: 'POST',
@@ -62,6 +63,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             name: newName,
             due: newDueDate,
             listId: newListId,
+            complete: newStatus,
             description: newDescription
           }),
         });
@@ -95,6 +97,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 function createTasksList(tasks, taskContainer) {
+  const taskContainer2 = document.querySelector(".task-list")
+  const incompleteContainer = document.querySelector(".complete-tasks")
+  taskContainer2.innerHTML = "";
+  incompleteContainer.innerHTML = "";
+
 
   for (let i = 0; i< tasks.length; i++) {
     const task = tasks[i];
@@ -107,7 +114,7 @@ function createTasksList(tasks, taskContainer) {
       para.innerText = task.name;
       para.className = "edit-task-para"
       para.addEventListener("click", (event) => {
-        // event.preventDefault();
+        event.preventDefault();
         if(event.target.classList.contains("edit-task-para")) {
           const listSummaryContainer = document.querySelector(".list-summary-container");
           listSummaryContainer.style.display = "none";
@@ -135,15 +142,20 @@ function createTasksList(tasks, taskContainer) {
 
 
     if (task.complete === false) {
+      const checkbox = document.querySelector("#complete-select")
+      checkbox.checked = false
       const completeButton = document.createElement('button');
       completeButton.className = 'complete-button';
       completeButton.innerText = "Complete";
       para.appendChild(deleteButton);
       taskDiv.appendChild(para);
-      taskContainer.appendChild(taskDiv)
+
+      taskContainer2.appendChild(taskDiv)
     } else {
+      // const checkbox = document.querySelector("#complete-select")
       para.appendChild(deleteButton);
       taskDiv.appendChild(para);
+
       incompleteContainer.appendChild(taskDiv)
     }
   }
@@ -175,6 +187,9 @@ function createTasksList(tasks, taskContainer) {
 
       const taskDescription = document.querySelector("#task-description");
       taskDescription.value = data.task.description;
+
+      const completeStatus = document.querySelector("#complete-select");
+      completeStatus.value = data.task.complete;
 
     } catch (e) {
     }
@@ -240,6 +255,7 @@ searchButton.addEventListener("click", async (event) => {
           event.preventDefault();
           try {
             const res = await fetch(`tasks/${list.id}/tasks`);
+            
             selectedList = list.id;
             const {tasks} = await res.json();
             const taskContainer = document.querySelector(".task-list")
@@ -337,7 +353,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   let incompleteTab = document.querySelector(".button-1");
   let completeTab = document.querySelector(".button-2");
   const taskContainer = document.querySelector(".task-list")
-
+  const incompleteContainer = document.querySelector(".complete-tasks")
   completeTab.addEventListener("click", async (event) => {
 
     taskContainer.style.display = "none";
@@ -350,6 +366,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     incompleteContainer.style.display = "none";
   });
 });
+
+
 
 //
 
@@ -372,4 +390,3 @@ document.addEventListener('DOMContentLoaded', async () => {
 //   event.preventDefault();
 //   listName.innerText = list.innerText
 // })
-
