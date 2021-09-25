@@ -299,7 +299,7 @@ searchButton.addEventListener("click", async (event) => {
             completeTotal.innerHTML = completeCounter
             overdueTotal.innerHTML = overdueCounter
             const listName = document.querySelector('.listName')
-            // listName.innerText = para.innerText.slice(0, -6)
+            listName.innerText = para.innerText.slice(0, -6)
 
           } catch (e) {
             console.error(e)
