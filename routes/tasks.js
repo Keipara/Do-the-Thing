@@ -17,7 +17,8 @@ const taskNotFoundError = (id) => {
   return err;
 };
 
-router.get("/", csrfProtection, asyncHandler(async (req, res) => {
+//loads the main page when a user logs in
+router.get("/", csrfProtection, requireAuth, asyncHandler(async (req, res) => {
     const tasks = await Task.findAll();
     const task = Task.build();
     const lists = await List.findAll({
@@ -34,7 +35,9 @@ router.get("/", csrfProtection, asyncHandler(async (req, res) => {
   })
 );
 
-router.get("/task-list", asyncHandler(async (req, res) => {
+//finds the lists belonging to the logged in user
+//and sends all the tasks associated with that list
+router.get("/task-list", requireAuth, asyncHandler(async (req, res) => {
   const tasks = await Task.findAll({
     include: [{
       model: List,
@@ -46,8 +49,8 @@ router.get("/task-list", asyncHandler(async (req, res) => {
 })
 );
 
-
-router.get("/add-list", asyncHandler(async (req, res) => {
+//??????
+router.get("/add-list", requireAuth, asyncHandler(async (req, res) => {
   const lists = await List.findAll({
 
       where:{userId: res.locals.user.id},
@@ -65,15 +68,15 @@ router.get("/add-list", asyncHandler(async (req, res) => {
 //   })
 // );
 
-
-router.post("/:id(\\d+)", asyncHandler(async (req, res, next) => {
+//?????
+router.post("/:id(\\d+)", requireAuth, asyncHandler(async (req, res, next) => {
     const taskId = parseInt(req.params.id, 10);
     const task = await Task.findByPk(taskId);
     res.json({ task });
   })
 );
-
-router.patch("/:id(\\d+)", asyncHandler(async (req, res, next) => {
+//??????
+router.patch("/:id(\\d+)", requireAuth, asyncHandler(async (req, res, next) => {
     const taskId = parseInt(req.params.id, 10);
     const task = await Task.findByPk(taskId);
 
@@ -86,8 +89,8 @@ router.patch("/:id(\\d+)", asyncHandler(async (req, res, next) => {
   })
 );
 
-
-router.post("/delete/:id(\\d+)", asyncHandler(async (req, res, next) => {
+//deletes a task from the Tasks table
+router.post("/delete/:id(\\d+)", requireAuth, asyncHandler(async (req, res, next) => {
   const taskId = parseInt(req.params.id, 10);
   const task = await Task.findByPk(taskId);
 
@@ -100,9 +103,10 @@ router.post("/delete/:id(\\d+)", asyncHandler(async (req, res, next) => {
 })
 );
 
-router.post("/lists/delete/:listId(\\d+)", asyncHandler(async (req, res, next) => {
+//deletes a list from the Lists table
+router.post("/lists/delete/:listId(\\d+)", requireAuth, asyncHandler(async (req, res, next) => {
   const listId = parseInt(req.params.listId, 10);
-  console.log(req.params.listId)
+
   const list = await List.findByPk(listId);
   if (list) {
     await list.destroy();
@@ -113,6 +117,7 @@ router.post("/lists/delete/:listId(\\d+)", asyncHandler(async (req, res, next) =
 })
 );
 
+//searches for the tasks containing the search term
 router.get("/search/:searchTerm(\\w+)", requireAuth, asyncHandler(async (req, res) => {
    const searchTerm = req.params.searchTerm;
    const tasks = await Task.findAll({
@@ -134,6 +139,9 @@ router.get("/search/:searchTerm(\\w+)", requireAuth, asyncHandler(async (req, re
 })
 );
 
+//when a user clicks on a task, this route receives the task id
+//and pulls the task details from the Task table
+//and sends them to be populated in the task edit panel
 router.get("/:id(\\d+)/edit", csrfProtection, requireAuth, asyncHandler(async (req, res) => {
   const taskId = parseInt(req.params.id, 10);
     const task = await Task.findByPk(taskId);
@@ -154,7 +162,8 @@ router.get("/:id(\\d+)/edit", csrfProtection, requireAuth, asyncHandler(async (r
   })
 );
 
-
+//receives the task edits from the task edit panel
+//and updates the changes in the Tasks table
 router.post("/:id(\\d+)/edit", requireAuth, asyncHandler(async (req, res) => {
 
   const taskId = parseInt(req.params.id, 10);
@@ -177,7 +186,8 @@ router.post("/:id(\\d+)/edit", requireAuth, asyncHandler(async (req, res) => {
   res.status(204).end();
 }))
 
-router.get("/:id(\\d+)/tasks", asyncHandler(async (req, res, next) => {
+//gets the tasks belonging to a particular list
+router.get("/:id(\\d+)/tasks", requireAuth, asyncHandler(async (req, res, next) => {
   const listId = parseInt(req.params.id, 10);
   const tasks = await Task.findAll({
     include: [{
@@ -191,7 +201,8 @@ router.get("/:id(\\d+)/tasks", asyncHandler(async (req, res, next) => {
 })
 );
 
-router.get("/list-list", asyncHandler(async (req, res) => {
+//gets the lists belonging to a particular user
+router.get("/list-list", requireAuth, asyncHandler(async (req, res) => {
   const lists = await List.findAll({
         where:{
           userId: res.locals.user.id
@@ -201,8 +212,8 @@ router.get("/list-list", asyncHandler(async (req, res) => {
 })
 );
 
-
-router.post("/add-list", asyncHandler(async (req, res) => {
+//adds a new list to the Lists table
+router.post("/add-list", requireAuth, asyncHandler(async (req, res) => {
   const {name} = req.body;
   const list =await List.create({
     name,
@@ -211,7 +222,9 @@ router.post("/add-list", asyncHandler(async (req, res) => {
   res.redirect('/tasks')
 }))
 
-router.post("/add-task", asyncHandler(async (req, res) => {
+
+//adds a new task to the Task table
+router.post("/add-task", requireAuth, asyncHandler(async (req, res) => {
     let { name, listId} = req.body;
 
     if(!listId) {
@@ -235,7 +248,8 @@ router.post("/add-task", asyncHandler(async (req, res) => {
   })
 );
 
-router.post('/lists/delete/:id(\\d+)', asyncHandler(async (req, res) => {
+//???????
+router.post('/lists/delete/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
     const bookId = parseInt(req.params.id, 10);
     const book = await db.Book.findByPk(bookId);
 

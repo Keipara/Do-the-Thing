@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', async () => {
       let task = tasks[i];
 
       //List-Summary
-      console.log(task.complete)
       if (task.complete === false) {
         incompleteCounter++;
       } else {
@@ -39,7 +38,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const editSaveButton = document.querySelector("#edit-save-button");
       editSaveButton.addEventListener("click", async (event) => {
         event.preventDefault();
-        console.log("clicked")
+
         const taskNameInput = document.querySelector("#task-name-input");
         const newName = taskNameInput.value
 
@@ -108,7 +107,7 @@ function createTasksList(tasks, taskContainer) {
 
     const taskDiv = document.createElement('div')
     taskDiv.className = "task-div"
-    console.log(task.name)
+
     const para = document.createElement("p");
       para.id = task.id;
       para.innerText = task.name;
@@ -177,7 +176,7 @@ function createTasksList(tasks, taskContainer) {
      try {
       const res = await fetch(`/tasks/${taskId}/edit`);
       const data = await res.json();
-      console.log(data)
+
       const taskNameInput = document.querySelector("#task-name-input");
       taskNameInput.value = data.task.name;
 
@@ -333,7 +332,7 @@ searchButton.addEventListener("click", async (event) => {
 
 
   async function addTask(taskName, listId) {
-    console.log(listId)
+
     try {
       const res = await fetch("/tasks/add-task", {
         method: 'POST',
@@ -358,6 +357,10 @@ searchButton.addEventListener("click", async (event) => {
         method: 'POST',
         headers: {'Content-type': 'application/json'}
       });
+
+      if(res.ok) {
+        window.location.reload();
+      }
     } catch (e) {
     }
   }
