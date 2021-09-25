@@ -4,16 +4,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     const {tasks} = await res.json();
     const taskContainer = document.querySelector(".task-list")
 
-    createTasksList(tasks, taskContainer);
-
-    //List-Summary
     let completeCounter = 0;
     let incompleteCounter = 0;
     let overdueCounter = 0;
+    createTasksList(tasks, taskContainer);
+
+    //List-Summary
     //
 
     for (let i = 0; i< tasks.length; i++) {
-      const task = tasks[i];
+      let task = tasks[i];
 
       //List-Summary
       console.log(task.complete)
@@ -255,15 +255,35 @@ searchButton.addEventListener("click", async (event) => {
           event.preventDefault();
           try {
             const res = await fetch(`tasks/${list.id}/tasks`);
-            
+
             selectedList = list.id;
             const {tasks} = await res.json();
             const taskContainer = document.querySelector(".task-list")
             taskContainer.innerHTML = "";
+            // taskTotal.innerHTML = para.childNodes.length
             createTasksList(tasks, taskContainer);
-
+            let incompleteCounter = 0;
+            let completeCounter = 0;
+            let overdueCounter = 0;
+            for (let i = 0; i < tasks.length; i++) {
+             let task = tasks[i];
+             if (task.complete === false) {
+               incompleteCounter++
+             } else {
+               completeCounter++
+             }
+             if (task.due <= Date()) {
+               overdueCounter++;
+             }
+            }
+            let taskTotal= document.querySelector(".tasksNumber")
+            let completeTotal = document.querySelector(".completedNumber")
+            let overdueTotal = document.querySelector(".overdueNumber")
+            taskTotal.innerHTML = incompleteCounter
+            completeTotal.innerHTML = completeCounter
+            overdueTotal.innerHTML = overdueCounter
             const listName = document.querySelector('.listName')
-            listName.innerText = para.innerText.slice(0, -6)
+            // listName.innerText = para.innerText.slice(0, -6)
 
           } catch (e) {
             console.error(e)
