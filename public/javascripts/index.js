@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const newDescription = taskDescription.value
 
         const completeStatus = document.querySelector("#complete-select");
-        const newStatus = completeStatus.value
+        const newStatus = completeStatus.checked
 
         const taskId = event.target.dataset.taskId;
         const res = await fetch (`/tasks/${taskId}/edit`, {
@@ -152,7 +152,9 @@ function createTasksList(tasks, taskContainer) {
 
       taskContainer2.appendChild(taskDiv)
     } else {
-      // const checkbox = document.querySelector("#complete-select")
+
+      const checkbox = document.querySelector("#complete-select")
+      checkbox.checked = true
       para.appendChild(deleteButton);
       taskDiv.appendChild(para);
 
@@ -190,7 +192,21 @@ function createTasksList(tasks, taskContainer) {
 
       const completeStatus = document.querySelector("#complete-select");
       completeStatus.value = data.task.complete;
+      if (completeStatus.value === false) {
+        const completeButton = document.createElement('button');
+        completeButton.className = 'complete-button';
+        completeButton.innerText = "Complete";
+        para.appendChild(deleteButton);
+        taskDiv.appendChild(para);
 
+        taskContainer2.appendChild(taskDiv)
+      } else {
+        // const checkbox = document.querySelector("#complete-select")
+        para.appendChild(deleteButton);
+        taskDiv.appendChild(para);
+
+        incompleteContainer.appendChild(taskDiv)
+      }
     } catch (e) {
     }
   }
@@ -283,7 +299,7 @@ searchButton.addEventListener("click", async (event) => {
             completeTotal.innerHTML = completeCounter
             overdueTotal.innerHTML = overdueCounter
             const listName = document.querySelector('.listName')
-            // listName.innerText = para.innerText.slice(0, -6)
+            listName.innerText = para.innerText.slice(0, -6)
 
           } catch (e) {
             console.error(e)
