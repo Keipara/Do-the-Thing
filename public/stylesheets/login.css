@@ -62,7 +62,7 @@ a {
     padding: 10px;
     font-weight: bold;
     color: gray;
-    background-color: rgb(205, 237, 248);
+    background-color: rgb(234, 205, 248);
     border-radius: 5%;
 }
 
@@ -111,13 +111,31 @@ ul {
 .username-label {
     padding: 10px;
     font-size: 20px;
-    width: 70%
+    width: 70%;
+
+
 }
 
 .password-label {
     padding: 10px;
     font-size: 20px;
     width: 70%
+}
+
+input
+{
+
+  border-radius: 5px;
+  border-width: thin;
+  border-color: rgb(231, 195, 252);
+
+}
+
+input:focus {
+    outline: none;
+    box-shadow: 0 0 5px 5px rgb(238, 196, 248);
+    transition: all 0.20s ease-in-out;
+
 }
 
 .login-button-div {
@@ -131,10 +149,11 @@ ul {
     margin: 10px;
     font-size: 20px;
     padding: 10px;
-    background-color: rgb(161, 63, 185);
+    background-color: rgb(175, 72, 201);
     color: white;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     font-size: 20px;
     border: none;
     border-radius: 5px;
+    box-shadow: none;
 }
