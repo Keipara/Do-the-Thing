@@ -16,6 +16,18 @@
 
 }
 
+#quote {
+    color: lightgray;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+}
+
+#author {
+    color: lightgray;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px;
+}
+
 .quotes-team {
     margin-top: 150px;
     display: flex;
@@ -28,6 +40,7 @@
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     font-size: small;
     display: flex;
+    margin-top: 70px;
 }
 
 #catImage {
