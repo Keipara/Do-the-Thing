@@ -3,13 +3,14 @@
     display: grid;
     grid-template-areas: "mascot login" ;
     height: 100vh;
+    gap: 30px;
 
 }
 
 .logo-quote-container {
     grid-area: mascot;
     background-color: rgb(131, 52, 151);
-    width: 90%;
+    width: 100%;
 }
 
 .sign-up-form-container {
@@ -76,6 +77,7 @@ a {
 .welcome-text {
     font-size: large;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
+    margin-left: 20px;
 }
 
 .errors-div{
@@ -129,4 +131,10 @@ ul {
     margin: 10px;
     font-size: 20px;
     padding: 10px;
+    background-color: rgb(161, 63, 185);
+    color: white;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px;
+    border: none;
+    border-radius: 5px;
 }
