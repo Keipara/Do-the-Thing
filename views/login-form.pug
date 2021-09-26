@@ -7,29 +7,29 @@ block content
     div(class='main-container')
         div(class="logo-quote-container")
             div(class="logo")
-                a(href='/')
+                a(href='/' id="logo-link")
                     img(src='pink-w-black-outline.png' alt='logo' id="logoImage")
                 a(href='/' id="app-name")  Do The Thing!
         div(class="sign-up-form-container")
             div
                 a(class='sign-up-button', href='/signup') Sign up for free
-            div
+            div(class="signup-section")
                 p(class= 'welcome-text') Been here before? Welcome back!
-            div(class="errors-div")
-                if errors
-                    div
-                        p The following error(s) occurred:
-                        ul
-                            each error in errors
-                                li= error
-            div(class="login-div")
-                form(class= "login-form" action="/login" method="post")
-                    input(type="hidden" name="_csrf" value=csrfToken)
-                    div
-                        label(class= "username-label" for="username")
-                        input(type="text" name="username" value=username placeholder="Username")
-                    div
-                        label(class= "password-label" for="password")
-                        input(type="password" name="password" value=password placeholder="Password")
-                    div
-                        input(type="submit" value="Log In")
+                div(class="errors-div")
+                    if errors
+                        div
+                            p The following error(s) occurred:
+                            ul
+                                each error in errors
+                                    li= error
+                div(class="login-div")
+                    form(class= "login-form" action="/login" method="post")
+                        input(type="hidden" name="_csrf" value=csrfToken)
+                        div(class="username-div")
+                            label(class= "username-label" for="username")
+                            input(type="text" name="username" value=username placeholder="Username" class= "username-label")
+                        div(class="password-div")
+                            label(class= "password-label" for="password")
+                            input(type="password" name="password" value=password placeholder="Password" class= "password-label")
+                        div(class="login-button-div")
+                            input(type="submit" value="Log In" class="login-button")
