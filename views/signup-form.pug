@@ -1,36 +1,44 @@
 extends layout
 
+append head
+    link(rel='stylesheet', href='/stylesheets/login.css')
+
 block content
-    a(class='button', href='/') Do The Thing!
-    div
-    a(class='button', href='/login') Log in
-    div
-    p Sign up for free.
-    if errors
-        div
-            p The following error(s) occurred:
-            ul
-                each error in errors
-                    li= error
-    form(action="/signup" method="post")
-        input(type="hidden" name="_csrf" value=csrfToken)
-        div
-            label(for="firstName")
-            input(type="text" name="firstName" value=firstName placeholder= "First Name")
-        div
-            label(for="lastName")
-            input(type="text" name="lastName" value=lastName placeholder= "Last Name")
-        div
-            label(for="email" )
-            input(type="email" name="email" value=email placeholder= "Email")
-        div
-            label(for="username")
-            input(type="text" name="username" value=username placeholder= "Username")
-        div
-            label(for="password")
-            input(type="password" name="password" value=password placeholder= "Password")
-        div
-            label(for="confirmPassword")
-            input(type="password" name="confirmPassword" value=confirmPassword placeholder= "Confirm Password")
-        div
-            input(type="submit" value="Sign up!")
+    div(class='main-container')
+        div(class="logo-quote-container")
+            a(class='button', href='/') Do The Thing!
+        div(class="signup-form-container")
+            div
+                a(class='login-button', href='/login') Log in
+            div(class="signup-section")
+                p(class= 'welcome-text') Sign up for free.
+                div
+                    if errors
+                        div(class="errors-div")
+                            p The following error(s) occurred:
+                            ul
+                                each error in errors
+                                    li= error
+                div(class="signup-div")
+                    form(action="/signup" method="post" class= "signup-form")
+                        input(type="hidden" name="_csrf" value=csrfToken)
+                        div
+                            label(for="firstName")
+                            input(type="text" name="firstName" value=firstName placeholder= "First Name")
+                        div
+                            label(for="lastName")
+                            input(type="text" name="lastName" value=lastName placeholder= "Last Name")
+                        div
+                            label(for="email" )
+                            input(type="email" name="email" value=email placeholder= "Email")
+                        div
+                            label(for="username")
+                            input(type="text" name="username" value=username placeholder= "Username")
+                        div
+                            label(for="password")
+                            input(type="password" name="password" value=password placeholder= "Password")
+                        div
+                            label(for="confirmPassword")
+                            input(type="password" name="confirmPassword" value=confirmPassword placeholder= "Confirm Password")
+                        div(class="signup-button-div")
+                            input(type="submit" value="Sign up!" class="signup-button")

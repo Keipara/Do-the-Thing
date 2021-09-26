@@ -13,7 +13,7 @@
     width: 100%;
 }
 
-.sign-up-form-container {
+.login-form-container {
     grid-area: login;
     width: 50%;
     display:flex;
@@ -66,7 +66,7 @@ a {
     border-radius: 5%;
 }
 
-.signup-section {
+.login-section {
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -97,37 +97,22 @@ ul {
  }
 
 
-.username-div {
-    width: 100%
-
-}
-
-.password-div {
+.username-password-div {
+    width: 100%;
     margin-top: 20px;
-    width: 100%
 
 }
 
-.username-label {
-    padding: 10px;
-    font-size: 20px;
-    width: 70%;
-
-
-}
-
-.password-label {
-    padding: 10px;
-    font-size: 20px;
-    width: 70%
-}
 
 input
 {
-
-  border-radius: 5px;
-  border-width: thin;
-  border-color: rgb(231, 195, 252);
+    margin-left: 20px;
+    border-radius: 5px;
+    border-width: thin;
+    border-color: rgb(231, 195, 252);
+    font-size: 20px;
+    width: 70%;
+    padding: 10px;
 
 }
 
