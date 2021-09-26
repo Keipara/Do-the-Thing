@@ -1,45 +1,28 @@
 .main-container {
     display: grid;
-    grid-template-areas:
-    "mascot login" ;
+    grid-template-areas: "mascot login" ;
     height: 100vh;
-    
+
 }
 
 .logo-quote-container {
-    grid-area: "mascot";
+    grid-area: mascot;
     background-color: rgb(131, 52, 151);
-    justify-content: center;
+    width: 90%;
 }
 
 .sign-up-form-container {
-    grid-area: "login";
-    justify-content: center;
+    grid-area: login;
+    width: 50%;
+    display:flex;
+    flex-direction: column;
+
 }
 
 a {
     text-decoration: none;
 }
 
-.button-2 {
-    position: relative;
-    left: 975px;
-    border-style: solid
-}
-
-.text {
-    position: relative;
-    left: 600px
-}
-.form {
-    position: relative;
-    left: 600px;
-}
-
-.username-label {
-    margin: 100px;
-    /* padding-top: 100px */
-}
 
 .logo {
     display: flex;
@@ -59,6 +42,40 @@ a {
 #app-name {
     color: white;
     margin-left: 125px;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: cursive;
     font-size: 25px;
+    font-weight: bold;
+}
+
+.sign-up-button {
+    float: right;
+    margin: 50px 10px;
+    font-size: 20px;
+    padding: 10px;
+    font-weight: bold;
+    color: gray;
+    background-color: rgb(205, 237, 248);
+    border-radius: 5%;
+}
+
+.welcome-text {
+    position: relative;
+
+}
+
+.errors-div{
+
+}
+
+.login-div {
+
+}
+
+.login-form {
+    position: relative;
+
+}
+
+.username-label {
+
 }

@@ -12,18 +12,18 @@ block content
                 a(href='/' id="app-name")  Do The Thing!
         div(class="sign-up-form-container")
             div
-                a(class='button-2', href='/signup') Sign up for free
+                a(class='sign-up-button', href='/signup') Sign up for free
             div
-                p(class= 'text') Been here before? Welcome back!
-            div
+                p(class= 'welcome-text') Been here before? Welcome back!
+            div(class="errors-div")
                 if errors
                     div
                         p The following error(s) occurred:
                         ul
                             each error in errors
                                 li= error
-            div
-                form(class= "form" action="/login" method="post")
+            div(class="login-div")
+                form(class= "login-form" action="/login" method="post")
                     input(type="hidden" name="_csrf" value=csrfToken)
                     div
                         label(class= "username-label" for="username")
