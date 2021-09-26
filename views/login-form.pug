@@ -4,27 +4,32 @@ append head
     link(rel='stylesheet', href='/stylesheets/login.css')
 
 block content
-    div
-        a(class='button-1', href='/') Do The Thing!
-    div
-        a(class='button-2', href='/signup') Sign up for free
-    div
-        p(class= 'text') Been here before? Welcome back!
-    div
-        if errors
+    div(class='main-container')
+        div(class="logo-quote-container")
+            div(class="logo")
+                a(href='/')
+                    img(src='pink-w-black-outline.png' alt='logo' id="logoImage")
+                a(href='/' id="app-name")  Do The Thing!
+        div(class="sign-up-form-container")
             div
-                p The following error(s) occurred:
-                ul
-                    each error in errors
-                        li= error
-    div
-        form(class= "form" action="/login" method="post")
-            input(type="hidden" name="_csrf" value=csrfToken)
+                a(class='button-2', href='/signup') Sign up for free
             div
-                label(class= "username-label" for="username")
-                input(type="text" name="username" value=username placeholder="Username")
+                p(class= 'text') Been here before? Welcome back!
             div
-                label(class= "password-label" for="password")
-                input(type="password" name="password" value=password placeholder="Password")
+                if errors
+                    div
+                        p The following error(s) occurred:
+                        ul
+                            each error in errors
+                                li= error
             div
-                input(type="submit" value="Log In")
+                form(class= "form" action="/login" method="post")
+                    input(type="hidden" name="_csrf" value=csrfToken)
+                    div
+                        label(class= "username-label" for="username")
+                        input(type="text" name="username" value=username placeholder="Username")
+                    div
+                        label(class= "password-label" for="password")
+                        input(type="password" name="password" value=password placeholder="Password")
+                    div
+                        input(type="submit" value="Log In")

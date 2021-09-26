@@ -1,3 +1,26 @@
+.main-container {
+    display: grid;
+    grid-template-areas:
+    "mascot login" ;
+    height: 100vh;
+    
+}
+
+.logo-quote-container {
+    grid-area: "mascot";
+    background-color: rgb(131, 52, 151);
+    justify-content: center;
+}
+
+.sign-up-form-container {
+    grid-area: "login";
+    justify-content: center;
+}
+
+a {
+    text-decoration: none;
+}
+
 .button-2 {
     position: relative;
     left: 975px;
@@ -16,4 +39,26 @@
 .username-label {
     margin: 100px;
     /* padding-top: 100px */
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 50px;
+
+}
+
+#logoImage {
+    width: 200px;
+    height: 150px;
+    margin-left: 100px;
+}
+
+
+#app-name {
+    color: white;
+    margin-left: 125px;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 25px;
 }
