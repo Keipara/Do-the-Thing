@@ -15,9 +15,9 @@ block content
                 a(class='sign-up-button', href='/signup') Sign up for free
             div(class="signup-section")
                 p(class= 'welcome-text') Been here before? Welcome back!
-                div(class="errors-div")
+                div
                     if errors
-                        div
+                        div(class="errors-div")
                             p The following error(s) occurred:
                             ul
                                 each error in errors
