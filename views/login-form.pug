@@ -5,26 +5,26 @@ append head
 
 block content
     div
-    a(class='button-1', href='/') Do The Thing!
+        a(class='button-1', href='/') Do The Thing!
     div
-    a(class='button-2', href='/signup') Sign up for free
+        a(class='button-2', href='/signup') Sign up for free
     div
-    p(class= 'text') Been here before? Welcome back!
+        p(class= 'text') Been here before? Welcome back!
     div
-    if errors
-        div
-            p The following error(s) occurred:
-            ul
-                each error in errors
-                    li= error
+        if errors
+            div
+                p The following error(s) occurred:
+                ul
+                    each error in errors
+                        li= error
     div
-    form(class= "form" action="/login" method="post")
-        input(type="hidden" name="_csrf" value=csrfToken)
-        div
-            label(class= "username-label" for="username")
-            input(type="text" name="username" value=username placeholder="Username")
-        div
-            label(class= "password-label" for="password")
-            input(type="password" name="password" value=password placeholder="Password")
-        div
-            input(type="submit" value="Log In")
+        form(class= "form" action="/login" method="post")
+            input(type="hidden" name="_csrf" value=csrfToken)
+            div
+                label(class= "username-label" for="username")
+                input(type="text" name="username" value=username placeholder="Username")
+            div
+                label(class= "password-label" for="password")
+                input(type="password" name="password" value=password placeholder="Password")
+            div
+                input(type="submit" value="Log In")
