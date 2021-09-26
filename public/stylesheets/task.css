@@ -19,32 +19,38 @@
     background-color: white;
     top: 5px;
     border-radius: 5px;
-    width: 45%;
+    max-width: 45%;
+    max-height: 100em;
+    overflow: auto
 
 }
 
 .task-div {
-    border-bottom:1px dotted gray;
+    /* border-bottom:1px dotted gray; */
 }
 
 .button-1 {
     display: inline-flex;
-    margin: 5px;
+    padding: 5px;
     position: relative;
-    left: 305px;
+    left: 360px;
+    top: 10px;
     font-size: 10px;
+    border-right: 1px solid;
 }
 .button-2 {
     display: inline-flex;
     position: relative;
-    left: 315px;
+    left: 363px;
+    top: 10px;
     font-size: 10px;
+    padding: 5px
 }
 
 .list-container {
     display: flex;
     flex-direction: column;
-    width: 10%;
+    width: 13%;
 
 }
 
@@ -67,7 +73,6 @@
 .task {
     border-top: 1px solid;
     border-bottom: 1px solid;
-    padding: 1px;
     font-size: 10px;
     font-weight: bold;
 }
@@ -75,25 +80,30 @@
 .taskBarandBox{
     padding: 5px;
     border-top: 1px solid;
+    position: relative;
+    top: 10px
 }
  .addTaskbox {
-     height: 30px;
-     width: 450px;
+     height: 20px;
+     width: 466px;
      display: block;
-     margin: 5px
+     margin: 5px;
+     border-radius: 3px;
+     border-width: 1px;
+     font-size: 10px
  }
 
 .addTaskButton {
     display: block;
     position: relative;
-    left: 360px
+    left: 400px
 }
 
 .logo {
     height: 65px;
     width: 75px;
     position: relative;
-    top: 50px
+    top: 30px
 }
 
 .listButtons {
@@ -111,7 +121,10 @@
 
 
 .list-list {
-    position: relative
+    position: relative;
+    bottom: 15px;
+    padding-top: 2px;
+    padding-bottom: 2px;
 }
 
 .form-items {
@@ -143,6 +156,10 @@
 .complete-tasks {
     display: none;
     width: 100%;
+}
+
+.complete-task-div {
+    position: relative;
 
 }
 
@@ -157,11 +174,15 @@
 
 
 .edit-task-para {
-    border: 1px dotted;
+    /* border-top: 1px dotted; */
+    border-bottom: 1px dotted;
+    font-size: 10px;
+    padding: 8px;
+    margin: 0px;
 }
 
 .tasksCount {
-    border: 1px solid;
+    background-color: #dbe8f6;
     height: 40px;
     width: 40px;
     font-size: 8px;
@@ -169,7 +190,7 @@
 }
 
 .completedCount {
-    border: 1px solid;
+    background-color: #dbe8f6;
     height: 40px;
     width: auto;
     display: inline-flex;
@@ -178,7 +199,7 @@
 }
 
 .overdueCount {
-    border: 1px solid;
+    background-color: #dbe8f6;
     height: 40px;
     width: 40px;
     display: inline-flex;
@@ -188,8 +209,8 @@
     position: relative;
     font-size: 8px;
     border: none;
-    top: 25px
-
+    top: 25px;
+    right: 9px
 }
 
 
@@ -198,35 +219,38 @@
     font-size: 8px;
     border: none;
     top: 25px;
-    right: 3px
+    right: 3px;
+    color: rgba(0,0,0,0.4);
 }
-
 
 .taskInfo-3 {
     position: relative;
     font-size: 8px;
     border: none;
     top: 25px;
-    right: 3px
-
+    right: 5px;
 }
+
 
 .tasksNumber {
     position: relative;
     top: 5px;
-    left: 9px
+    right: -6px;
+    color: #0060bf;
 }
 
 .completedNumber {
     position: relative;
     top: 5px;
-    left: 7px
+    left: 6px;
+    color: rgba(0,0,0,0.4);
 }
 
 .overdueNumber {
     position: relative;
     top: 5px;
-    left: 9px
+    left: 7px;
+    color: #d74a00;
 }
 
 .logoutbutton {
@@ -240,3 +264,98 @@
     right: 20px;
     text-decoration: none;
 }
+
+/* .task-edit-container {
+    transition: 1s;
+    right: 0;
+} */
+
+.list-input {
+    display: inline-flex;
+    width: 100px;
+    border-radius: 2px;
+    border: 1px solid;
+    position: relative;
+    left: 3px;
+}
+ .add-list-button {
+    display: block;
+    position: relative;
+    bottom: 16px;
+    left: 120px;
+    height: 16px;
+    width: 15px;
+    border: 1px solid #7ab2e0;
+    border-radius: 3px;
+    background-color: #e4eef8;
+    padding: 0px;
+    color: #7ab2e0;
+    text-align: center;
+ }
+
+ .add-list-button:hover {
+    background-color: #7ab2e0;
+    color: #e4eef8;
+ }
+
+.delete-button {
+    height: 15px;
+    font-size: 10px;
+    position: absolute;
+    left: 425px;
+    text-align: center;
+ }
+
+.delete-button-complete {
+    height: 15px;
+    font-size: 10px;
+    position: absolute;
+    left: 575px;
+    text-align: center;
+}
+
+.completeTaskDiv {
+    position: relative;
+    top: 15px;
+}
+
+.task-div {
+    position: relative;
+    top: 10px
+}
+
+.listNames {
+    font-size: 13px;
+    width: 110px;
+    display: flex;
+}
+
+.delete-list-button {
+    position: absolute;
+    left: 115px;
+    border: none;
+    background-color: #e4eef8;
+}
+
+.delete-list-button:hover {
+
+}
+
+
+#search-button {
+    position: relative;
+    background: none;
+    color: #2196F3;
+    font-size: 12px;
+    border: none;
+    border-left: none;
+    cursor: pointer;
+    left: -347px;
+    top: 5px;
+  }
+
+#search-box {
+    position: relative;
+    left: -325px;
+    font-size: 12px;
+  }
