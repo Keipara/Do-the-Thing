@@ -96,10 +96,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 function createTasksList(tasks, taskContainer) {
-  const taskContainer2 = document.querySelector(".task-list")
-  const incompleteContainer = document.querySelector(".complete-tasks")
-  taskContainer2.innerHTML = "";
+  const incompleteContainer = document.querySelector(".task-list")
+  const completeContainer = document.querySelector(".complete-tasks")
   incompleteContainer.innerHTML = "";
+  completeContainer.innerHTML = "";
 
 
   for (let i = 0; i< tasks.length; i++) {
@@ -149,15 +149,15 @@ function createTasksList(tasks, taskContainer) {
       para.appendChild(deleteButton);
       taskDiv.appendChild(para);
 
-      taskContainer2.appendChild(taskDiv)
-    } else {
+      incompleteContainer.appendChild(taskDiv)
+    } else if (task.complete === true) {
 
       const checkbox = document.querySelector("#complete-select")
       checkbox.checked = true
       para.appendChild(deleteButton);
       taskDiv.appendChild(para);
 
-      incompleteContainer.appendChild(taskDiv)
+      completeContainer.appendChild(taskDiv)
     }
   }
 }
@@ -198,13 +198,13 @@ function createTasksList(tasks, taskContainer) {
         para.appendChild(deleteButton);
         taskDiv.appendChild(para);
 
-        taskContainer2.appendChild(taskDiv)
+        incompleteContainer.appendChild(taskDiv)
       } else {
         // const checkbox = document.querySelector("#complete-select")
         para.appendChild(deleteButton);
         taskDiv.appendChild(para);
 
-        incompleteContainer.appendChild(taskDiv)
+        completeContainer.appendChild(taskDiv)
       }
     } catch (e) {
     }
@@ -392,17 +392,17 @@ document.addEventListener('DOMContentLoaded', async () => {
   let incompleteTab = document.querySelector(".button-1");
   let completeTab = document.querySelector(".button-2");
   const taskContainer = document.querySelector(".task-list")
-  const incompleteContainer = document.querySelector(".complete-tasks")
+  const completeContainer = document.querySelector(".complete-tasks")
   completeTab.addEventListener("click", async (event) => {
 
     taskContainer.style.display = "none";
-    incompleteContainer.style.display = "block";
+    completeContainer.style.display = "block";
   });
 
   incompleteTab.addEventListener("click", async (event) => {
 
     taskContainer.style.display = "block";
-    incompleteContainer.style.display = "none";
+    completeContainer.style.display = "none";
   });
 });
 
