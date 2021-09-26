@@ -9,14 +9,16 @@ append head
 block content
   nav
     div(class='nav-container')
-      div
-        a(href='/') Do The Thing
-      div
-        a(href='/login') Log In
-      div
-        a(href='/signup') Sign up for free
-      div
-        a(onclick="window.location.href='/demo'") Demo User
+        div(class='logo')
+            img(class="image-logo" src="pink-w-black-outline.png" style="max-height: 80px")
+            div(class='logo-text') Do the Thing!
+        div(class='nav-links')
+          div
+            a(href='/demo') Demo User
+          div()
+            a(class="login-link" href='/login') Log In
+          div(class="nav-signup-container")
+            a(class="signup-link" href='/signup' class="signup") Sign up for Free
 
   main
     div(class='main-container')
@@ -24,10 +26,20 @@ block content
         h1 Be
           i  well-armed
           |  to tackle the to-do!
-        a(href='/signup') Sign up for free
+      div(class="main-signup-container")
+        a(href='/signup' class='main-signup' ) Sign up for Free
       div(class='image-container')
+
   footer
     div(class='footer-container')
-      a(href='https://github.com/Keipara') Kiara
-      a(href='https://github.com/LakshmiPriyaPrakash') Lakshmi
-      a(href='https://github.com/nevinchow') Nevin
+      div(class='Kiara-div')
+          text Kiara Mendaros
+          a(href='https://github.com/Keipara') Github
+          a(href='https://www.linkedin.com/in/kiara-mendaros-9761101b8/') LinkedIn
+      div(class='Lakshmi-div')
+          text Lakshmi Prakash
+          a(href='https://github.com/LakshmiPriyaPrakash') Github
+          a(href='https://www.linkedin.com/in/lakshmi-priya-prakash/') LinkedIn
+      div(class='Nevin-div')
+          text Nevin Chow
+          a(href='https://github.com/nevinchow') Github
