@@ -1,12 +1,15 @@
 extends layout
 
 append head
-    link(rel='stylesheet', href='/stylesheets/login.css')
+    link(rel='stylesheet', href='/stylesheets/signup.css')
 
 block content
     div(class='main-container')
         div(class="logo-quote-container")
-            a(class='button', href='/') Do The Thing!
+            div(class="logo")
+                a(href='/' id="logo-link")
+                    img(src='pink-w-black-outline.png' alt='logo' id="logoImage")
+                a(href='/' id="app-name")  Do The Thing!
         div(class="signup-form-container")
             div
                 a(class='login-button', href='/login') Log in
@@ -22,23 +25,17 @@ block content
                 div(class="signup-div")
                     form(action="/signup" method="post" class= "signup-form")
                         input(type="hidden" name="_csrf" value=csrfToken)
-                        div
-                            label(for="firstName")
-                            input(type="text" name="firstName" value=firstName placeholder= "First Name")
-                        div
-                            label(for="lastName")
+                        div(class="signup-form-field-div")
+                            input(type="text" name="firstName" value=firstName placeholder= "First Name" autofocus=true)
+                        div(class="signup-form-field-div")
                             input(type="text" name="lastName" value=lastName placeholder= "Last Name")
-                        div
-                            label(for="email" )
+                        div(class="signup-form-field-div")
                             input(type="email" name="email" value=email placeholder= "Email")
-                        div
-                            label(for="username")
+                        div(class="signup-form-field-div")
                             input(type="text" name="username" value=username placeholder= "Username")
-                        div
-                            label(for="password")
+                        div(class="signup-form-field-div")
                             input(type="password" name="password" value=password placeholder= "Password")
-                        div
-                            label(for="confirmPassword")
+                        div(class="signup-form-field-div")
                             input(type="password" name="confirmPassword" value=confirmPassword placeholder= "Confirm Password")
                         div(class="signup-button-div")
                             input(type="submit" value="Sign up!" class="signup-button")

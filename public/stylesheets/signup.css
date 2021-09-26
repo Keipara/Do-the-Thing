@@ -1,0 +1,139 @@
+.main-container {
+    display: grid;
+    grid-template-areas: "mascot login" ;
+    height: 100vh;
+    gap: 30px;
+
+}
+
+.logo-quote-container {
+    grid-area: mascot;
+    background-color: rgb(131, 52, 151);
+    width: 100%;
+}
+
+.signup-form-container {
+    grid-area: login;
+    width: 50%;
+    display:flex;
+    flex-direction: column;
+
+}
+
+a {
+    text-decoration: none;
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 50px;
+    width: fit-content;
+}
+
+#logoImage {
+    width: 200px;
+    height: 150px;
+    margin-left: 100px;
+
+}
+
+#logo-link {
+    width:0%;
+}
+
+#app-name {
+    color: white;
+    margin-left: 125px;
+    font-family: cursive;
+    font-size: 25px;
+    font-weight: bold;
+    width:fit-content;
+}
+
+.login-button {
+    float: right;
+    margin: 50px 10px;
+    font-size: 20px;
+    padding: 10px;
+    font-weight: bold;
+    color: gray;
+    background-color: rgb(234, 205, 248);
+    border-radius: 5%;
+}
+
+.signup-section {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin-top: 30px;
+
+}
+
+.welcome-text {
+    font-size: large;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    margin-left: 20px;
+}
+
+.errors-div{
+    background-color: rgb(247, 225, 225);
+    color: rgb(255, 73, 73);
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    padding: 0 10px 10px 10px;
+    margin-left: 10px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+ul {
+    list-style-position: inside;
+ }
+
+ .signup-form-field-div {
+    width: 100%;
+    margin-top: 20px;
+
+}
+
+input
+{
+    margin-left: 20px;
+    border-radius: 5px;
+    border-width: thin;
+    border-color: rgb(231, 195, 252);
+    font-size: 20px;
+    width: 70%;
+    padding: 10px;
+
+}
+
+input:focus {
+    outline: none;
+    box-shadow: 0 0 5px 5px rgb(238, 196, 248);
+    transition: all 0.20s ease-in-out;
+
+}
+
+.signup-button-div {
+    margin-top: 20px;
+    margin-left: 10px;
+    width: 70%;
+}
+
+.signup-button {
+    width: 100%;
+    margin: 10px;
+    font-size: 20px;
+    padding: 10px;
+    background-color: rgb(175, 72, 201);
+    color: white;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: none;
+}
