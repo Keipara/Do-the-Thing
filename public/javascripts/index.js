@@ -86,8 +86,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const taskEditContainer = document.querySelector(".task-edit-container");
         taskEditContainer.style.display = "none";
-        // moveLeft();
-
       })
 
   } catch (e) {
@@ -123,6 +121,7 @@ function createTasksList(tasks, taskContainer) {
           const taskEditContainer = document.querySelector(".task-edit-container");
           taskEditContainer.style.display = "block";
 
+
           const taskId = event.target.id
           const editSubmitButton = document.querySelector("#edit-save-button")
           editSubmitButton.dataset.taskId = taskId;
@@ -154,6 +153,7 @@ function createTasksList(tasks, taskContainer) {
       const completeTaskDiv = document.createElement('div')
       completeTaskDiv.className = "complete-task-div"
       const deleteButton = document.createElement('button')
+      deleteButton.className = "complete-task-delete-btn"
     deleteButton.innerText = "Delete";
     deleteButton.addEventListener('click', (event) => {
       event.preventDefault();
@@ -305,7 +305,7 @@ searchButton.addEventListener("click", async (event) => {
             completeTotal.innerHTML = completeCounter
             overdueTotal.innerHTML = overdueCounter
             const listName = document.querySelector('.listName')
-            listName.innerText = para.innerText.slice(0, -6)
+            listName.innerText = para.innerText
 
           } catch (e) {
             console.error(e)
@@ -336,8 +336,10 @@ searchButton.addEventListener("click", async (event) => {
       addTaskButton.addEventListener("click", (event) => {
         event.preventDefault()
         let addTaskbox = document.querySelector(".addTaskbox")
-        let taskName = addTaskbox.value;
-        addTask(taskName, selectedList);
+        if (addTaskbox.value !== "") {
+          let taskName = addTaskbox.value;
+          addTask(taskName, selectedList);
+        }
       })
 
 

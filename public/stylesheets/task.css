@@ -1,7 +1,7 @@
 .main-container {
     display: flex;
     flex-direction: row;
-    background-color: #e4eef8;
+    background-color: #e6d7ec;
     height: 100%;
 
 }
@@ -11,7 +11,7 @@
     flex-direction: row;
     justify-content: space-between;
     height: 30px;
-    background-color: #0060bf;
+    background-color: #A155B9;
     color: whitesmoke;
 }
 
@@ -51,7 +51,7 @@
     display: flex;
     flex-direction: column;
     width: 13%;
-
+    margin-left: 10px;
 }
 
 #search-button {
@@ -96,7 +96,19 @@
 .addTaskButton {
     display: block;
     position: relative;
-    left: 400px
+    left: 400px;
+    height: 19px;
+    width: 70px;
+    font-size: 12px;
+    background-color: #e6d7ec;
+    border: none;
+    color: #ae3cdb;
+    border-radius: 2px;
+}
+
+.addTaskButton:hover {
+    background-color: #ae3cdb;
+    color: #e6d7ec;
 }
 
 .logo {
@@ -145,7 +157,8 @@
 .task-edit-container {
     display: none;
     width: 100%;
-
+    position: relative;
+    left: 5px;
 }
 
 .task-list {
@@ -182,7 +195,7 @@
 }
 
 .tasksCount {
-    background-color: #dbe8f6;
+    background-color: #ddb7ec;
     height: 40px;
     width: 40px;
     font-size: 8px;
@@ -190,27 +203,29 @@
 }
 
 .completedCount {
-    background-color: #dbe8f6;
+    background-color: #ddb7ec;
     height: 40px;
     width: auto;
     display: inline-flex;
     font-size: 8px;
-    margin: 4px
+    margin-top: 4px;
 }
 
 .overdueCount {
-    background-color: #dbe8f6;
+    background-color: #ddb7ec;
     height: 40px;
     width: 40px;
     display: inline-flex;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .taskInfo-1 {
-    position: relative;
+    position: absolute;
     font-size: 8px;
     border: none;
-    top: 25px;
-    right: 9px
+    bottom: 9px;
+    left: 6px;
 }
 
 
@@ -257,18 +272,15 @@
     border: 1px red solid;
     background-color: red;
     border-radius: 5px;
-    height: 5px;
     font-size: 11px;
     position: relative;
     top: 5px;
     right: 20px;
     text-decoration: none;
+    padding: 3px;
 }
 
-/* .task-edit-container {
-    transition: 1s;
-    right: 0;
-} */
+
 
 .list-input {
     display: inline-flex;
@@ -285,17 +297,17 @@
     left: 120px;
     height: 16px;
     width: 15px;
-    border: 1px solid #7ab2e0;
+    border: 1px solid #ae3cdb;
     border-radius: 3px;
-    background-color: #e4eef8;
+    background-color: #e6d7ec;
     padding: 0px;
-    color: #7ab2e0;
+    color: #ae3cdb;
     text-align: center;
  }
 
  .add-list-button:hover {
-    background-color: #7ab2e0;
-    color: #e4eef8;
+    background-color: #ae3cdb;
+    color: #e6d7ec;
  }
 
 .delete-button {
@@ -304,19 +316,37 @@
     position: absolute;
     left: 425px;
     text-align: center;
+    border: 1px solid #ae3cdb;
+    border-radius: 3px;
+    background-color: #e6d7ec;
+    color: #ae3cdb;
  }
 
-.delete-button-complete {
+ .delete-button:hover {
+    background-color: #ae3cdb;
+    color: #e6d7ec;
+ }
+
+.complete-task-delete-btn {
     height: 15px;
     font-size: 10px;
     position: absolute;
-    left: 575px;
+    left: 425px;
     text-align: center;
+    border: 1px solid #ae3cdb;
+    border-radius: 3px;
+    background-color: #e6d7ec;
+    color: #ae3cdb;
 }
 
-.completeTaskDiv {
+.complete-task-delete-btn:hover {
+    background-color: #ae3cdb;
+    color: #e6d7ec;
+ }
+
+.complete-task-div {
     position: relative;
-    top: 15px;
+    top: 10px;
 }
 
 .task-div {
@@ -324,28 +354,34 @@
     top: 10px
 }
 
+.task-edit-container {
+    position: relative;
+    top: 12px;
+}
+
 .listNames {
     font-size: 13px;
     width: 110px;
     display: flex;
+    position: relative;
+    left: 5px;
+}
+
+.listNames:hover {
+    background-color: #ae3cdb
 }
 
 .delete-list-button {
     position: absolute;
-    left: 115px;
+    left: 114px;
     border: none;
-    background-color: #e4eef8;
+    background-color: #e6d7ec;
 }
-
-.delete-list-button:hover {
-
-}
-
 
 #search-button {
     position: relative;
     background: none;
-    color: #2196F3;
+    color: #ae3cdb;
     font-size: 12px;
     border: none;
     border-left: none;
@@ -359,3 +395,42 @@
     left: -325px;
     font-size: 12px;
   }
+
+
+#edit-save-button,#edit-close-button {
+    position: relative;
+    top: 50px;
+    margin: 5px;
+}
+
+#task-name-input {
+    width: 400px;
+    border-radius: 3px;
+    border: 1px solid;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-right: 8px;
+}
+
+
+#task-due-date, #list-select, #complete-select, #task-description {
+    margin: 8px;
+}
+
+#task-description {
+    position: relative;
+    top: 10px;
+    width: 325px;
+    height: 100px;
+}
+
+
+.title {
+    text-decoration: none;
+    color: black;
+    font-family:"Leckerli One";
+    display: block;
+    position: relative;
+    left: 77px;
+    bottom: 5px;
+}

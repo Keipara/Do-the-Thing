@@ -2,16 +2,22 @@ extends layout
 
 append head
     link(rel="stylesheet" href="/stylesheets/task.css")
+    link(rel="preconnect" href="https://fonts.googleapis.com")
+    link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin)
+    link(href="https://fonts.googleapis.com/css2?family=Leckerli+One&family=Varela+Round&display=swap" rel="stylesheet")
     link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
     link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
     script(src="javascripts/index.js" type="module" defer)
+
 
 block content
     nav
         div(class='nav-container')
             div
                 a(href='localhost:8080/tasks')
-                    img.image(class="logo" src="blue-w-black-outline.png")
+                    img.image(class="logo" src="pink-w-black-outline.png")
+                a(href='localhost:8080/tasks' class="title") Do the Thing!
+
             div
                 input(type="text" name="search" id='search-box' value="" placeholder= "Search tasks")
                 button(action="submit" id='search-button' class="fa fa-search")
