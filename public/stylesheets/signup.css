@@ -1,22 +1,24 @@
 .main-container {
-    display: grid;
-    grid-template-areas: "mascot login" ;
+    /* display: grid;
+    grid-template-areas: "mascot login" ; */
+    display: flex;
     height: 100vh;
-    gap: 30px;
 
 }
 
 .logo-quote-container {
-    grid-area: mascot;
+    /* grid-area: mascot; */
     background-color: rgb(131, 52, 151);
     width: 100%;
 }
 
 .signup-form-container {
-    grid-area: login;
-    width: 50%;
+    /* grid-area: login; */
+    width: 100%;
     display:flex;
     flex-direction: column;
+    margin-left: 50px;
+    overflow: hidden scroll;
 
 }
 
@@ -54,7 +56,7 @@ a {
 
 .login-button {
     float: right;
-    margin: 50px 10px;
+    margin: 50px 300px;
     font-size: 20px;
     padding: 10px;
     font-weight: bold;
@@ -82,19 +84,25 @@ a {
     color: rgb(255, 73, 73);
     display: flex;
     flex-direction: column;
-    width: 70%;
+    width: 50%;
     padding: 0 10px 10px 10px;
     margin-left: 10px;
     margin-bottom: 20px;
     border-radius: 10px;
+    font-size: small;
 }
 
 ul {
     list-style-position: inside;
+
+ }
+
+ li {
+    font-size: small;
  }
 
  .signup-form-field-div {
-    width: 100%;
+    width: 50%;
     margin-top: 20px;
 
 }
@@ -125,7 +133,7 @@ input:focus {
 }
 
 .signup-button {
-    width: 100%;
+    width: 50%;
     margin: 10px;
     font-size: 20px;
     padding: 10px;
