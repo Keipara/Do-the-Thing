@@ -3,19 +3,25 @@ extends layout
 append head
   //- add page specific styles by appending to the head
   link(rel="stylesheet" href="/stylesheets/index.css")
+  link(rel="preconnect" href="https://fonts.googleapis.com")
+  link(rel="preconnect" href="https://fonts.gstatic.com" crossorigin)
+  link(href="https://fonts.googleapis.com/css2?family=Leckerli+One&family=Varela+Round&display=swap" rel="stylesheet")
   //- add page specific js
  
 block content
   nav
     div(class='nav-container')
-      div
-        a(href='/') Do The Thing
-      div
-        a(href='/login') Log In
-      div
-        a(href='/signup') Sign up for free
-      div
-        a(onclick="window.location.href='/demo'") Demo User
+        div(class='logo')
+            img(class="image-logo" src="pink-w-black-outline.png" style="max-height: 70px")
+            div(class='logo-text')
+              text Do the Thing
+        div(class='nav-links')
+          div
+            a(href='/demo') Demo User
+          div()
+            a(class="login-link" href='/login') Log In
+          div(class="nav-signup-container")
+            a(class="signup-link" href='/signup' class="signup") Sign up for Free
 
   main
     div(class='main-container')
@@ -23,10 +29,36 @@ block content
         h1 Be
           i  well-armed
           |  to tackle the to-do!
-        a(href='/signup') Sign up for free
+      div(class="main-signup-container")
+        a(href='/signup' class='main-signup' ) Sign up for Free
       div(class='image-container')
+        img(class="main-image" src="blue-w-black-outline.png")
+        text(class="main-big-text") Don't get tangled by your tasks.
+        text(class="main-small-text") Sign up now to stay on track and Do the Thing!
+
   footer
     div(class='footer-container')
-      a(href='https://github.com/Keipara') Kiara
-      a(href='https://github.com/LakshmiPriyaPrakash') Lakshmi
-      a(href='https://github.com/nevinchow') Nevin
+      div(class='Kiara-div')
+          text Kiara Mendaros
+          div(class="Kiara-github" )
+            img(class="kg-image-logo" src="github-logo.png" style="max-height: 20px" )
+            a(href='https://github.com/Keipara') Github
+          div(class="Kiara-linkedin")
+            img(class="kl-image-logo" src="linkedin-logo.png" style="max-height: 20px")
+            a(href='https://www.linkedin.com/in/kiara-mendaros-9761101b8/' class="test") LinkedIn
+      div(class='Lakshmi-div')
+          text Lakshmi Prakash
+          div(class="Lakshmi-github")
+            img(class="lg-image-logo" src="github-logo.png" style="max-height: 20px")
+            a(href='https://github.com/LakshmiPriyaPrakash') Github
+          div(class="lakshmi-linkedin")
+            img(class="ll-image-logo" src="linkedin-logo.png" style="max-height: 20px")
+            a(href='https://www.linkedin.com/in/lakshmi-priya-prakash/') LinkedIn
+      div(class='Nevin-div')
+          text Nevin Chow
+          div(class="Nevin-github")
+            img(class="ng-image-logo" src="github-logo.png" style="max-height: 20px")
+            a(href='https://github.com/nevinchow') Github
+          div(class="nevin-linkedin")
+            img(class="nl-image-logo" src="linkedin-logo.png" style="max-height: 20px")
+            a(href='https://www.linkedin.com/in/nevin-chow-aa4770221/') LinkedIn
