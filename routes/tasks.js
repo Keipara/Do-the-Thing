@@ -29,9 +29,7 @@ router.get("/", csrfProtection, requireAuth, asyncHandler(async (req, res) => {
     res.render("tasks.pug", {
       task,
       lists,
-      // csrfToken: req.csrfToken()
     })
-    // res.json({ tasks });
   })
 );
 
@@ -47,46 +45,6 @@ router.get("/task-list", requireAuth, asyncHandler(async (req, res) => {
   });
   res.json({ tasks });
 })
-);
-
-//??????
-router.get("/add-list", requireAuth, asyncHandler(async (req, res) => {
-  const lists = await List.findAll({
-
-      where:{userId: res.locals.user.id},
-
-  });
-  res.json({ tasks });
-})
-);
-
-
-// router.post("/task-list", asyncHandler(async (req, res) => {
-//     const { name, complete, listId, createdAt, updatedAt} = req.body;
-//     const task = await Task.create({ name, complete, listId, createdAt, updatedAt });
-//     res.redirect('/tasks')
-//   })
-// );
-
-//?????
-router.post("/:id(\\d+)", requireAuth, asyncHandler(async (req, res, next) => {
-    const taskId = parseInt(req.params.id, 10);
-    const task = await Task.findByPk(taskId);
-    res.json({ task });
-  })
-);
-//??????
-router.patch("/:id(\\d+)", requireAuth, asyncHandler(async (req, res, next) => {
-    const taskId = parseInt(req.params.id, 10);
-    const task = await Task.findByPk(taskId);
-
-    if (task) {
-      await task.update({ name: req.body.name });
-      res.json({ task });
-    } else {
-      next(taskNotFoundError(taskId));
-    }
-  })
 );
 
 //deletes a task from the Tasks table
@@ -152,13 +110,6 @@ router.get("/:id(\\d+)/edit", csrfProtection, requireAuth, asyncHandler(async (r
     });
 
     res.json({ task, lists });
-
-    // res.render("task-edit.pug", {
-    //   title: 'Task Edit Form',
-    //   task,
-    //   lists,
-    //   csrfToken: req.csrfToken(),
-    // })
   })
 );
 
@@ -176,13 +127,12 @@ router.post("/:id(\\d+)/edit", requireAuth, asyncHandler(async (req, res) => {
   }
 
   if(description === "") {
-    task = { name, due, listId, complete }
+    task = { name, due, listId, complete}
   } else {
     task = { name, due, listId, complete, description }
   }
 
   await taskToUpdate.update(task);
-  // res.redirect('/tasks')
   res.status(204).end();
 }))
 
@@ -247,17 +197,6 @@ router.post("/add-task", requireAuth, asyncHandler(async (req, res) => {
     res.status(204).end();
   })
 );
-
-//???????
-router.post('/lists/delete/:id(\\d+)', requireAuth, asyncHandler(async (req, res) => {
-    const bookId = parseInt(req.params.id, 10);
-    const book = await db.Book.findByPk(bookId);
-
-    checkPermissions(book, res.locals.user);
-
-    await book.destroy();
-    res.redirect('/');
-  }));
 
 
 
