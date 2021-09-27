@@ -1,6 +1,30 @@
-# Express Project Skeleton
+Do the Thing!
 
-Use this project skeleton as a starting point for structuring your app. Things to note
-* Sequelize configuration has not yet been added -- you will need to set that up yourself
-* You may find yourself wanting to use javascript -- js files can be added in `public/javascripts` and should be appended to the Pug templates as needed
-* CSS files can go in `public/stylesheets` and also will need to be added to Pug templates
+By Kiara Mendaros, Lakshmi Prakash, and Nevin Chow <link to site>
+
+A task tracker to keep track of all the things you need to do!
+
+
+Table of Contents
+
+-Do the Thing - preview
+
+<image of tables>
+<link to docs>
+
+
+
+Two features
+- Ability to move tasks between Incomplete/Complete tab based on checked status of checkbox.
+
+- Ability to search through tasks dynamically without refreshing page.
+
+
+One Challenge
+
+- One challenge that gave us a lot of frustration was (innerHtml concatenating tasks over and over when clicking on a list)
+
+- include how we overcame
+
+
+Code Snippets
