@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     createTasksList(tasks, taskContainer);
 
     //List-Summary
-    //
 
     for (let i = 0; i< tasks.length; i++) {
       let task = tasks[i];
@@ -32,7 +31,6 @@ document.addEventListener('DOMContentLoaded', async () => {
       completeTotal.innerHTML = completeCounter
       let overdueTotal = document.querySelector(".overdueNumber")
       overdueTotal.innerHTML = overdueCounter
-      //
     }
 
     const editSaveButton = document.querySelector("#edit-save-button");
@@ -127,7 +125,6 @@ function createTasksList(tasks, taskContainer) {
           editSubmitButton.dataset.taskId = taskId;
           editTask(taskId)
         }
-
       })
 
 
@@ -207,7 +204,6 @@ function createTasksList(tasks, taskContainer) {
 
         incompleteContainer.appendChild(taskDiv)
       } else {
-        // const checkbox = document.querySelector("#complete-select")
         para.appendChild(deleteButton);
         taskDiv.appendChild(para);
 
@@ -282,7 +278,6 @@ searchButton.addEventListener("click", async (event) => {
             const {tasks} = await res.json();
             const taskContainer = document.querySelector(".task-list")
             taskContainer.innerHTML = "";
-            // taskTotal.innerHTML = para.childNodes.length
             createTasksList(tasks, taskContainer);
             let incompleteCounter = 0;
             let completeCounter = 0;
@@ -427,27 +422,3 @@ document.addEventListener('DOMContentLoaded', async () => {
     incompleteTab.style.fontWeight = "bold"
   });
 });
-
-
-
-//
-
-  // add-list-button
-
-// const deleteButton = document.getElementsByClassName("delete-button")
-// deleteButton.addEventListener('click', async() => {
-//   try {
-//     const res = await fetch(`/tasks/${task.id}`, {
-//       method: "DELETE",
-//     });
-//   } catch (e) {
-//   }
-// })
-
-
-// let listName = document.querySelector('.listName')
-// let list = document.querySelector('.listNames')
-// list.addEventListener("click", async (event) => {
-//   event.preventDefault();
-//   listName.innerText = list.innerText
-// })

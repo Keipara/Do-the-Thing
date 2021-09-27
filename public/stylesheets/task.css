@@ -3,7 +3,6 @@
     flex-direction: row;
     background-color: #e6d7ec;
     height: 100%;
-
 }
 
 .nav-container {
@@ -23,10 +22,6 @@
     max-height: 100em;
     overflow: auto
 
-}
-
-.task-div {
-    /* border-bottom:1px dotted gray; */
 }
 
 .button-1 {
@@ -187,7 +182,6 @@
 
 
 .edit-task-para {
-    /* border-top: 1px dotted; */
     border-bottom: 1px dotted;
     font-size: 10px;
     padding: 8px;

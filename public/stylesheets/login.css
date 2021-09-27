@@ -1,14 +1,11 @@
 
 .main-container {
-    /* display: grid;
-    grid-template-areas: "mascot login" ; */
     display: flex;
     height: 100vh;
 
 }
 
 .logo-quote-container {
-    /* grid-area: mascot; */
     background-color: rgb(131, 52, 151);
     width: 100%;
     display: flex;
@@ -57,7 +54,6 @@
 }
 
 .login-form-container {
-    /* grid-area: login; */
     width: 100%;
     display:flex;
     flex-direction: column;
