@@ -224,7 +224,7 @@
     position: absolute;
     font-size: 8px;
     border: none;
-    bottom: 9px;
+    bottom: 5px;
     left: 6px;
 }
 
@@ -250,7 +250,7 @@
 .tasksNumber {
     position: relative;
     top: 5px;
-    right: -6px;
+    right: -7px;
     color: #0060bf;
 }
 
