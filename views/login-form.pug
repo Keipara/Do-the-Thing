@@ -4,32 +4,37 @@ append head
     link(rel='stylesheet', href='/stylesheets/login.css')
 
 block content
-    div
-    a(class='button-1', href='/') Do The Thing!
-    div
-    a(class='button-2', href='/signup') Sign up for free
-    div
-    p(class= 'text') Been here before? Welcome back!
-    div
-    if errors
-        div
-            p The following error(s) occurred:
-            ul
-                each error in errors
-                    li= error
-    div
-    form(class= "form" action="/login" method="post")
-        input(type="hidden" name="_csrf" value=csrfToken)
-        div
-            label(class= "username-label" for="username")
-            input(type="text" name="username" value=username placeholder="Username")
-        div
-            label(class= "password-label" for="password")
-            input(type="password" name="password" value=password placeholder="Password")
-        div
-            label(class=divClasses)
-            input(type="checkbox" value="stay-logged-in")
-            span Stay logged in
-        div
-            a(href='placeholderforpasswordreset') Forgot password?
-        input(type="submit" value="Log In")
+    div(class='main-container')
+        div(class="logo-quote-container")
+            div(class="logo")
+                a(href='/' id="logo-link")
+                    img(src='pink-w-black-outline.png' alt='logo' id="logoImage")
+                a(href='/' id="app-name")  Do The Thing!
+            div(class="quotes-team")
+                div(class="quotes")
+                    p(id="quote")= quote
+                    p(id="author")= author
+                div(class="team")
+                    img(src='cat.png' alt='logo' id="catImage")
+                    p Quotes curated by group 7, aA June 2021 cohort-2
+        div(class="login-form-container")
+            div
+                a(class='sign-up-button', href='/signup') Sign up for free
+            div(class="login-section")
+                p(class= 'welcome-text') Been here before? Welcome back!
+                div
+                    if errors
+                        div(class="errors-div")
+                            p The following error(s) occurred:
+                            ul
+                                each error in errors
+                                    li= error
+                div(class="login-div")
+                    form(class= "login-form" action="/login" method="post")
+                        input(type="hidden" name="_csrf" value=csrfToken)
+                        div(class="username-password-div")
+                            input(type="text" name="username" value=username placeholder="Username" autofocus=true)
+                        div(class="username-password-div")
+                            input(type="password" name="password" value=password placeholder="Password" )
+                        div(class="login-button-div")
+                            input(type="submit" value="Log In" class="login-button")
