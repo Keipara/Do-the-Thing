@@ -1,8 +1,9 @@
 nav {
-    height: 10vh;
+    height: 12vh;
     display: flex;
     justify-content: center;
     background-color: #A155B9;
+    border-bottom: 0.5px solid rgba(105, 105, 105, 0.3);
 }
 
 .nav-container {
@@ -16,13 +17,25 @@ nav {
 
 .logo {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 
 }
 
 .logo-text {
     display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
+}
+
+.logo-text > text{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Leckerli One', cursive;
+    font-size: 22px;
+    color:rgba(255, 255, 255, 0.884)
+
 }
 
 .nav-links {
@@ -38,20 +51,41 @@ nav {
     color: rgb(255, 255, 255, .8);
 }
 
+.nav-links a:hover{
+    color: rgb(255, 255, 255, 1);
+}
+
 .nav-signup-container {
     width: 140px;
     height: 35px;
-    outline: auto;
-    outline-color: rgb(255, 255, 255, 0);
+    border: 2px solid rgba(255, 255, 255, 0.705);
+    border-radius: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+.signup-link {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-signup-container:hover{
+    border: 2px solid rgb(255, 255, 255, 1);
+}
+
 .main-signup {
     text-decoration: none;
     font-size: 20px;
-    font-weight: bold
+    font-weight: bold;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 h1 {
@@ -59,7 +93,7 @@ h1 {
     padding: 20px;
     font-size: 45px;
     font-weight: bold;
-    font-family: lo
+    font-family: 'Varela Round', sans-serif;
 }
 
 .main-container {
@@ -86,6 +120,10 @@ h1 {
     margin-top: 20px;
 }
 
+.main-signup-container:hover {
+    background-color: #0B1354;
+}
+
 .main-signup-container > a {
     color:rgb(255, 255, 255, 1)
 }
@@ -96,7 +134,7 @@ h1 {
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 150px;
+    height: 130px;
 }
 
 .tagline > h1 {
@@ -108,6 +146,26 @@ h1 {
 .image-container {
     width: 100%;
     height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-big-text {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size:27px;
+    font-weight: bold;
+    color:rgb(255, 255, 255, 1);
+    font-family: 'Varela Round', sans-serif;
+}
+
+.main-small-text {
+    margin-bottom: 10px;
+    font-size:20px;
+    color:rgb(255, 255, 255, .7);
+    font-family: 'Varela Round', sans-serif;
 }
 
 .footer-container {
@@ -125,12 +183,24 @@ h1 {
     font-size: 20px;
     color: rgb(0, 0, 0, .6);
     font-weight: bold;
-    margin-bottom: 15px
+    margin-bottom: 10px
 }
 
-.footer-container > div > a{
+
+.footer-container > div > div {
+    margin-top: 3px;
+    height: 25px
+}
+
+.footer-container > div > div > a {
+    position: absolute;
     color: rgb(0, 0, 0, .6);
     font-size: 17px;
     text-decoration: none;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+    padding-left: 10px;
+}
+
+.footer-container > div > div > a:hover {
+    font-weight: bold;
 }
