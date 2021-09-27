@@ -1,4 +1,3 @@
-
 .main-container {
     /* display: grid;
     grid-template-areas: "mascot login" ; */
@@ -16,59 +15,38 @@
 
 }
 
-.quotes {
-    width: 50%;
-    overflow-wrap: break-word;
-}
-
-#quote {
-    color: lightgray;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 30px;
-}
-
-#author {
-    color: lightgray;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 20px;
-}
-
-.quotes-team {
+.icons-message {
     margin-top: 150px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.team {
+.message {
     color: lightgray;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
-    font-size: small;
-    display: flex;
-    margin-top: 70px;
+    font-size: large;
 }
 
-#catImage {
-    width: 70px;
-    height: 70px;
-    border-radius: 50px;
-    margin-right: 20px;
-
+.icons {
+    width: 130px;
+    height: 130px;
+    margin: 10px;
 }
 
-.login-form-container {
+.signup-form-container {
     /* grid-area: login; */
     width: 100%;
     display:flex;
     flex-direction: column;
     margin-left: 50px;
+    overflow: hidden scroll;
 
 }
 
 a {
     text-decoration: none;
 }
-
 
 .logo {
     display: flex;
@@ -89,7 +67,6 @@ a {
     width:0%;
 }
 
-
 #app-name {
     color: white;
     margin-left: 125px;
@@ -99,7 +76,7 @@ a {
     width:fit-content;
 }
 
-.sign-up-button {
+.login-button {
     float: right;
     margin: 50px 300px;
     font-size: 20px;
@@ -110,11 +87,11 @@ a {
     border-radius: 5%;
 }
 
-.login-section {
+.signup-section {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    margin-top: 80px;
+    margin-top: 30px;
 
 }
 
@@ -134,19 +111,23 @@ a {
     margin-left: 10px;
     margin-bottom: 20px;
     border-radius: 10px;
+    font-size: small;
 }
 
 ul {
     list-style-position: inside;
+
  }
 
+ li {
+    font-size: small;
+ }
 
-.username-password-div {
+ .signup-form-field-div {
     width: 50%;
     margin-top: 20px;
 
 }
-
 
 input
 {
@@ -167,13 +148,13 @@ input:focus {
 
 }
 
-.login-button-div {
+.signup-button-div {
     margin-top: 20px;
     margin-left: 10px;
     width: 70%;
 }
 
-.login-button {
+.signup-button {
     width: 50%;
     margin: 10px;
     font-size: 20px;

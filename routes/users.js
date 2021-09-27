@@ -107,6 +107,19 @@ router.post('/signup', csrfProtection, userValidators, asyncHandler(async(req,re
 
 }));
 
+const quotes = [
+  {quote: "Education is the most powerful weapon you can use to change the world.", author: "BB King"},
+  {quote: "The expert in anything was once a beginner.", author: "Helen Hayes"},
+  {quote: "Motivation is what gets you started. Habit is what keeps you going.", author: "Jim Ryun"},
+  {quote: "The best way to predict your future is to create it.", author: "Abraham Lincoln"},
+  {quote: "Success is the sum of small efforts, repeated.", author: "R Collier"},
+  {quote: "Do something today that your future self will thank you for.", author: "Sean Patrick Flanery"},
+  {quote: "A little progress each day adds up to big results.", author: "Satya Nani"},
+  {quote: "You may never know what results come of your action, but if you do nothing there will be no result.", author: "Mahatma Gandhi"},
+  {quote: "Following-through is the only thing that separates dreamers from people that accomplish great things.", author: "Gene Hayden"},
+  {quote: "Whatever you want to do, do it now! There are only so many tomorrows.", author: "Michael Landon"},
+]
+
 const loginValidators = [
   check('username')
     .exists({ checkFalsy: true })
@@ -117,8 +130,13 @@ const loginValidators = [
 ];
 
 router.get('/login', csrfProtection, function(req, res, next) {
+  let randomNum = Math.floor(Math.random() * 10);
+  let randomQuote = quotes[randomNum];
+
   res.render('login-form', {
     title: 'Log In Form',
+    quote: `"${randomQuote.quote}"`,
+    author: `- ${randomQuote.author}`,
     csrfToken: req.csrfToken(),
   });
 });
