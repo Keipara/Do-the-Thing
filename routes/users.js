@@ -178,7 +178,7 @@ router.get('/demo', asyncHandler(async (req, res) => {
   let demo = await User.findOne({ where: {email: 'demouser@demo.com'} });
   loginUser(req, res, demo);
   res.redirect('/tasks');
-  res.redirect('/');
+
 }));
 
 router.get('/logout', (req, res) => {
