@@ -25,7 +25,7 @@ module.exports = {
         references: {model: "Lists"}
       },
       description: {
-        type: Sequelize.TEXT
+        type: Sequelize.STRING
       },
       createdAt: {
         type: Sequelize.DATE
