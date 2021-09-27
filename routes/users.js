@@ -161,9 +161,15 @@ router.post('/login', csrfProtection, loginValidators, asyncHandler(async(req,re
   } else {
     errors = validatorErrors.array().map((error) => error.msg);
   }
+
+  let randomNum = Math.floor(Math.random() * 10);
+  let randomQuote = quotes[randomNum];
+
   res.render('login-form', {
     title: 'Login',
     errors,
+    quote: `"${randomQuote.quote}"`,
+    author: `- ${randomQuote.author}`,
     csrfToken: req.csrfToken(),
   });
 }));
