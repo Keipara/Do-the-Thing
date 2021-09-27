@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     due: DataTypes.DATE,
     complete: DataTypes.BOOLEAN,
     listId: DataTypes.INTEGER,
-    description: DataTypes.TEXT
+    description: DataTypes.STRING
   }, {});
   Task.associate = function(models) {
     Task.belongsTo(models.List, {

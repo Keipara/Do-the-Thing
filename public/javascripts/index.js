@@ -188,7 +188,12 @@ function createTasksList(tasks, taskContainer) {
       listSelect.value = data.task.listId;
 
       const taskDueDate = document.querySelector("#task-due-date");
-      taskDueDate.value = data.task.due.slice(0,10);
+      if(data.task.due) {
+        taskDueDate.value = data.task.due.slice(0,10);
+      } else {
+        taskDueDate.value = "9999-12-31";
+      }
+
 
       const taskDescription = document.querySelector("#task-description");
       taskDescription.value = data.task.description;
