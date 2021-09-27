@@ -86,7 +86,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const taskEditContainer = document.querySelector(".task-edit-container");
         taskEditContainer.style.display = "none";
-
       })
 
   } catch (e) {
@@ -102,11 +101,11 @@ function createTasksList(tasks, taskContainer) {
   completeContainer.innerHTML = "";
 
 
+  const taskDiv = document.createElement('div')
+  taskDiv.className = "task-div"
   for (let i = 0; i< tasks.length; i++) {
     const task = tasks[i];
 
-    const taskDiv = document.createElement('div')
-    taskDiv.className = "task-div"
 
     const para = document.createElement("p");
       para.id = task.id;
@@ -118,8 +117,10 @@ function createTasksList(tasks, taskContainer) {
           const listSummaryContainer = document.querySelector(".list-summary-container");
           listSummaryContainer.style.display = "none";
 
+
           const taskEditContainer = document.querySelector(".task-edit-container");
           taskEditContainer.style.display = "block";
+
 
           const taskId = event.target.id
           const editSubmitButton = document.querySelector("#edit-save-button")
@@ -129,16 +130,6 @@ function createTasksList(tasks, taskContainer) {
 
       })
 
-    const deleteButton = document.createElement('button');
-    deleteButton.className = "delete-button";
-    deleteButton.innerText = "Delete";
-    deleteButton.addEventListener('click', (event) => {
-      event.preventDefault();
-      removeTask(task.id)
-      event.target.parentElement.remove();
-    })
-
-
 
     if (task.complete === false) {
       const checkbox = document.querySelector("#complete-select")
@@ -146,18 +137,34 @@ function createTasksList(tasks, taskContainer) {
       const completeButton = document.createElement('button');
       completeButton.className = 'complete-button';
       completeButton.innerText = "Complete";
+      const deleteButton = document.createElement('button')
+    deleteButton.className = "delete-button";
+    deleteButton.innerText = "Delete";
+    deleteButton.addEventListener('click', (event) => {
+      event.preventDefault();
+      removeTask(task.id)
+      event.target.parentElement.remove();
+    })
       para.appendChild(deleteButton);
       taskDiv.appendChild(para);
 
       incompleteContainer.appendChild(taskDiv)
     } else if (task.complete === true) {
-
+      const completeTaskDiv = document.createElement('div')
+      completeTaskDiv.className = "complete-task-div"
+      const deleteButton = document.createElement('button')
+      deleteButton.className = "complete-task-delete-btn"
+    deleteButton.innerText = "Delete";
+    deleteButton.addEventListener('click', (event) => {
+      event.preventDefault();
+      removeTask(task.id)
+      event.target.parentElement.remove();
+    })
       const checkbox = document.querySelector("#complete-select")
       checkbox.checked = true
       para.appendChild(deleteButton);
-      taskDiv.appendChild(para);
-
-      completeContainer.appendChild(taskDiv)
+      completeTaskDiv.appendChild(para)
+      completeContainer.appendChild(completeTaskDiv)
     }
   }
 }
@@ -298,7 +305,7 @@ searchButton.addEventListener("click", async (event) => {
             completeTotal.innerHTML = completeCounter
             overdueTotal.innerHTML = overdueCounter
             const listName = document.querySelector('.listName')
-            listName.innerText = para.innerText.slice(0, -6)
+            listName.innerText = para.innerText
 
           } catch (e) {
             console.error(e)
@@ -307,12 +314,15 @@ searchButton.addEventListener("click", async (event) => {
         })
       const deleteListButton = document.createElement('button')
       deleteListButton.className = "delete-list-button"
-      deleteListButton.innerText = "Delete"
+      const trashCanButton = document.createElement('i')
+    trashCanButton.className = "fa fa-trash-o"
+    trashCanButton.style.fontSize = "12px"
       deleteListButton.addEventListener('click', (event) => {
         event.preventDefault();
         removeList(list.id)
         event.target.parentElement.remove();
       })
+      deleteListButton.appendChild(trashCanButton)
       para.appendChild(deleteListButton)
       listDiv.appendChild(para);
       listContainer.appendChild(listDiv)
@@ -326,8 +336,10 @@ searchButton.addEventListener("click", async (event) => {
       addTaskButton.addEventListener("click", (event) => {
         event.preventDefault()
         let addTaskbox = document.querySelector(".addTaskbox")
-        let taskName = addTaskbox.value;
-        addTask(taskName, selectedList);
+        if (addTaskbox.value !== "") {
+          let taskName = addTaskbox.value;
+          addTask(taskName, selectedList);
+        }
       })
 
 
@@ -393,16 +405,26 @@ document.addEventListener('DOMContentLoaded', async () => {
   let completeTab = document.querySelector(".button-2");
   const taskContainer = document.querySelector(".task-list")
   const completeContainer = document.querySelector(".complete-tasks")
+  incompleteTab.style.border = "1px solid"
+  incompleteTab.style.fontWeight = "bold"
   completeTab.addEventListener("click", async (event) => {
 
     taskContainer.style.display = "none";
     completeContainer.style.display = "block";
+    incompleteTab.style.border = "none"
+    incompleteTab.style.fontWeight = "normal"
+    completeTab.style.border = "1px solid"
+    completeTab.style.fontWeight = "bold"
   });
 
   incompleteTab.addEventListener("click", async (event) => {
 
     taskContainer.style.display = "block";
     completeContainer.style.display = "none";
+    completeTab.style.border = "none"
+    completeTab.style.fontWeight = "normal"
+    incompleteTab.style.border = "1px solid"
+    incompleteTab.style.fontWeight = "bold"
   });
 });
 
