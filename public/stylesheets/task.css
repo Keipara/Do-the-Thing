@@ -46,7 +46,7 @@
 .list-container {
     display: flex;
     flex-direction: column;
-    width: 13%;
+    width: 18%;
     margin-left: 10px;
 }
 
@@ -283,7 +283,7 @@
 
 .list-input {
     display: inline-flex;
-    width: 80%;
+    width: 70%;
     border-radius: 2px;
     border: 1px solid;
     position: relative;
@@ -301,7 +301,7 @@
     padding: 0px;
     color: #ae3cdb;
     text-align: center;
-    margin-left: 83%;
+    margin-left: 73%;
     position: relative;
     bottom: 9.5%;
  }
@@ -362,7 +362,7 @@
 
 .listNames {
     font-size: 20px;
-    width: 90%;
+    width: 80%;
     display: flex;
     justify-content: space-between;
     left: 5px;
