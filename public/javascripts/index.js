@@ -316,7 +316,7 @@ searchButton.addEventListener("click", async (event) => {
       deleteListButton.className = "delete-list-button"
       const trashCanButton = document.createElement('i')
     trashCanButton.className = "fa fa-trash-o"
-    trashCanButton.style.fontSize = "12px"
+    trashCanButton.style.fontSize = "20px"
       deleteListButton.addEventListener('click', (event) => {
         event.preventDefault();
         removeList(list.id)
