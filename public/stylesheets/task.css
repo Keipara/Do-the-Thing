@@ -328,10 +328,10 @@
  }
 
 .complete-task-delete-btn {
-    height: 15px;
-    font-size: 10px;
+    height: 25px;
+    font-size: 16px;
     position: absolute;
-    left: 425px;
+    left: 1000px;
     text-align: center;
     border: 1px solid #ae3cdb;
     border-radius: 3px;
