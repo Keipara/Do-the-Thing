@@ -13,7 +13,7 @@ append head
 block content
     nav
         div(class='nav-container')
-            div
+            div(class='logo-container')
                 a(href='localhost:8080/tasks')
                     img.image(class="logo" src="pink-w-black-outline.png")
                 a(href='localhost:8080/tasks' class="title") Do the Thing!
@@ -30,9 +30,11 @@ block content
         div(class='list-container')
             form(action="/tasks/add-list" method="post" class="list-form")
                 div(class="form-items")
-                    input(type="text" class="list-input" name="name" placeholder="Add a list")
-                    button( value="list" action="submit" class="add-list-button") +
-                    div(class="list-list")
+                    div(class='add-list-button-container')
+                        input(type="text" class="list-input" name="name" placeholder="Add a list")
+                        button( value="list" action="submit" class="add-list-button") +
+                        div
+                            div(class="list-list")
 
 
 
