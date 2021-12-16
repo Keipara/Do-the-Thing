@@ -153,7 +153,14 @@ router.get("/:id(\\d+)/tasks", requireAuth, asyncHandler(async (req, res, next) 
 
 //gets all the user's tasks
 router.get("/:id(\\d+)/allTasks", requireAuth, asyncHandler(async (req, res, next) => {
-  const tasks = await Task.findAll();
+  const tasks = await Task.findAll({
+    include: [{
+      model: List,
+      where:{
+        userId: res.locals.user.id
+       }
+    }]
+  });
   res.json({ tasks });
 })
 );

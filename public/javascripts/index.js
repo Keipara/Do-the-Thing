@@ -282,6 +282,9 @@ searchButton.addEventListener("click", async (event) => {
 
               selectedList = list.id;
               const {tasks} = await resAllTasks.json();
+
+              console.log(tasks)
+
               const taskContainer = document.querySelector(".task-list")
               taskContainer.innerHTML = "";
               createTasksList(tasks, taskContainer);
@@ -307,7 +310,7 @@ searchButton.addEventListener("click", async (event) => {
               overdueTotal.innerHTML = overdueCounter
               const listName = document.querySelector('.listName')
               listName.innerText = para.innerText
-            }
+            } else {
             const res = await fetch(`tasks/${list.id}/tasks`);
 
             selectedList = list.id;
@@ -337,6 +340,7 @@ searchButton.addEventListener("click", async (event) => {
             overdueTotal.innerHTML = overdueCounter
             const listName = document.querySelector('.listName')
             listName.innerText = para.innerText
+          }
 
           } catch (e) {
             console.error(e)
