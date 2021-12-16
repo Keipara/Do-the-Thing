@@ -378,20 +378,18 @@
 }
 
 #search-button {
-    position: relative;
     background: none;
     color: black;
     font-size: 16px;
     border: none;
     border-left: none;
     cursor: pointer;
-    left: -815px;
-    top: 5px;
+    margin-left: 16.5%;
+    margin-top: 0.15%;
   }
 
 #search-box {
-    position: relative;
-    left: -815px;
+    margin-left: 15%;
     font-size: 16px;
     height: 25px;
   }
