@@ -9,7 +9,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    height: 30px;
+    height: 35px;
     background-color: #A155B9;
     color: whitesmoke;
 }
@@ -18,8 +18,8 @@
     background-color: white;
     top: 5px;
     border-radius: 5px;
-    max-width: 45%;
-    max-height: 100em;
+    width: 45%;
+    height: 110vh;
     overflow: auto
 
 }
@@ -28,24 +28,25 @@
     display: inline-flex;
     padding: 5px;
     position: relative;
-    left: 360px;
+    left: 910px;
     top: 10px;
-    font-size: 10px;
+    font-size: 17px;
     border-right: 1px solid;
 }
 .button-2 {
     display: inline-flex;
     position: relative;
-    left: 363px;
+    left: 915px;
     top: 10px;
-    font-size: 10px;
-    padding: 5px
+    font-size: 17px;
+    padding: 5px;
+
 }
 
 .list-container {
     display: flex;
     flex-direction: column;
-    width: 13%;
+    width: 18%;
     margin-left: 10px;
 }
 
@@ -79,20 +80,20 @@
     top: 10px
 }
  .addTaskbox {
-     height: 20px;
-     width: 466px;
+     height: 40px;
+     width: 1100px;
      display: block;
      margin: 5px;
      border-radius: 3px;
      border-width: 1px;
-     font-size: 10px
+     font-size: 18px;
  }
 
 .addTaskButton {
     display: block;
     position: relative;
-    left: 400px;
-    height: 19px;
+    left: 1000px;
+    height: 30px;
     width: 70px;
     font-size: 12px;
     background-color: #e6d7ec;
@@ -107,10 +108,9 @@
 }
 
 .logo {
-    height: 65px;
-    width: 75px;
-    position: relative;
-    top: 30px
+    height: 100px;
+    width: 110px;
+    top: 30px;
 }
 
 .listButtons {
@@ -183,61 +183,60 @@
 
 .edit-task-para {
     border-bottom: 1px dotted;
-    font-size: 10px;
-    padding: 8px;
+    font-size: 20px;
+    padding: 10px;
     margin: 0px;
 }
 
 .tasksCount {
     background-color: #ddb7ec;
-    height: 40px;
-    width: 40px;
-    font-size: 8px;
-    display: inline-flex
+    height: 70px;
+    width: 70px;
+    display: inline-flex;
+    margin-top: 5px;
 }
 
 .completedCount {
     background-color: #ddb7ec;
-    height: 40px;
-    width: auto;
+    height: 70px;
+    width: 70px;
     display: inline-flex;
-    font-size: 8px;
-    margin-top: 4px;
+
 }
 
 .overdueCount {
     background-color: #ddb7ec;
-    height: 40px;
-    width: 40px;
+    height: 70px;
+    width: 70px;
     display: inline-flex;
     margin-left: 5px;
     margin-right: 5px;
 }
 
 .taskInfo-1 {
-    position: absolute;
-    font-size: 8px;
+    position: relative;
+    font-size: 14px;
     border: none;
-    bottom: 5px;
-    left: 6px;
+    top: 35px;
+    right: 17px;
 }
 
 
 .taskInfo-2 {
     position: relative;
-    font-size: 8px;
+    font-size: 14px;
     border: none;
-    top: 25px;
-    right: 3px;
-    color: rgba(0,0,0,0.4);
+    top: 35px;
+    right: 10px;
+    color: rgba(0, 0, 0, 0.842);
 }
 
 .taskInfo-3 {
     position: relative;
-    font-size: 8px;
+    font-size: 14px;
     border: none;
-    top: 25px;
-    right: 5px;
+    top: 35px;
+    right: 8px;
 }
 
 
@@ -245,20 +244,23 @@
     position: relative;
     top: 5px;
     right: -7px;
+    font-size: 25px;
     color: #0060bf;
 }
 
 .completedNumber {
     position: relative;
     top: 5px;
+    font-size: 25px;
     left: 6px;
-    color: rgba(0,0,0,0.4);
+    color: rgba(0, 0, 0, 0.842);
 }
 
 .overdueNumber {
     position: relative;
     top: 5px;
     left: 7px;
+    font-size: 25px;
     color: #d74a00;
 }
 
@@ -266,37 +268,42 @@
     border: 1px red solid;
     background-color: red;
     border-radius: 5px;
-    font-size: 11px;
+    font-size: 16px;
     position: relative;
-    top: 5px;
+    top: 8px;
     right: 20px;
     text-decoration: none;
     padding: 3px;
 }
 
-
+.add-list-button-container {
+    display: flex;
+    flex-direction: column;
+}
 
 .list-input {
     display: inline-flex;
-    width: 100px;
+    width: 70%;
     border-radius: 2px;
     border: 1px solid;
     position: relative;
     left: 3px;
+    margin-top: 12%;
+    height: 10%;
+    font-size: 20px;
 }
  .add-list-button {
-    display: block;
-    position: relative;
-    bottom: 16px;
-    left: 120px;
-    height: 16px;
-    width: 15px;
+    height: 30px;
+    width: 30px;
     border: 1px solid #ae3cdb;
     border-radius: 3px;
     background-color: #e6d7ec;
     padding: 0px;
     color: #ae3cdb;
     text-align: center;
+    margin-left: 73%;
+    position: relative;
+    bottom: 9.5%;
  }
 
  .add-list-button:hover {
@@ -305,10 +312,10 @@
  }
 
 .delete-button {
-    height: 15px;
-    font-size: 10px;
+    height: 25px;
+    font-size: 16px;
     position: absolute;
-    left: 425px;
+    left: 1000px;
     text-align: center;
     border: 1px solid #ae3cdb;
     border-radius: 3px;
@@ -322,10 +329,10 @@
  }
 
 .complete-task-delete-btn {
-    height: 15px;
-    font-size: 10px;
+    height: 25px;
+    font-size: 16px;
     position: absolute;
-    left: 425px;
+    left: 1000px;
     text-align: center;
     border: 1px solid #ae3cdb;
     border-radius: 3px;
@@ -354,10 +361,10 @@
 }
 
 .listNames {
-    font-size: 13px;
-    width: 110px;
+    font-size: 20px;
+    width: 80%;
     display: flex;
-    position: relative;
+    justify-content: space-between;
     left: 5px;
 }
 
@@ -366,28 +373,25 @@
 }
 
 .delete-list-button {
-    position: absolute;
-    left: 114px;
     border: none;
     background-color: #e6d7ec;
 }
 
 #search-button {
-    position: relative;
     background: none;
-    color: #ae3cdb;
-    font-size: 12px;
+    color: black;
+    font-size: 16px;
     border: none;
     border-left: none;
     cursor: pointer;
-    left: -347px;
-    top: 5px;
+    margin-left: 16.5%;
+    margin-top: 0.15%;
   }
 
 #search-box {
-    position: relative;
-    left: -325px;
-    font-size: 12px;
+    margin-left: 15%;
+    font-size: 16px;
+    height: 25px;
   }
 
 
@@ -419,12 +423,21 @@
 }
 
 
+
 .title {
     text-decoration: none;
     color: black;
     font-family:"Leckerli One";
-    display: block;
-    position: relative;
-    left: 77px;
-    bottom: 5px;
+    display: flex;
+    margin-top: 15%;
+    font-size: 25px;
+}
+.logo-container {
+    display: flex;
+    margin-top: 1.5%;
+    margin-left: 1%;
+}
+
+.details-containter {
+    margin-left: 2%;
 }
