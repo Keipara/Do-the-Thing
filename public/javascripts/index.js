@@ -277,6 +277,40 @@ searchButton.addEventListener("click", async (event) => {
         para.addEventListener("click", async (event) => {
           event.preventDefault();
           try {
+            if (list.name == "All Tasks") {
+              const resAllTasks = await fetch(`tasks/${list.id}/allTasks`);
+
+              selectedList = list.id;
+              const {tasks} = await resAllTasks.json();
+
+              console.log(tasks)
+
+              const taskContainer = document.querySelector(".task-list")
+              taskContainer.innerHTML = "";
+              createTasksList(tasks, taskContainer);
+              let incompleteCounter = 0;
+              let completeCounter = 0;
+              let overdueCounter = 0;
+              for (let i = 0; i < tasks.length; i++) {
+              let task = tasks[i];
+              if (task.complete === false) {
+                incompleteCounter++
+              } else {
+                completeCounter++
+              }
+              if (task.due <= Date()) {
+                overdueCounter++;
+              }
+              }
+              let taskTotal= document.querySelector(".tasksNumber")
+              let completeTotal = document.querySelector(".completedNumber")
+              let overdueTotal = document.querySelector(".overdueNumber")
+              taskTotal.innerHTML = incompleteCounter
+              completeTotal.innerHTML = completeCounter
+              overdueTotal.innerHTML = overdueCounter
+              const listName = document.querySelector('.listName')
+              listName.innerText = para.innerText
+            } else {
             const res = await fetch(`tasks/${list.id}/tasks`);
 
             selectedList = list.id;
@@ -306,17 +340,21 @@ searchButton.addEventListener("click", async (event) => {
             overdueTotal.innerHTML = overdueCounter
             const listName = document.querySelector('.listName')
             listName.innerText = para.innerText
+          }
 
           } catch (e) {
             console.error(e)
             }
 
         })
+        if (list.name !== "All Tasks") {
       const deleteListButton = document.createElement('button')
       deleteListButton.className = "delete-list-button"
       const trashCanButton = document.createElement('i')
-    trashCanButton.className = "fa fa-trash-o"
-    trashCanButton.style.fontSize = "20px"
+
+      trashCanButton.className = "fa fa-trash-o"
+      trashCanButton.style.fontSize = "12px"
+
       deleteListButton.addEventListener('click', (event) => {
         event.preventDefault();
         removeList(list.id)
@@ -324,6 +362,7 @@ searchButton.addEventListener("click", async (event) => {
       })
       deleteListButton.appendChild(trashCanButton)
       para.appendChild(deleteListButton)
+      }
       listDiv.appendChild(para);
       listContainer.appendChild(listDiv)
 

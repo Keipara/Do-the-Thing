@@ -89,6 +89,10 @@ router.post('/signup', csrfProtection, userValidators, asyncHandler(async(req,re
     user.hashedPassword = hashedPassword;
     await user.save();
     await List.create({
+      name: "All Tasks",
+      userId: user.id
+    });
+    await List.create({
       name: "Miscellaneous",
       userId: user.id
     });

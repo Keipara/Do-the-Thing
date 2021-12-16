@@ -151,6 +151,20 @@ router.get("/:id(\\d+)/tasks", requireAuth, asyncHandler(async (req, res, next) 
 })
 );
 
+//gets all the user's tasks
+router.get("/:id(\\d+)/allTasks", requireAuth, asyncHandler(async (req, res, next) => {
+  const tasks = await Task.findAll({
+    include: [{
+      model: List,
+      where:{
+        userId: res.locals.user.id
+       }
+    }]
+  });
+  res.json({ tasks });
+})
+);
+
 //gets the lists belonging to a particular user
 router.get("/list-list", requireAuth, asyncHandler(async (req, res) => {
   const lists = await List.findAll({
