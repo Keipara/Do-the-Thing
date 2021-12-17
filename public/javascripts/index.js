@@ -13,7 +13,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     for (let i = 0; i< tasks.length; i++) {
       let task = tasks[i];
-
+      let today = new Date();
+      let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
       //List-Summary
       if (task.complete === false) {
         incompleteCounter++;
@@ -21,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         completeCounter++;
       }
 
-      if (task.due <= Date() ) {
+      if (task.due <= date && task.complete === false ) {
         overdueCounter++;
       }
 
