@@ -282,9 +282,6 @@ searchButton.addEventListener("click", async (event) => {
 
               selectedList = list.id;
               const {tasks} = await resAllTasks.json();
-
-              console.log(tasks)
-
               const taskContainer = document.querySelector(".task-list")
               taskContainer.innerHTML = "";
               createTasksList(tasks, taskContainer);
@@ -311,36 +308,36 @@ searchButton.addEventListener("click", async (event) => {
               const listName = document.querySelector('.listName')
               listName.innerText = para.innerText
             } else {
-            const res = await fetch(`tasks/${list.id}/tasks`);
+              const res = await fetch(`tasks/${list.id}/tasks`);
 
-            selectedList = list.id;
-            const {tasks} = await res.json();
-            const taskContainer = document.querySelector(".task-list")
-            taskContainer.innerHTML = "";
-            createTasksList(tasks, taskContainer);
-            let incompleteCounter = 0;
-            let completeCounter = 0;
-            let overdueCounter = 0;
-            for (let i = 0; i < tasks.length; i++) {
-             let task = tasks[i];
-             if (task.complete === false) {
-               incompleteCounter++
-             } else {
-               completeCounter++
-             }
-             if (task.due <= Date()) {
-               overdueCounter++;
-             }
+              selectedList = list.id;
+              const {tasks} = await res.json();
+              const taskContainer = document.querySelector(".task-list")
+              taskContainer.innerHTML = "";
+              createTasksList(tasks, taskContainer);
+              let incompleteCounter = 0;
+              let completeCounter = 0;
+              let overdueCounter = 0;
+              for (let i = 0; i < tasks.length; i++) {
+              let task = tasks[i];
+              if (task.complete === false) {
+                incompleteCounter++
+              } else {
+                completeCounter++
+              }
+              if (task.due <= Date()) {
+                overdueCounter++;
+              }
+              }
+              let taskTotal= document.querySelector(".tasksNumber")
+              let completeTotal = document.querySelector(".completedNumber")
+              let overdueTotal = document.querySelector(".overdueNumber")
+              taskTotal.innerHTML = incompleteCounter
+              completeTotal.innerHTML = completeCounter
+              overdueTotal.innerHTML = overdueCounter
+              const listName = document.querySelector('.listName')
+              listName.innerText = para.innerText
             }
-            let taskTotal= document.querySelector(".tasksNumber")
-            let completeTotal = document.querySelector(".completedNumber")
-            let overdueTotal = document.querySelector(".overdueNumber")
-            taskTotal.innerHTML = incompleteCounter
-            completeTotal.innerHTML = completeCounter
-            overdueTotal.innerHTML = overdueCounter
-            const listName = document.querySelector('.listName')
-            listName.innerText = para.innerText
-          }
 
           } catch (e) {
             console.error(e)
@@ -353,7 +350,7 @@ searchButton.addEventListener("click", async (event) => {
       const trashCanButton = document.createElement('i')
 
       trashCanButton.className = "fa fa-trash-o"
-      trashCanButton.style.fontSize = "12px"
+      trashCanButton.style.fontSize = "20px"
 
       deleteListButton.addEventListener('click', (event) => {
         event.preventDefault();

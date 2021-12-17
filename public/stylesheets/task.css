@@ -189,6 +189,7 @@
 }
 
 .tasksCount {
+    flex-direction: column;
     background-color: #ddb7ec;
     height: 70px;
     width: 70px;
@@ -217,8 +218,8 @@
     position: relative;
     font-size: 14px;
     border: none;
-    top: 35px;
-    right: 17px;
+    top: 6px;
+    left: 8px;
 }
 
 
