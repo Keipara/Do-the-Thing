@@ -192,7 +192,9 @@ function createTasksList(tasks, taskContainer) {
       if(data.task.due) {
         taskDueDate.value = data.task.due.slice(0,10);
       } else {
-        taskDueDate.value = "9999-12-31";
+        let today = new Date();
+        let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        taskDueDate.value = date;
       }
 
 
