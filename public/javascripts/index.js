@@ -279,6 +279,13 @@ searchButton.addEventListener("click", async (event) => {
         para.className = "listNames"
         para.addEventListener("click", async (event) => {
           event.preventDefault();
+
+          const listSummaryContainer = document.querySelector(".list-summary-container");
+          listSummaryContainer.style.display = "block";
+
+          const taskEditContainer = document.querySelector(".task-edit-container");
+          taskEditContainer.style.display = "none";
+
           try {
             if (list.name == "All Tasks") {
               const resAllTasks = await fetch(`tasks/${list.id}/allTasks`);
