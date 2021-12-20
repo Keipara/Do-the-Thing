@@ -192,7 +192,9 @@ function createTasksList(tasks, taskContainer) {
       if(data.task.due) {
         taskDueDate.value = data.task.due.slice(0,10);
       } else {
-        taskDueDate.value = "9999-12-31";
+        let today = new Date();
+        let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        taskDueDate.value = date;
       }
 
 
@@ -277,6 +279,13 @@ searchButton.addEventListener("click", async (event) => {
         para.className = "listNames"
         para.addEventListener("click", async (event) => {
           event.preventDefault();
+
+          const listSummaryContainer = document.querySelector(".list-summary-container");
+          listSummaryContainer.style.display = "block";
+
+          const taskEditContainer = document.querySelector(".task-edit-container");
+          taskEditContainer.style.display = "none";
+
           try {
             if (list.name == "All Tasks") {
               const resAllTasks = await fetch(`tasks/${list.id}/allTasks`);
