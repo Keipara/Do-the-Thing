@@ -189,6 +189,8 @@
 }
 
 .tasksCount {
+    display: flex;
+    justify-content: center;
     background-color: #ddb7ec;
     height: 70px;
     width: 70px;

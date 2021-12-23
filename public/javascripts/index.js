@@ -11,6 +11,15 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     //List-Summary
 
+    if (tasks.length === 0) {
+      let taskTotal= document.querySelector(".tasksNumber")
+      taskTotal.innerHTML = incompleteCounter
+      let completeTotal = document.querySelector(".completedNumber")
+      completeTotal.innerHTML = completeCounter
+      let overdueTotal = document.querySelector(".overdueNumber")
+      overdueTotal.innerHTML = overdueCounter
+    }
+
     for (let i = 0; i< tasks.length; i++) {
       let task = tasks[i];
       let today = new Date();
@@ -363,7 +372,7 @@ searchButton.addEventListener("click", async (event) => {
       const trashCanButton = document.createElement('i')
 
       trashCanButton.className = "fa fa-trash-o"
-      trashCanButton.style.fontSize = "12px"
+      trashCanButton.style.fontSize = "17px"
 
       deleteListButton.addEventListener('click', (event) => {
         event.preventDefault();
